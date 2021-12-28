@@ -1,6 +1,7 @@
 
-import Slideshow from '../Slideshow/Slideshow';
-import AboutMeShort from './AboutMeShort';
+import Slideshow from './Slideshow/Slideshow';
+import AboutMeShort from './AboutMeShort/AboutMeShort';
+import ShortGallery from './ShortGallery/ShortGallery';
 
 export default function Home() {
 
@@ -15,6 +16,7 @@ export default function Home() {
         minWidth: '300px'
       }}>
         <AboutMeShort />
+        <ShortGallery />
       </div>
     </div>
     

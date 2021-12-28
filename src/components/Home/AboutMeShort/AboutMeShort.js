@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import MyButton from "../MyButton/MyButton";
+import MyButton from "../../MyButton/MyButton";
 import styles from './AboutMeShort.module.scss';
+import portret from '../../../images/portret.jpg';
 
 export default function AboutMeShort() {
   const history = useNavigate();
@@ -14,10 +15,11 @@ export default function AboutMeShort() {
       <img
         style={{
           display: 'inline-block',
+          //imageOrientation: '90deg',
           width: '100%',
           maxWidth: '250px',
         }}
-        src='/images/me.jpg'
+        src={portret}
         alt='Iryna&apos;s portret'
       />
       <div style={{

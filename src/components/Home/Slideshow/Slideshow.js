@@ -31,13 +31,13 @@ export default function Slideshow() {
       <img
         key={id}
         className={styles.slide}
-        src={`/images/${counter}.jpg`}
+        src={`/slides/${counter}.jpg`}
         alt="first-slide" 
       />
       <img 
         key={id + 1}
         className={`${styles.slide} ${styles.second}`}
-        src={`/images/${counter === 6 ? 1 : counter + 1}.jpg`}
+        src={`/slides/${counter === 6 ? 1 : counter + 1}.jpg`}
         alt="second-slide" 
       />
     </div>
