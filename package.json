@@ -12,6 +12,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "sass": "^1.45.1",
+    "uuidv4": "^6.2.12",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

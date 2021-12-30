@@ -5,7 +5,7 @@ import portret from '../../../images/portret.jpg';
 
 export default function AboutMeShort() {
   const history = useNavigate();
-  const handleCklick = () => history.push('/blog');
+  const handleCklick = () => history('/blog');
 
   return (
     <div style={{
