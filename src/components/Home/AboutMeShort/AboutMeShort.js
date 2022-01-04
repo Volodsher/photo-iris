@@ -10,6 +10,7 @@ export default function AboutMeShort() {
   return (
     <div style={{
       margin: 'auto',
+      padding: '50px 0px 50px 0px',
       width: '95%'
     }}>
       <img
