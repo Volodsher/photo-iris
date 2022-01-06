@@ -4,6 +4,7 @@ import AboutMeShort from './AboutMeShort/AboutMeShort';
 import ShortGallery from './ShortGallery/ShortGallery';
 import backShort from '../../images/shortGallery/Editar1.jpg';
 import backShort1 from '../../logo.svg';
+import ShortSession from './ShortSessions/ShortSessions';
 
 export default function Home() {
 
@@ -19,6 +20,7 @@ export default function Home() {
       }}>
         <AboutMeShort />
         <ShortGallery />
+        <ShortSession />
         <div style={{
           backgroundImage: `url(${backShort})`,
           width: '100%',

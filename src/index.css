@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 400;
+  color: white;
+  font-size: 90px;
+}
+
+.shortExplanation {
+  font-family: 'Tajawal', sans-serif;
+  color: white;
+  font-size: 34px;
+}
+
+.shortExplanation2 {
+  font-family: 'PT Sans', sans-serif;
+  color: #484747;
+  font-size: 17px;
+  font-weight: bold;
+  margin: 30px 0;
+}
+
