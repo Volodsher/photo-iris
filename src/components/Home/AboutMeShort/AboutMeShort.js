@@ -42,6 +42,7 @@ export default function AboutMeShort() {
         </p>
         <MyButton
           className={styles.aboutMeButton}
+          borderColor='#8E8D8A'
           name="About me"
           handleCklick={handleCklick}
         />

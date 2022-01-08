@@ -12,7 +12,7 @@ export default function ShortSession() {
     <div style={{
       backgroundColor: '#D8C3A5',
       margin: '50px -60px 0 -60px',
-      padding: '50px 140px 110px 140px',
+      padding: '50px 140px 150px 140px',
       textAlign: 'center'
     }}>
       <h1>Photo Sessions</h1>
@@ -62,6 +62,7 @@ export default function ShortSession() {
         className={styles.shortSessionButton}
         name="Sessions"
         handleCklick={handleCklick}
+        borderColor='#f7f6f4'
       />
     </div>
   )

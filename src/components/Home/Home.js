@@ -2,9 +2,10 @@
 import Slideshow from './Slideshow/Slideshow';
 import AboutMeShort from './AboutMeShort/AboutMeShort';
 import ShortGallery from './ShortGallery/ShortGallery';
-import backShort from '../../images/shortGallery/Editar1.jpg';
-import backShort1 from '../../logo.svg';
+//import backShort from '../../images/shortGallery/Editar1.jpg';
+//import backShort1 from '../../logo.svg';
 import ShortSession from './ShortSessions/ShortSessions';
+import AdvertSession from './AdvertSession/AdvertSession';
 
 export default function Home() {
 
@@ -21,7 +22,10 @@ export default function Home() {
         <AboutMeShort />
         <ShortGallery />
         <ShortSession />
-        <div style={{
+        <AdvertSession />
+        
+        
+        {/* <div style={{
           backgroundImage: `url(${backShort})`,
           width: '100%',
           height: 200,
@@ -30,8 +34,8 @@ export default function Home() {
           backgroundSize: 'cover'
         }}>
           sdfsdfsd
-        </div>
-        <div style={{
+        </div> */}
+        {/* <div style={{
           backgroundImage: `url(${backShort1})`,
           width: '100%',
           height: 200,
@@ -60,7 +64,7 @@ export default function Home() {
           backgroundSize: 'cover'
         }}>
           sdfsdfsd
-        </div>
+        </div> */}
       </div>
     </div>
   )
