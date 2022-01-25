@@ -2,7 +2,7 @@
 
 # dependencies
 publicPhoto/node_modules
-/publicPhoto/node_modules
+
 /.pnp
 .pnp.js
 
