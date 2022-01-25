@@ -1,0 +1,36 @@
+{
+  "name": "photo-iris-server",
+  "version": "1.0.0",
+  "description": "this is server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Volodsher/photo-iris.git"
+  },
+  "author": "volodsher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Volodsher/photo-iris/issues"
+  },
+  "homepage": "https://github.com/Volodsher/photo-iris#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.7",
+    "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.8",
+    "npm": "^8.3.2",
+    "request": "^2.88.2",
+    "run": "^1.4.0",
+    "server": "^1.0.37"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15"
+  }
+}
