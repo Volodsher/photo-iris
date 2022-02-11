@@ -7,29 +7,25 @@ import { useState } from 'react';
 //import { useState, useRef, useEffect } from 'react';
 // import styles from './AppExample.module.scss';
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from '../src/components/Home/Home';
-import Blog from '../src/components/Blog/Blog';
-import Sessions from '../src/components/Sessions/Sessions';
-import Gallery from '../src/components/Gallery/Gallery';
-import Inspiration from '../src/components/Inspiration/Inspiration';
-import Contact from '../src/components/Contact/Contact';
+import Home from './components/Home/Home';
+import Blog from './components/Blog/Blog';
+import Sessions from './components/Sessions/Sessions';
+import Gallery from './components/Gallery/Gallery';
+import Inspiration from './components/Inspiration/Inspiration';
+import Contact from './components/Contact/Contact';
 
-import Header from '../src/components/Header/Header';
-import Footer from '../src/components/Footer/Footer';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import styles from './App.module.scss';
 
 function App() {
   const [menuOpen, toOpenMenu] = useState(false);
 
   const changeMenuStatus = () => {
-    toOpenMenu(!menuOpen)
-  }
+    toOpenMenu(!menuOpen);
+  };
 
   // const [isVisible, setVisible] = useState(true);
   // const domRef = useRef();
@@ -40,7 +36,7 @@ function App() {
   //       console.log(entry.isIntersecting);
   //       //if (entry.isIntersecting) {
   //         setVisible(entry.isIntersecting)
-  //       //} 
+  //       //}
   //     });
   //   });
   //   observer.observe(domRef.current);
@@ -70,16 +66,6 @@ function App() {
 
 export default App;
 
-
-
-
-
-
-
-
-
-
-
 ////////////////////////////////////////////////////////////
 // function App() {
 //   const [counter, changeCounter] = useState(1);
@@ -107,9 +93,9 @@ export default App;
 //         }}
 //         //className={`${styles.slide} ${styles.first}`}
 //         src={`/images/${counter}.jpg`}
-//         alt="first-slide" 
+//         alt="first-slide"
 //       />
-//       <img 
+//       <img
 //         key={id + 1}
 //         style={{
 //           display: 'inline-block',
@@ -119,19 +105,13 @@ export default App;
 //         //className={`${styles.slide} ${styles.second}`}
 //         className={styles.second}
 //         src={`/images/${counter === 6 ? 1 : counter + 1}.jpg`}
-//         alt="second-slide" 
+//         alt="second-slide"
 //       />
 //     </div>
 //   </>
 //   )
 // }
 /////////////////////////////////////////////////////////////
-
-
-
-
-
-
 
 // import logo from './logo.svg';
 // import './App.css';
