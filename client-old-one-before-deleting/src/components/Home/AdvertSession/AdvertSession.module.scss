@@ -1,0 +1,28 @@
+  // .sessionGrid::before {
+// content: '';
+//   width: 0;
+//   padding-bottom: 100%;
+//   grid-row: 1 / 1;
+//   grid-column: 1 / 1;
+// }
+
+// .sessionGrid > *:first-child {
+//   grid-row: 1 / 1;
+//   grid-column: 1 / 1;
+// }
+
+// .shortSessionImg {
+//   width: 100%;
+// }
+
+.shortSessionButton {
+  //margin: 0 auto;
+  border-color: #f7f6f4;
+  color: white;
+}
+
+.shortSessionButton:hover {
+  background-color: white;
+  color: black;
+  border-color: red;
+}

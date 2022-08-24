@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/photo-iris-react/static/css/main.40f9326c.css",
+    "main.js": "/photo-iris-react/static/js/main.198bc597.js",
+    "static/js/787.20cd23c4.chunk.js": "/photo-iris-react/static/js/787.20cd23c4.chunk.js",
+    "static/media/chan8.jpg": "/photo-iris-react/static/media/chan8.fb14feb200837c0e5bd0.jpg",
+    "static/media/chan4.jpg": "/photo-iris-react/static/media/chan4.4ebcaa663011d3124d76.jpg",
+    "static/media/chan9.jpg": "/photo-iris-react/static/media/chan9.dac66346cdc0e0002df6.jpg",
+    "static/media/portret.jpg": "/photo-iris-react/static/media/portret.60959c08a12c2ce08b84.jpg",
+    "static/media/3.jpg": "/photo-iris-react/static/media/3.2da1753c9712371e20de.jpg",
+    "static/media/2.jpg": "/photo-iris-react/static/media/2.7b15ebcf55c7bcee3f07.jpg",
+    "static/media/1.jpg": "/photo-iris-react/static/media/1.18a34c9aa5029006abab.jpg",
+    "static/media/6.jpg": "/photo-iris-react/static/media/6.1d5be5653ad69a15f0f2.jpg",
+    "static/media/5.jpg": "/photo-iris-react/static/media/5.4d578e2bf767240b63e6.jpg",
+    "static/media/4.jpg": "/photo-iris-react/static/media/4.07fabf26441aecceb3e5.jpg",
+    "static/media/fam19.jpg": "/photo-iris-react/static/media/fam19.357142d125833adad574.jpg",
+    "static/media/fam5.jpg": "/photo-iris-react/static/media/fam5.1dea4a00af657f656cbb.jpg",
+    "static/media/logo-iris-photo.png": "/photo-iris-react/static/media/logo-iris-photo.9d93f3861b40648e5440.png",
+    "static/media/port2.jpg": "/photo-iris-react/static/media/port2.0796288f08437d0171ac.jpg",
+    "static/media/int1.jpg": "/photo-iris-react/static/media/int1.a8ce57fbf6cdebf60fe2.jpg",
+    "static/media/fam15.jpg": "/photo-iris-react/static/media/fam15.08867c8cc7efeadfbf10.jpg",
+    "static/media/int4.jpg": "/photo-iris-react/static/media/int4.4c8e02efa05a81f58c2a.jpg",
+    "static/media/port12.jpg": "/photo-iris-react/static/media/port12.538ceb74158c60caf5ee.jpg",
+    "static/media/int7.jpg": "/photo-iris-react/static/media/int7.3ee6f76d6e07722e259d.jpg",
+    "static/media/fam10.jpg": "/photo-iris-react/static/media/fam10.d1a5502cdb0090cccb22.jpg",
+    "static/media/Editar1.jpg": "/photo-iris-react/static/media/Editar1.c251209d588dd4041a68.jpg",
+    "static/media/insta.png": "/photo-iris-react/static/media/insta.1e040c245fba14ea4f20.png",
+    "index.html": "/photo-iris-react/index.html",
+    "main.40f9326c.css.map": "/photo-iris-react/static/css/main.40f9326c.css.map",
+    "main.198bc597.js.map": "/photo-iris-react/static/js/main.198bc597.js.map",
+    "787.20cd23c4.chunk.js.map": "/photo-iris-react/static/js/787.20cd23c4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.40f9326c.css",
+    "static/js/main.198bc597.js"
+  ]
+}

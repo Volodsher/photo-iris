@@ -12,8 +12,8 @@ app.use(express.json({ extended: false }));
 app.get('/', (req, res) => res.send('trying to understand how to create crud'));
 
 // define routes
-app.use('/api/pictures', require('./routes/api/pictures'));
+app.use('/api/users', require('./routes/api/users'));
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`server started on Port ${PORT}`));
