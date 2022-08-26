@@ -26,15 +26,15 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const { name, email, status, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
-      console.log('just checked the user');
+      let user = await User.findOne({ $or: [{ name }, { email }] });
+
       if (user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'User already exists' }] });
+        return res.status(400).json({
+          errors: [{ msg: 'User with such name or email already exists' }],
+        });
       }
 
       const avatar = normalize(
@@ -49,6 +49,7 @@ router.post(
       user = new User({
         name,
         email,
+        status,
         avatar,
         password,
       });
@@ -57,7 +58,7 @@ router.post(
 
       user.password = await bcrypt.hash(password, salt);
 
-      let newuser = await user.save();
+      await user.save();
 
       const payload = {
         user: {
@@ -65,10 +66,12 @@ router.post(
         },
       };
 
+      console.log(payload);
+
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: '5 days' },
+        { expiresIn: 36000 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
