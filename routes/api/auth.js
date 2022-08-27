@@ -29,7 +29,7 @@ router.get('/', auth, async (req, res) => {
 router.post(
   '/',
   [
-    check('email', 'Please include your email').exists(),
+    check('nameOrEmail', 'Please include your email or name').exists(),
     check('password', 'Password is required').exists(),
   ],
   async (req, res) => {
@@ -38,10 +38,12 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { nameOrEmail, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      let user = await User.findOne({
+        $or: [{ email: nameOrEmail }, { name: nameOrEmail }],
+      });
 
       if (!user) {
         return res
