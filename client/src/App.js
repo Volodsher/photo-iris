@@ -9,8 +9,10 @@ import Sessions from './components/Sessions/Sessions';
 import Gallery from './components/Gallery/Gallery';
 import Inspiration from './components/Inspiration/Inspiration';
 import Contact from './components/Contact/Contact';
-import Header from './components/Layout/Header';
-import Footer from './components/Layout/Footer';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import NotFound from './components/layout/NotFound';
+import Login from './components/auth/Login';
 import styles from './App.module.scss';
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
               element={<Inspiration />}
             />
             <Route path="/photo-iris-react/contact" element={<Contact />} />
+            <Route path="/photo-iris-react/login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <Footer />

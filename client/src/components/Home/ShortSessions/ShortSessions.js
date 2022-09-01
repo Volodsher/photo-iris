@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import MyButton from '../../Layout/MyButton/MyButton';
+import MyButton from '../../layout/MyButton/MyButton';
 import styles from './ShortSessions.module.scss';
 import one from '../../../images/shortGallery/Editar1.jpg';
 import portrait from '../../../images/sessions/port2.jpg';

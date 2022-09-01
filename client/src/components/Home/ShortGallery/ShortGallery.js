@@ -1,6 +1,6 @@
 import styles from './ShortGallery.module.scss';
 import { useNavigate } from 'react-router-dom';
-import MyButton from '../../Layout/MyButton/MyButton';
+import MyButton from '../../layout/MyButton/MyButton';
 
 import { v4 as uuidv4 } from 'uuid';
 import one from '../../../images/shortGallery/fam10.jpg';

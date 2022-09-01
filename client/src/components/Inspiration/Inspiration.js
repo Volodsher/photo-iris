@@ -1,5 +1,5 @@
 import './Inspiration.module.scss';
-import HamburgerButton from '../Layout/HamburgerButton/HamburgerButton';
+import HamburgerButton from '../layout/HamburgerButton/HamburgerButton';
 
 export default function Inspiration() {
   return (

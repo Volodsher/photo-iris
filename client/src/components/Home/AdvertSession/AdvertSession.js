@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import MyButton from '../../Layout/MyButton/MyButton';
+import MyButton from '../../layout/MyButton/MyButton';
 import styles from './AdvertSession.module.scss';
 import backShort from '../../../images/shortGallery/Editar1.jpg';
 

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MyButton from '../../Layout/MyButton/MyButton';
+import MyButton from '../../layout/MyButton/MyButton';
 import styles from './AboutMeShort.module.scss';
 import portret from '../../../images/portret.jpg';
 
