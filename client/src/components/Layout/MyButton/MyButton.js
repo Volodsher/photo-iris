@@ -2,26 +2,25 @@ import PropTypes from 'prop-types';
 
 export default function MyButton(props) {
   return (
-    <div
+    <button
+      type={props.type}
+      value={props.value}
       style={{
-        width: '130px',
-        border: `2px solid ${props.borderColor}`,
-        borderRadius: '4px',
-        textAlign: 'center',
-        padding: 10,
-        cursor: 'pointer',
+        border: `0.1rem solid ${props.borderColor}`,
+        borderRadius: '0.4rem',
       }}
       className={props.className}
       onClick={props.handleCklick}
     >
-      {props.name}
-    </div>
+      {props.value}
+    </button>
   );
 }
 
 MyButton.propTypes = {
   color: PropTypes.string,
   name: PropTypes.string,
+  value: PropTypes.string,
   className: PropTypes.string,
   handleCklick: PropTypes.func,
   borderColor: PropTypes.string,

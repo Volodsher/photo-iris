@@ -1,8 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-
 import Home from './components/Home/Home';
 import Blog from './components/Blog/Blog';
 import Sessions from './components/Sessions/Sessions';
@@ -14,12 +13,25 @@ import Footer from './components/layout/Footer';
 import NotFound from './components/layout/NotFound';
 import Login from './components/auth/Login';
 import styles from './App.module.scss';
+import setAuthToken from './utils/setAuthToken';
+import { loadUser } from './features/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 function App() {
+  const auth = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
   const [menuOpen, toOpenMenu] = useState(false);
   const changeMenuStatus = () => {
     toOpenMenu(!menuOpen);
   };
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
 
   return (
     <Router>
@@ -36,7 +48,7 @@ function App() {
               element={<Inspiration />}
             />
             <Route path="/photo-iris-react/contact" element={<Contact />} />
-            <Route path="/photo-iris-react/login" element={<Login />} />
+            <Route path="/photo-iris-react/vhid" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

@@ -23,7 +23,7 @@ export default function AdvertSession() {
       <p className="global-shortExplanation">Choose your photo session.</p>
       <MyButton
         className={styles.shortSessionButton}
-        name="Sessions"
+        value="Sessions"
         handleCklick={handleCklick}
         borderColor="white"
       />

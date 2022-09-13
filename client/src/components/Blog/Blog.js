@@ -42,12 +42,9 @@ export default function Blog() {
       headers: { 'Content-Type': 'application/json' },
       // body: JSON.stringify({ title: 'React Hooks POST Request Example' }),
     };
-    axios
-      .get(`https://amihappy.chaykovska.com.ua`, requestOptions)
-      .then((res) => {
-        console.log('good');
-        console.log(res);
-      });
+    axios.get(`/api/posts`, requestOptions).then((res) => {
+      console.log(res.data[1].text);
+    });
   }, []);
 
   // function createPost() {

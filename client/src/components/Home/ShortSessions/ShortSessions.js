@@ -57,7 +57,7 @@ export default function ShortSession() {
       </div>
       <MyButton
         className={styles.shortSessionButton}
-        name="Sessions"
+        value="Sessions"
         handleCklick={handleCklick}
         borderColor="#f7f6f4"
       />

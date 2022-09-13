@@ -3,11 +3,18 @@ import { NavLink } from 'react-router-dom';
 import styles from './Layout.module.scss';
 import HamburgerButton from './HamburgerButton/HamburgerButton';
 import logo from '../../logo-iris-photo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../features/authSlice';
 
 function Header(props) {
+  const auth = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
   let activeStyle = {
     color: '#E98074',
   };
+
   return (
     <div className={styles.header}>
       <div className={styles.toCenterLogo} />
@@ -40,7 +47,9 @@ function Header(props) {
           </NavLink>
         </li>
       </ul>
-      <img src={logo} className={styles.logo} alt="logo" />
+      <a href="/photo-iris-react/vhid">
+        <img src={logo} className={styles.logo} alt="logo" />
+      </a>
       <ul className={`${styles.menuList} ${styles.menuListSecond}`}>
         <li key="4">
           <NavLink
@@ -60,7 +69,12 @@ function Header(props) {
             Inspiration
           </NavLink>
         </li>
-        <li key="6">
+        <li
+          key="6"
+          style={{
+            position: 'relative',
+          }}
+        >
           <NavLink
             to="/photo-iris-react/contact"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
@@ -68,8 +82,22 @@ function Header(props) {
           >
             Contact
           </NavLink>
+          {auth.isAuthenticated && (
+            <a
+              onClick={() => dispatch(logout())}
+              href="#!"
+              style={{
+                position: 'absolute',
+                top: '40px',
+                right: '25px',
+              }}
+            >
+              <FontAwesomeIcon icon={faRightFromBracket} size="2x" />{' '}
+            </a>
+          )}
         </li>
       </ul>
+      {/* <a onClick={} href="#!"> */}
       <HamburgerButton
         menuOpen={props.menuOpen}
         changeMenuStatus={props.changeMenuStatus}

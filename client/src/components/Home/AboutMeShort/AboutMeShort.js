@@ -68,7 +68,7 @@ export default function AboutMeShort(props) {
         <MyButton
           className={styles.aboutMeButton}
           borderColor="#8E8D8A"
-          name="About me"
+          value="About me"
           handleCklick={handleCklick}
         />
       </div>

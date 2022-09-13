@@ -1,8 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const auth = require('./middleware/auth');
 
 const app = express();
+
+// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Connect Database
 connectDB();
@@ -10,8 +14,23 @@ connectDB();
 // Init Middleware
 app.use(express.json({ extended: false }));
 
+// app.get('/cors', (req, res) => {
+//   res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+//   res.send({ msg: 'This has CORS enabled' });
+// });
+
 // Test Request
-app.get('/', auth, (req, res) => res.send('Api Is Running'));
+// app.get('/', (req, res) => {
+//   res.json({
+//     name: 'bill',
+//     age: 99,
+//   });
+// });
+
+app.get('/api', (req, res) => {
+  // res.send({ message: 'We did it!' });
+  res.send('We did it');
+});
 
 // define routes
 app.use('/api/users', require('./routes/api/users'));

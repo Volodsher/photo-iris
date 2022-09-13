@@ -37,7 +37,7 @@ export default function ShortGallery() {
       <div className={styles.imageGrid}>{newGal}</div>
       <MyButton
         className={styles.shortGalleryButton}
-        name="More photos"
+        value="More photos"
         handleCklick={handleCklick}
         borderColor="#8E8D8A"
       />

@@ -5,7 +5,8 @@
   gap: 30px;
   padding: 10px 20px 10px 20px;
   height: 160px;
-  border-bottom: 5px solid #D8C3A5;
+  // border-bottom: 5px solid #D8C3A5;
+  border-bottom: 5px solid var(--primary-color);
   color: #8E8D8A;
 }
 
