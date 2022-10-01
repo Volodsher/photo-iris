@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 
-const url = 'http://localhost:5000/';
+// const url = 'http://localhost:5000/';
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -10,8 +10,6 @@ const initialState = {
   loading: true,
   user: null,
 };
-
-//
 
 // Login User
 const authSlice = createSlice({
@@ -32,6 +30,7 @@ const authSlice = createSlice({
     // register: (state, action) => {},
     login: (state, { payload }) => {
       localStorage.setItem('token', payload.token);
+      console.log(payload);
       return {
         ...state,
         ...payload,
@@ -58,24 +57,26 @@ const authSlice = createSlice({
 });
 
 // Load User
+export const loadUser = createAsyncThunk(
+  'auth/loaded',
+  async (foo, { dispatch }) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
 
-export const loadUser = createAsyncThunk('auth/loaded', async (_, thunkApi) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+    try {
+      const res = await axios.get('/api/auth');
+      dispatch(loaded(res.data));
+    } catch (error) {
+      console.log(error.message);
+    }
   }
-
-  try {
-    const res = await axios.get('/api/auth');
-    thunkApi.dispatch(loaded(res.data));
-  } catch (error) {
-    console.log(error.message);
-  }
-});
+);
 
 // Login User
 export const loginUser = createAsyncThunk(
   'auth/login',
-  async ({ nameOrEmail, password }, thunkApi) => {
+  async ({ nameOrEmail, password }, { dispatch }) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -84,10 +85,9 @@ export const loginUser = createAsyncThunk(
     const body = JSON.stringify({ nameOrEmail, password });
     try {
       const res = await axios.post('/api/auth', body, config);
+      dispatch(login(res.data));
 
-      thunkApi.dispatch(login(res.data));
-
-      loadUser();
+      return dispatch(loadUser());
     } catch (error) {
       console.log(error.message);
     }

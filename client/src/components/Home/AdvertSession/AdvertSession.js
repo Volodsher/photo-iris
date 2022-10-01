@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import MyButton from '../../layout/MyButton/MyButton';
 import styles from './AdvertSession.module.scss';
 import backShort from '../../../images/shortGallery/Editar1.jpg';
@@ -27,6 +27,9 @@ export default function AdvertSession() {
         handleCklick={handleCklick}
         borderColor="white"
       />
+      <h1>
+        <Link to="/photo-iris-react/contact">let</Link>
+      </h1>
     </div>
   );
 }

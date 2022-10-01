@@ -15,7 +15,6 @@ router.post(
   auth,
   check('text', 'Text is required').notEmpty(),
   async (req, res) => {
-    console.log('trying');
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -25,8 +24,8 @@ router.post(
       const user = await User.findById(req.user.id).select('-password');
 
       const newPost = new Post({
+        title: req.body.title,
         text: req.body.text,
-        postName: req.body.postName,
         name: user.name,
         avatar: user.avatar,
         // user: req.user.id,
@@ -51,6 +50,26 @@ router.get('/', async (req, res) => {
     res.json(posts);
   } catch (error) {
     console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET api/posts/:id
+// @dexc    Get post by ID
+// @access  Private
+router.get('/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+    res.json(post);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
     res.status(500).send('Server Error');
   }
 });
@@ -99,8 +118,8 @@ router.put('/:id', auth, async (req, res) => {
   }
 
   // Edit the post
-  const { postName, text } = req.body;
-  Object.assign(post, { postName, text });
+  const { title, text } = req.body;
+  Object.assign(post, { title, text });
 
   await post.save();
 

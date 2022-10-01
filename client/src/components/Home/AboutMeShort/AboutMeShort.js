@@ -1,26 +1,28 @@
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MyButton from '../../layout/MyButton/MyButton';
 import styles from './AboutMeShort.module.scss';
 import portret from '../../../images/portret.jpg';
 
 export default function AboutMeShort(props) {
-  const history = useNavigate();
-  const handleCklick = () => history('/blog');
-
   const [isVisible, setIsVisible] = useState(false);
+  const [forIsVisible, setForIsVisible] = useState('old');
+
   const containerRef = useRef();
 
   useEffect(() => {
     const newContainerRef = containerRef;
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
-      setIsVisible(entry.isIntersecting);
+      setForIsVisible(entry.isIntersecting);
     });
+    if (forIsVisible === true) {
+      setIsVisible(true);
+    }
     observer.observe(newContainerRef.current);
 
     return () => observer.disconnect(newContainerRef);
-  }, []);
+  }, [forIsVisible]);
 
   return (
     <div
@@ -54,7 +56,7 @@ export default function AboutMeShort(props) {
       >
         <h1
           style={{
-            color: '#b08c59',
+            color: 'var(--primary-color)',
           }}
         >
           Iryna Sheremeta
@@ -65,12 +67,13 @@ export default function AboutMeShort(props) {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
         </p>
-        <MyButton
-          className={styles.aboutMeButton}
-          borderColor="#8E8D8A"
-          value="About me"
-          handleCklick={handleCklick}
-        />
+        <Link to="/photo-iris-react/blog">
+          <MyButton
+            className={styles.aboutMeButton}
+            borderColor="--light-gray"
+            value="My Blog"
+          />
+        </Link>
       </div>
     </div>
   );

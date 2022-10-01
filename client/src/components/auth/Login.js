@@ -28,22 +28,15 @@ const Login = () => {
 
   // Redirect if logged in
   if (auth.isAuthenticated) {
-    return <Navigate to="/photo-iris-react/blog" />;
+    return <Navigate to="/photo-iris-react/" />;
   }
 
-  ///////////////////////////////
-  /// this is a good working part
-  ///////////////////////////////
-  // axios('/api')
-  //   .then((response) => {
-  //     console.log(response.data);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  /////////////////////////////////
   return (
-    <Fragment>
+    <div
+      style={{
+        marginBottom: '100px',
+      }}
+    >
       <h1>Log In</h1>
       <form className="form" onSubmit={(e) => onSubmit(e)}>
         <div className="form-group">
@@ -70,7 +63,7 @@ const Login = () => {
           />
         </div>
       </form>
-    </Fragment>
+    </div>
   );
 };
 

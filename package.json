@@ -30,7 +30,8 @@
     "npm": "^8.3.2",
     "request": "^2.88.2",
     "run": "^1.4.0",
-    "server": "^1.0.37"
+    "server": "^1.0.37",
+    "util": "^0.12.4"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",

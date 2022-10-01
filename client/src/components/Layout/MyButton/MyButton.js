@@ -6,7 +6,7 @@ export default function MyButton(props) {
       type={props.type}
       value={props.value}
       style={{
-        border: `0.1rem solid ${props.borderColor}`,
+        border: `0.1rem solid var(${props.borderColor})`,
         borderRadius: '0.4rem',
       }}
       className={props.className}

@@ -85,7 +85,7 @@ function Header(props) {
           {auth.isAuthenticated && (
             <a
               onClick={() => dispatch(logout())}
-              href="#!"
+              href="/photo-iris-react/"
               style={{
                 position: 'absolute',
                 top: '40px',
@@ -102,6 +102,24 @@ function Header(props) {
         menuOpen={props.menuOpen}
         changeMenuStatus={props.changeMenuStatus}
       />
+      {auth.isAuthenticated && (
+        <a
+          onClick={() => dispatch(logout())}
+          href="/photo-iris-react/"
+          className={styles.logout}
+          style={{
+            position: 'absolute',
+            top: '44px',
+            right: '60px',
+          }}
+        >
+          <FontAwesomeIcon
+            style={{ color: 'var(--gray)' }}
+            icon={faRightFromBracket}
+            size="2x"
+          />{' '}
+        </a>
+      )}
       <div
         className={
           props.menuOpen

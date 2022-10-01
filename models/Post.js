@@ -6,7 +6,7 @@ const PostSchema = new Schema({
   // user: {
   //   type: Schema.Types.ObjectId,
   // },
-  postName: {
+  title: {
     type: String,
   },
   text: {
