@@ -1,3 +1,4 @@
+// header
 .header {
   display: flex;
   justify-content: center;
@@ -6,38 +7,39 @@
   padding: 0.6rem 1.25rem;
   height: 10rem;
   border-bottom: 0.3rem solid var(--primary-color);
-  color: var(--light-gray);
+  color: var(--gray-light);
 }
 
 .logo {
   height: 13vw;
+  max-height: 150px;
+  max-width: 150px;
   pointer-events: none;
 }
 
 .menuList {
-    display: flex;
-    width: 250px;
-    padding: 0;
-    color: var(--light-gray);
-    list-style-type: none;
-    background-color: none;
-    margin: 0;
-    
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 0.8rem;
-    letter-spacing: .1rem;
-    text-transform: uppercase;
+  display: flex;
+  max-width: 30%;
+  padding: 0;
+  // color: var(--gray-light);
+  list-style-type: none;
+  background-color: none;
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
 
-    li {
-      margin: 1rem;
+  li {
+    margin: 1rem;
 
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
+    a {
+      text-decoration: none;
+      color: inherit;
     }
+  }
 }
 
 .menuListFirst {
@@ -57,31 +59,6 @@
 }
 
 @media (max-width: 800px) {
-  .menuList {
-    li {
-      margin: 0.3rem;
-    }
-  }
-}
-
-
-.footer {
-  position: absolute;
-  padding: 1.25rem;
-  height: 100px;
-  width: 100%;
-  background-color: var(--primary-color);
-  bottom: 0;
-  z-index: 1;
-
-  .socialMedia {
-    width: 1.7rem;
-    margin: 0.3rem;
-  }
-}
-
-
-@media (max-width: 600px) {
   .header {
     justify-content: space-between;
     height: 100px;
@@ -111,6 +88,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--primary-ultralight);
+    align-items: center;
   }
 
   .sideMenu {
@@ -125,7 +103,7 @@
     padding: 2rem 0;
     right: 100%;
     width: 70%;
-    background-color: var(--red-light-color);
+    background-color: var(--red-light);
     transition: 0.5s;
   }
   
@@ -141,13 +119,37 @@
     bottom: 0;
     left: 100%;
     width: 30%;
-    background-color: var(--light-gray);
+    background-color: var(--gray-light);
     opacity: 0.5;
     transition: 0.5s;
   }
   
   .shadowOpen {
     transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@media (max-width: 1050px) {
+  .menuList li {
+    margin: 0.5rem;
+    letter-spacing: 0.01rem;
+  }
+}
+
+// footer
+.footer {
+  position: absolute;
+  padding: 1.25rem;
+  height: 8rem;
+  max-width: 1920px;
+  width: 100%;
+  background-color: var(--primary-color);
+  bottom: 0;
+  z-index: 1;
+
+  .socialMedia {
+    width: 1.7rem;
+    margin: 0.3rem;
   }
 }
 
@@ -180,7 +182,7 @@
 }
 
 .btn:hover {
-  color: var(--dark-gray);
+  color: var(--gray-dark);
   background: var(--primary-light);
 }
 
@@ -188,19 +190,19 @@
 .confirmBtn {
   background: transparent;
   padding: 0.5rem 1rem;
-  color: var(--red-dark-color);
-  border: 1px solid var(--red-dark-color);
+  color: var(--red-color);
+  border: 1px solid var(--red-color);
   margin-top: 2.25rem;
   border-radius: var(--radius);
 }
 
 .cancelBtn:hover {
-  background: var(--red-light-color);
-  color: var(--red-dark-color);
-  border-color: var(--red-light-color);
+  background: var(--red-light);
+  color: var(--red-dark);
+  border-color: var(--red-light);
 }
 
 .confirmBtn {
   border-color: var(--primary-color);
-  color: var(--dark-gray);
+  color: var(--gray-dark);
 }

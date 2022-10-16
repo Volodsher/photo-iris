@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import styles from './Slideshow.module.scss';
+import styles from './Home.module.scss';
 
-import img1 from '../../../slides/1.jpg';
-import img2 from '../../../slides/2.jpg';
-import img3 from '../../../slides/3.jpg';
-import img4 from '../../../slides/4.jpg';
-import img5 from '../../../slides/5.jpg';
-import img6 from '../../../slides/6.jpg';
+import img1 from '../../slides/1.jpg';
+import img2 from '../../slides/2.jpg';
+import img3 from '../../slides/3.jpg';
+import img4 from '../../slides/4.jpg';
+import img5 from '../../slides/5.jpg';
+import img6 from '../../slides/6.jpg';
 
 let imgs = [img1, img2, img3, img4, img5, img6];
 // let imgs = [

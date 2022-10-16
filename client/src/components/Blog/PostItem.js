@@ -11,6 +11,7 @@ import {
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import PostForm from './PostForm';
+import MyButton from '../layout/MyButton/MyButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePostAction } from '../../features/postSlice';
 
@@ -26,30 +27,35 @@ const PostItem = ({
   const firstSentence = text.slice(0, dotIndex);
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((store) => store.auth);
-  // console.log(_id);
 
   return (
-    <div className={`${styles.post} bg-white p-1 my-1`}>
+    <div className={`${styles.postItem}`}>
       <div>
         <h4>
           <Moment format="YYYY/MM/DD">{date}</Moment>
         </h4>
       </div>
       <div>
-        <h2 className="my-1">{title}</h2>
-        <p className="my-1">{firstSentence}</p>
-
-        <Link to={`/photo-iris-react/posts/${_id}`} className="btn btn-primary">
-          Read more{' '}
+        <h2 className="">{title}</h2>
+        <p className="">{firstSentence}</p>
+        <Link to={`/photo-iris-react/posts/${_id}`}>
+          <MyButton
+            className={styles.postButton}
+            value="Read more"
+            // color="--gray-light"
+            // padding="0.3rem"
+            borderColor="--gray-ultralight"
+          />
         </Link>
         {isAuthenticated && user.status === 'superuser' && (
-          <button
-            onClick={() => dispatch(openConfirm({ _id, title }))}
-            name="delete"
-          >
-            {' '}
-            delete
-          </button>
+          <Fragment>
+            <MyButton
+              className={styles.postButton}
+              handleCklick={() => dispatch(openConfirm({ _id, title }))}
+              value="delete"
+              borderColor="--gray-ultralight"
+            />
+          </Fragment>
         )}
       </div>
     </div>
@@ -67,13 +73,5 @@ PostItem.defaultProps = {
 //   removeLike: PropTypes.func.isRequired,
 //   deletePost: PropTypes.func.isRequired,
 // };
-
-// const mapStateToProps = (state) => ({
-//   auth: state.auth,
-// });
-
-// export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
-//   PostItem
-// );
 
 export default PostItem;

@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const auth = require('./middleware/auth');

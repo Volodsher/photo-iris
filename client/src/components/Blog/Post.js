@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPostAction } from '../../features/postSlice';
 import { openConfirm } from '../../features/confirmSlice';
 import { deletePostAction } from '../../features/postSlice';
+import styles from './Blog.module.scss';
 import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
 import Confirm from '../layout/Confirm';
 import Moment from 'react-moment';
+import MyButton from '../layout/MyButton/MyButton';
 
 const Post = (props) => {
   const { post, loading } = useSelector((store) => store.post);
@@ -32,7 +34,7 @@ const Post = (props) => {
   return loading || post === null ? (
     <Spinner />
   ) : (
-    <Fragment>
+    <div className={styles.postContainer}>
       {isOpen && (
         <Confirm
           action={deletePostAction}
@@ -40,35 +42,29 @@ const Post = (props) => {
           goTo="/photo-iris-react/blog"
         />
       )}
-      <Link to="/photo-iris-react/blog" className="btn">
-        Back to Posts
-      </Link>
-      {isAuthenticated && user.status === 'superuser' && (
-        <Fragment>
-          <Link
-            to="/photo-iris-react/posts/postForm"
-            state={{ ...post }}
-            className="btn btn-primary"
-          >
-            Edit{' '}
-          </Link>
-          <button
-            onClick={() => dispatch(openConfirm({ _id, title }))}
-            name="delete"
-          >
-            {' '}
-            delete
-          </button>
-        </Fragment>
-      )}
-
+      <div className={styles.postButtons}>
+        <Link to="/photo-iris-react/blog" className={styles.postLink}>
+          <MyButton value="All Posts" className={styles.postButton} />
+        </Link>
+        {isAuthenticated && user.status === 'superuser' && (
+          <Fragment>
+            <Link to="/photo-iris-react/posts/postForm" state={{ ...post }}>
+              <MyButton value="Edit" className={styles.postButton} />
+            </Link>
+            <MyButton
+              value="Delete"
+              className={styles.postButton}
+              handleCklick={() => dispatch(openConfirm({ _id, title }))}
+            />
+          </Fragment>
+        )}
+      </div>
       <h1>{post.title}</h1>
-      <h4>
+      <h4 style={{ color: 'var(--gray-light' }}>
         <Moment format="YYYY/MM/DD">{post.date}</Moment>
       </h4>
       <p>{post.text}</p>
-      {/* <PostItem post={post} showActions={false} /> */}
-    </Fragment>
+    </div>
   );
 };
 

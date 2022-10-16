@@ -41,7 +41,7 @@ function App() {
       <ScrollToTop />
       <div className="app">
         <Header menuOpen={menuOpen} changeMenuStatus={changeMenuStatus} />
-        <div className="main">
+        <main className="main">
           <Routes>
             <Route exact path="/photo-iris-react/" element={<Home />} />
             <Route exact path="/photo-iris-react/blog" element={<Blog />} />
@@ -60,7 +60,7 @@ function App() {
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
+        </main>
         <Footer />
       </div>
     </Router>

@@ -5,6 +5,7 @@ import styles from './Blog.module.scss';
 import { useDispatch } from 'react-redux';
 import { addPostAction, updatePostAction } from '../../features/postSlice';
 import { useLocation } from 'react-router';
+import MyButton from '../layout/MyButton/MyButton';
 
 const PostForm = (props) => {
   const [title, setTitle] = useState('');
@@ -21,9 +22,6 @@ const PostForm = (props) => {
       setTitle(fromPost.title);
       setText(fromPost.text);
       setId(fromPost._id);
-      // if (fromPost !== null) {
-      //   console.log(fromPost._id);
-      // }
     }
   }, []);
 
@@ -55,6 +53,9 @@ const PostForm = (props) => {
           placeholder="Create a post"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          style={{
+            width: '80vw',
+          }}
           required
         ></input>
         <textarea
@@ -64,9 +65,12 @@ const PostForm = (props) => {
           placeholder="Create a post"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          style={{
+            width: '80vw',
+          }}
           required
         />
-        <input type="submit" className="btn btn-dark my-1" value="Submit" />
+        <MyButton type="submit" value="Submit" borderColor="--gray-light" />
       </form>
     </div>
   );

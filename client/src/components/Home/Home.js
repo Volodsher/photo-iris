@@ -1,22 +1,15 @@
-import Slideshow from './Slideshow/Slideshow';
-import AboutMeShort from './AboutMeShort/AboutMeShort';
-import ShortGallery from './ShortGallery/ShortGallery';
-import ShortSession from './ShortSessions/ShortSessions';
-import AdvertSession from './AdvertSession/AdvertSession';
+import Slideshow from './Slideshow';
+import AboutMeShort from './AboutMeShort';
+import styles from './Home.module.scss';
+import ShortGallery from './ShortGallery';
+import ShortSession from './ShortSessions';
+import AdvertSession from './AdvertSession';
 
 export default function Home(props) {
   return (
-    <div style={{ marginBottom: 100 }}>
+    <div>
       <Slideshow />
-      <div
-        // className={styles.Home}
-        style={{
-          margin: 'auto',
-          padding: '40px 60px',
-          maxWidth: '1300px',
-          minWidth: '300px',
-        }}
-      >
+      <div className={styles.homeContainer}>
         <AboutMeShort />
         <ShortGallery />
         <ShortSession />

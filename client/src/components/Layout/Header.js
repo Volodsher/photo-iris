@@ -97,7 +97,6 @@ function Header(props) {
           )}
         </li>
       </ul>
-      {/* <a onClick={} href="#!"> */}
       <HamburgerButton
         menuOpen={props.menuOpen}
         changeMenuStatus={props.changeMenuStatus}
@@ -109,15 +108,12 @@ function Header(props) {
           className={styles.logout}
           style={{
             position: 'absolute',
-            top: '44px',
-            right: '60px',
+            top: '31px',
+            right: '50px',
+            color: 'var(--gray-light)',
           }}
         >
-          <FontAwesomeIcon
-            style={{ color: 'var(--gray)' }}
-            icon={faRightFromBracket}
-            size="2x"
-          />{' '}
+          <FontAwesomeIcon icon={faRightFromBracket} size="2x" />{' '}
         </a>
       )}
       <div
