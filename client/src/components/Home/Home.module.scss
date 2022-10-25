@@ -201,6 +201,11 @@
   width: 100%;
   border-radius: 0.5rem;
   object-fit: cover;
+  color: var(--gray-dark)
+}
+
+.advertSession {
+  color: var(--gray-dark);
 }
 
 // second
@@ -225,6 +230,7 @@
 //   border-radius: 5px;
 // }
 
+
 // .overlay {
 //   position: absolute;
 //   width: 100%;
@@ -242,7 +248,7 @@
 //   justify-content: center;
 // }
 
-// .shortSession li:hover .overlay {
+// .shortSession li .overlay:hover {
 //   transform: scale(1);
 // }
 

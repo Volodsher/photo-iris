@@ -1,0 +1,37 @@
+.galleryImagesBox {
+  display:inline-block;    
+  line-height: 0;       
+  column-count: 2;    
+  column-gap: 0.3rem; 
+}
+
+.galleryImagesBox > img {
+ width: 100% !important;    
+ height: auto !important;
+//  padding: 0.15rem;
+ margin-top: 0.3rem;
+ border-radius: 0.5rem;
+}
+
+
+
+// ul {
+//   display: flex;
+//   flex-wrap: wrap;
+// }
+
+// li {
+//   // height: 40vh;
+//   width: 30vh;
+//   flex-grow: 1;
+//   list-style-type: none;
+// }
+
+// img {
+//   width: 100%;
+//   height: 100%;
+//   // max-height: 100%;
+//   // max-width: 100%;
+//   // object-fit: fill;
+//   // vertical-align: bottom;
+// }

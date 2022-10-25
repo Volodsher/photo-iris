@@ -6,16 +6,22 @@ import { useDispatch } from 'react-redux';
 import { addPostAction, updatePostAction } from '../../features/postSlice';
 import { useLocation } from 'react-router';
 import MyButton from '../layout/MyButton/MyButton';
+import axios from 'axios';
 
 const PostForm = (props) => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
+  const [image, setImage] = useState();
   const [_id, setId] = useState();
+  const [url, setUrl] = useState('');
   // const postData = { title, text };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const fromPost = location.state;
+
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState();
 
   useEffect(() => {
     if (fromPost !== null) {
@@ -24,6 +30,33 @@ const PostForm = (props) => {
       setId(fromPost._id);
     }
   }, []);
+
+  const handleSubmission = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+
+    await axios
+      .post('/api/photo', formData)
+      .then((res) => {
+        console.log(res.data);
+        console.log('Success:', res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  console.log(isFilePicked);
+  console.log(selectedFile);
+
+  useEffect(() => {
+    if (selectedFile === undefined) {
+      setIsFilePicked(false);
+    } else {
+      setIsFilePicked(true);
+    }
+  }, [selectedFile]);
 
   return (
     <div className={styles.postForm}>
@@ -72,6 +105,52 @@ const PostForm = (props) => {
         />
         <MyButton type="submit" value="Submit" borderColor="--gray-light" />
       </form>
+      <form onSubmit={handleSubmission}>
+        <input
+          type="file"
+          name="file"
+          onChange={(event) => {
+            // setSelectedFile(event.target.files[0]);
+            // console.log(event.target.files[0]);
+            // if (event.target.files.length === 0) {
+            //   setIsFilePicked(false); // undefined take place instead by default
+            //   // the cancel event logics will always land here
+            // }
+            // if (event.target.files && event.target.files[0]) {
+            if (event.target.files.length !== 0) {
+              setSelectedFile(event.target.files[0]);
+              setImage(URL.createObjectURL(event.target.files[0]));
+            }
+          }}
+        />
+        {isFilePicked ? (
+          <div>
+            <p>Filename: {selectedFile.name}</p>
+            {/* <p>Filetype: {selectedFile.type}</p> */}
+            <p>
+              Size: {Math.round((selectedFile.size / 1000000) * 1000) / 1000} MB
+            </p>
+
+            <img src={image} />
+          </div>
+        ) : (
+          <p>Select a file to show details</p>
+        )}
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      {/* <div>
+        <input
+          type="file"
+          onChange={(e) => setImage(e.target.files[0])}
+        ></input>
+        <button onClick={uploadImage}>Upload</button>
+      </div> */}
+      <div>
+        <h1>Uploaded image will be displayed here</h1>
+        <img src={url} />
+      </div>
     </div>
   );
 };

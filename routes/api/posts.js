@@ -28,6 +28,7 @@ router.post(
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
+        image: req.body.image,
         // user: req.user.id,
       });
 

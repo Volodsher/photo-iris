@@ -4,10 +4,11 @@ import styles from './Home.module.scss';
 import ShortGallery from './ShortGallery';
 import ShortSession from './ShortSessions';
 import AdvertSession from './AdvertSession';
+import { Fragment } from 'react';
 
 export default function Home(props) {
   return (
-    <div>
+    <Fragment>
       <Slideshow />
       <div className={styles.homeContainer}>
         <AboutMeShort />
@@ -15,6 +16,6 @@ export default function Home(props) {
         <ShortSession />
         <AdvertSession />
       </div>
-    </div>
+    </Fragment>
   );
 }

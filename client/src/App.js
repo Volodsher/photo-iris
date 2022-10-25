@@ -7,7 +7,7 @@ import Home from './components/Home/Home';
 import Blog from './components/Blog/Blog';
 import Sessions from './components/Sessions/Sessions';
 import Gallery from './components/Gallery/Gallery';
-import Inspiration from './components/Inspiration/Inspiration';
+// import Inspiration from './components/Inspiration/Inspiration';
 import Contact from './components/Contact/Contact';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -15,7 +15,6 @@ import NotFound from './components/layout/NotFound';
 import Login from './components/auth/Login';
 import Post from './components/Blog/Post';
 import PostForm from './components/Blog/PostForm';
-// import styles from './App.module.scss';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,10 +46,10 @@ function App() {
             <Route exact path="/photo-iris-react/blog" element={<Blog />} />
             <Route path="/photo-iris-react/sessions" element={<Sessions />} />
             <Route path="/photo-iris-react/gallery" element={<Gallery />} />
-            <Route
+            {/* <Route
               path="/photo-iris-react/inspiration"
               element={<Inspiration />}
-            />
+            /> */}
             <Route path="/photo-iris-react/contact" element={<Contact />} />
             <Route path="/photo-iris-react/posts/:id" element={<Post />} />
             <Route path="/photo-iris-react/vhid" element={<Login />} />

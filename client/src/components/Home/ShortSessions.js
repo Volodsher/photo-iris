@@ -23,13 +23,13 @@ export default function ShortSession() {
           <div className={styles.imageItem}>
             <img src={portrait} alt="" />
             <div className={styles.overlay}>
-              <span>Image title</span>
+              <h2>Portrait</h2>
             </div>
           </div>
           <div className={styles.imageItem}>
             <img src={family} alt="" />
             <div className={styles.overlay}>
-              <span>Image title</span>
+              <h2>Family</h2>
             </div>
           </div>
         </div>
@@ -37,13 +37,13 @@ export default function ShortSession() {
           <div className={styles.imageItem}>
             <img src={inthemoment} alt="" />
             <div className={styles.overlay}>
-              <span>Image title</span>
+              <h2>In the moment</h2>
             </div>
           </div>
           <div className={styles.imageItem}>
             <img src={charm} alt="" />
             <div className={styles.overlay}>
-              <span>Image title</span>
+              <h2>Charm</h2>
             </div>
           </div>
           <Link to="/photo-iris-react/sessions">

@@ -60,7 +60,7 @@ function Header(props) {
             Gallery
           </NavLink>
         </li>
-        <li key="5">
+        {/* <li key="5">
           <NavLink
             to="/photo-iris-react/inspiration"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
@@ -68,7 +68,7 @@ function Header(props) {
           >
             Inspiration
           </NavLink>
-        </li>
+        </li> */}
         <li
           key="6"
           style={{
@@ -136,9 +136,9 @@ function Header(props) {
           <li key="4" onClick={props.changeMenuStatus}>
             <NavLink to="/photo-iris-react/gallery">Gallery</NavLink>
           </li>
-          <li key="5" onClick={props.changeMenuStatus}>
+          {/* <li key="5" onClick={props.changeMenuStatus}>
             <NavLink to="/photo-iris-react/inspiration">Inspiration</NavLink>
-          </li>
+          </li> */}
           <li key="6" onClick={props.changeMenuStatus}>
             <NavLink to="/photo-iris-react/contact">Contact</NavLink>
           </li>
