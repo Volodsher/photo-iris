@@ -119,8 +119,8 @@ router.put('/:id', auth, async (req, res) => {
   }
 
   // Edit the post
-  const { title, text } = req.body;
-  Object.assign(post, { title, text });
+  const { title, text, image } = req.body;
+  Object.assign(post, { title, text, image });
 
   await post.save();
 

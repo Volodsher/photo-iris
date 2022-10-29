@@ -31,7 +31,6 @@ export default function Blog() {
       <h1>Wellcome to my blog</h1>
       <p>Here I tell some intresting stores about photography</p>
       {isAuthenticated && user.status === 'superuser' && <PostForm />}
-      {isAuthenticated && user.status === 'superuser' && <div>this is it</div>}
       {loading === true ? (
         <Spinner />
       ) : (

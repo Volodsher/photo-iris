@@ -64,6 +64,10 @@ const Post = (props) => {
         <Moment format="YYYY/MM/DD">{post.date}</Moment>
       </h4>
       <p>{post.text}</p>
+      <img
+        src={`${process.env.REACT_APP_URL}/blog/${post.image}`}
+        style={{ maxWidth: '100%', height: 'auto' }}
+      />
     </div>
   );
 };
