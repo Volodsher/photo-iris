@@ -1,13 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const auth = require('../../middleware/auth');
+import auth from '../../middleware/auth.js';
+import fs from 'fs';
 
-const fs = require('fs');
-
-router.get('/api/gallery', auth, (req, res) => {
+router.get('/', (req, res) => {
   fs.readdir('./uploads/gallery', (err, files) => {
     res.send(files.filter((file) => file !== '.DS_Store'));
   });
 });
 
-module.exports = router;
+export default router;

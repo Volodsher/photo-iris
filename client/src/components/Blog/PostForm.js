@@ -2,13 +2,18 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Blog.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { openConfirm } from '../../features/confirmSlice';
 import { addPostAction, updatePostAction } from '../../features/postSlice';
 import { useLocation } from 'react-router';
 import MyButton from '../layout/MyButton/MyButton';
+import Confirm from '../layout/Confirm';
 import axios from 'axios';
 
 const PostForm = (props) => {
+  const { isOpen, payload } = useSelector((store) => store.confirm);
+  const dispatch = useDispatch();
+
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [image, setImage] = useState();
@@ -18,9 +23,9 @@ const PostForm = (props) => {
   const [url, setUrl] = useState('');
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState();
+  const [deleteImage, setDeleteImage] = useState(5);
   // const postData = { title, text };
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const fromPost = location.state;
@@ -31,6 +36,7 @@ const PostForm = (props) => {
       setText(fromPost.text);
       setId(fromPost._id);
       setImage(fromPost.image);
+      setPrevImage(fromPost.image);
     }
   }, []);
 
@@ -38,7 +44,7 @@ const PostForm = (props) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('file', selectedFile);
-    console.log(image);
+
     if (fromPost !== null) {
       dispatch(updatePostAction({ _id, title, text, image }));
       navigate(`/photo-iris-react/posts/${_id}`);
@@ -48,16 +54,29 @@ const PostForm = (props) => {
     setTitle('');
     setText('');
     setImage('');
+    setPrevImage('');
+    setImageUrl('');
+    setSelectedFile('');
 
-    await axios
-      .post('/api/photo-blog', formData)
-      .then((res) => {
-        console.log(res.data);
-        console.log('Success:', res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (image && prevImage === undefined) {
+      await axios
+        .post('/api/photo-blog', formData)
+        .then((res) => {
+          console.log('Success:', res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (image && prevImage !== image) {
+      await axios
+        .post('/api/photo-blog', formData)
+        .then((res) => {
+          console.log('Success:', res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   useEffect(() => {
@@ -68,15 +87,25 @@ const PostForm = (props) => {
     }
   }, [selectedFile]);
 
-  console.log(isFilePicked);
-  console.log(selectedFile);
+  const deletePostAction = () => {
+    setImage(null);
+    setPrevImage(null);
+    setIsFilePicked(null);
+    setSelectedFile('');
+    setImageUrl(null);
+  };
 
   return (
     <div className={styles.postForm}>
+      {isOpen && (
+        <Confirm
+          action={deletePostAction}
+          confirmName="Do you really want to delete a photo"
+        />
+      )}
       <div className="bg-primary p">
         <h3>Say Something...</h3>
       </div>
-      {/* {fromPost !== null && <p>{fromPost.title}</p>} */}
       <form className="form my-1" onSubmit={handleSubmission}>
         <input
           name="title"
@@ -103,11 +132,12 @@ const PostForm = (props) => {
           }}
           required
         />
-        {image && (
+        {prevImage && (
           <Fragment>
             <p>old name {image}</p>
             <img
-              src={`${process.env.REACT_APP_URL}/blog/${image}`}
+              src={`${process.env.REACT_APP_URL}/blog/${prevImage}`}
+              // src={imageUrl}
               style={{ margin: '2rem 0', maxWidth: '100%', height: 'auto' }}
             />
           </Fragment>
@@ -123,6 +153,14 @@ const PostForm = (props) => {
             }
           }}
         />
+        {image && (
+          <button
+            type="button"
+            onClick={() => dispatch(openConfirm({ title: image }))}
+          >
+            Delete image
+          </button>
+        )}
         {isFilePicked ? (
           <div>
             <p>Filename: {selectedFile.name}</p>

@@ -1,12 +1,13 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const auth = require('../../middleware/auth');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const { check, validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
+import { check, validationResult } from 'express-validator';
+import auth from '../../middleware/auth.js';
 
-const User = require('../../models/User');
+import jwt from 'jsonwebtoken';
+import config from 'config';
+import bcrypt from 'bcryptjs';
+
+import User from '../../models/User.js';
 
 // @route GET api/auth
 // @dexc  Test route
@@ -81,4 +82,5 @@ router.post(
   }
 );
 
-module.exports = router;
+export default router;
+// module.exports = router;

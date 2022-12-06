@@ -1,9 +1,10 @@
 // '/api/photo-blog'
 
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const auth = require('../../middleware/auth');
-const multer = require('multer');
+import auth from '../../middleware/auth.js';
+import multer from 'multer';
+import fs from 'fs';
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -36,4 +37,13 @@ router.post('/', auth, upload, (req, res, next) => {
   console.log('success');
 });
 
-module.exports = router;
+router.delete('/:image', auth, (req, res) => {
+  req.params.id;
+  fs.unlink(`./uploads/blog/${req.params.image}`, (err) => {
+    if (err) throw err;
+
+    console.log('Blog photo deleted');
+  });
+});
+
+export default router;

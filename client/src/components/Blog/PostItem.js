@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import styles from './Blog.module.scss';
-import { openConfirm } from '../../features/confirmSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faThumbsUp,
@@ -13,20 +12,22 @@ import {
 import PostForm from './PostForm';
 import MyButton from '../layout/MyButton/MyButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePostAction } from '../../features/postSlice';
 
 const PostItem = ({
   // addLike,
   // removeLike,
-  // deletePost,
   // auth,
-  post: { _id, text, title, avatar, likes, comments, date },
+  post: { _id, text, title, date, image },
   showActions,
+  toggleConfirm,
+  postPayload,
 }) => {
   const dotIndex = text.indexOf('.');
   const firstSentence = text.slice(0, dotIndex);
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((store) => store.auth);
+
+  console.log(image);
 
   return (
     <div className={`${styles.postItem}`}>
@@ -51,7 +52,10 @@ const PostItem = ({
           <Fragment>
             <MyButton
               className={styles.postButton}
-              handleCklick={() => dispatch(openConfirm({ _id, title }))}
+              handleCklick={() => {
+                postPayload({ _id, title, image });
+                toggleConfirm();
+              }}
               value="delete"
               borderColor="--gray-ultralight"
             />

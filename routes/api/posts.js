@@ -1,10 +1,10 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { check, validationResult } = require('express-validator');
-const auth = require('../../middleware/auth');
+import { check, validationResult } from 'express-validator';
+import auth from '../../middleware/auth.js';
 
-const Post = require('../../models/Post');
-const User = require('../../models/User');
+import Post from '../../models/Post.js';
+import User from '../../models/User.js';
 // const checkObjectId = require('../../middleware/checkObjectId');
 
 // @route  POST api/posts
@@ -127,4 +127,4 @@ router.put('/:id', auth, async (req, res) => {
   res.json(post);
 });
 
-module.exports = router;
+export default router;

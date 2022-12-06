@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const PictureSchema = new mongoose.Schema({
   name: {
@@ -16,4 +16,7 @@ const PictureSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Picture = mongoose.model('picture', PictureSchema);
+const Picture = mongoose.model('picture', PictureSchema);
+
+export default Picture;
+// module.exports = Picture = mongoose.model('picture', PictureSchema);

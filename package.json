@@ -22,6 +22,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.7",
+    "cors": "^2.8.5",
     "express": "^4.17.2",
     "express-validator": "^6.14.0",
     "gravatar": "^1.8.2",
@@ -29,8 +30,7 @@
     "mongoose": "^6.1.8",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.8.0",
-    "npm": "^8.3.2",
-    "request": "^2.88.2",
+    "normalize-url": "^8.0.0",
     "run": "^1.4.0",
     "server": "^1.0.37",
     "sharp": "^0.31.1",
@@ -39,5 +39,6 @@
   "devDependencies": {
     "concurrently": "^7.0.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "type": "module"
 }

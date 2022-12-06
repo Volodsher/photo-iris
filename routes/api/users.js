@@ -1,13 +1,13 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const gravatar = require('gravatar');
-const jwt = require('jsonwebtoken');
-const { check, validationResult } = require('express-validator');
-const config = require('config');
-const normalize = require('normalize-url');
+import bcrypt from 'bcryptjs';
+import gravatar from 'gravatar';
+import jwt from 'jsonwebtoken';
+import { check, validationResult } from 'express-validator';
+import config from 'config';
+import normalize from 'normalize-url';
 
-const User = require('../../models/User');
+import User from '../../models/User.js';
 
 // @route    POST api/users
 // @desc     Register user
@@ -49,7 +49,7 @@ router.post(
       user = new User({
         name,
         email,
-        avatar,
+        // avatar,
         password,
       });
 
@@ -83,4 +83,5 @@ router.post(
   }
 );
 
-module.exports = router;
+// module.exports = router;
+export default router;
