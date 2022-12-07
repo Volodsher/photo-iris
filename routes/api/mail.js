@@ -1,13 +1,14 @@
 import express from 'express';
 const router = express.Router();
 import nodemailer from 'nodemailer';
+import config from 'config';
 
 // for mail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'volodsher@gmail.com',
-    pass: 'aqqfhjmnxsopacmq',
+    user: config.get('mailUser'),
+    pass: config.get('mailPass'),
   },
 });
 
