@@ -1,7 +1,11 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import nodemailer from 'nodemailer';
-import config from 'config';
+const nodemailer = require('nodemailer');
+const config = require('config');
+
+// import express from 'express';
+// import nodemailer from 'nodemailer';
+// import config from 'config';
 
 // for mail
 const transporter = nodemailer.createTransport({
@@ -30,4 +34,5 @@ router.get('/', async (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;
+// export default router;

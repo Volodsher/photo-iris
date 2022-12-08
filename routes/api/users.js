@@ -1,13 +1,18 @@
-import express from 'express';
+// import express from 'express';
+const express = require('express');
 const router = express.Router();
-import bcrypt from 'bcryptjs';
-import gravatar from 'gravatar';
-import jwt from 'jsonwebtoken';
-import { check, validationResult } from 'express-validator';
-import config from 'config';
-import normalize from 'normalize-url';
-
-import User from '../../models/User.js';
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { check, validationResult } = require('express-validator');
+const config = require('config');
+const User = require('../../models/User');
+// import bcrypt from 'bcryptjs';
+// import gravatar from 'gravatar';
+// import jwt from 'jsonwebtoken';
+// import { check, validationResult } from 'express-validator';
+// import config from 'config';
+// import normalize from 'normalize-url';
+// import User from '../../models/User.js';
 
 // @route    POST api/users
 // @desc     Register user
@@ -37,14 +42,14 @@ router.post(
         });
       }
 
-      const avatar = normalize(
-        gravatar.url(email, {
-          s: '200',
-          r: 'pg',
-          d: 'mm',
-        }),
-        { forceHttps: true }
-      );
+      // const avatar = normalize(
+      //   gravatar.url(email, {
+      //     s: '200',
+      //     r: 'pg',
+      //     d: 'mm',
+      //   }),
+      //   { forceHttps: true }
+      // );
 
       user = new User({
         name,
@@ -83,5 +88,5 @@ router.post(
   }
 );
 
-// module.exports = router;
-export default router;
+module.exports = router;
+// export default router;

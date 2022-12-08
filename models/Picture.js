@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+// import mongoose from 'mongoose';
 
 const PictureSchema = new mongoose.Schema({
   name: {
@@ -18,5 +19,5 @@ const PictureSchema = new mongoose.Schema({
 
 const Picture = mongoose.model('picture', PictureSchema);
 
-export default Picture;
-// module.exports = Picture = mongoose.model('picture', PictureSchema);
+// export default Picture;
+module.exports = Picture;

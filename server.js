@@ -1,13 +1,23 @@
-import express from 'express';
-import cors from 'cors';
+// import express from 'express';
+const express = require('express');
+const cors = require('cors');
+const connectDB = require('./config/db');
+
+// import cors from 'cors';
 // import bodyParser from 'body-parser';
-import connectDB from './config/db.js';
-import users from './routes/api/users.js';
-import auth from './routes/api/auth.js';
-import posts from './routes/api/posts.js';
-import photoBlog from './routes/api/photoBlog.js';
-import mail from './routes/api/mail.js';
-import gallery from './routes/api/gallery.js';
+// import connectDB from './config/db.js';
+// import users from './routes/api/users.js';
+// import auth from './routes/api/auth.js';
+// import posts from './routes/api/posts.js';
+// import photoBlog from './routes/api/photoBlog.js';
+// import mail from './routes/api/mail.js';
+// import gallery from './routes/api/gallery.js';
+const users = require('./routes/api/users.js');
+const auth = require('./routes/api/posts.js');
+const posts = require('./routes/api/posts.js');
+const photoBlog = require('./routes/api/photoBlog.js');
+const mail = require('./routes/api/mail.js');
+const gallery = require('./routes/api/gallery.js');
 
 const app = express();
 app.use(cors());

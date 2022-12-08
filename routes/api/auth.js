@@ -1,11 +1,16 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import { check, validationResult } from 'express-validator';
-import auth from '../../middleware/auth.js';
-
-import jwt from 'jsonwebtoken';
-import config from 'config';
-import bcrypt from 'bcryptjs';
+const { check, validationResult } = require('express-validator');
+const auth = require('../../middleware/auth');
+const jwt = require('jwt');
+const config = require('config');
+const bcrypt = require(bcryptjs);
+// import express from 'express';
+// import { check, validationResult } from 'express-validator';
+// import auth from '../../middleware/auth.js';
+// import jwt from 'jsonwebtoken';
+// import config from 'config';
+// import bcrypt from 'bcryptjs';
 
 import User from '../../models/User.js';
 
@@ -82,5 +87,5 @@ router.post(
   }
 );
 
-export default router;
-// module.exports = router;
+// export default router;
+module.exports = router;
