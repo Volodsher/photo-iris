@@ -1,11 +1,11 @@
 // import express from 'express';
+// import connectDB from './config/db.js';
+// import cors from 'cors';
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 
-// import cors from 'cors';
 // import bodyParser from 'body-parser';
-// import connectDB from './config/db.js';
 // import users from './routes/api/users.js';
 // import auth from './routes/api/auth.js';
 // import posts from './routes/api/posts.js';

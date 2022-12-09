@@ -7,12 +7,13 @@ const { check, validationResult } = require('express-validator');
 const config = require('config');
 const User = require('../../models/User');
 // import bcrypt from 'bcryptjs';
-// import gravatar from 'gravatar';
 // import jwt from 'jsonwebtoken';
 // import { check, validationResult } from 'express-validator';
 // import config from 'config';
-// import normalize from 'normalize-url';
 // import User from '../../models/User.js';
+
+// import gravatar from 'gravatar';
+// import normalize from 'normalize-url';
 
 // @route    POST api/users
 // @desc     Register user

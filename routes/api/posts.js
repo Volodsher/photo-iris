@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
+// const checkObjectId = require('../../middleware/checkObjectId');
 // import express from 'express';
 // import { check, validationResult } from 'express-validator';
 // import auth from '../../middleware/auth.js';
