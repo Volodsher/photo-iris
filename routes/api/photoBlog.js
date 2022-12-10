@@ -1,15 +1,10 @@
 // '/api/photo-blog'
 const express = require('express');
 const router = express.Router();
-
 const auth = require('../../middleware/auth');
 const multer = require('multer');
-const fs = require('fs');
 
-// import express from 'express';
-// import auth from '../../middleware/auth.js';
-// import multer from 'multer';
-// import fs from 'fs';
+const fs = require('fs');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -52,4 +47,3 @@ router.delete('/:image', auth, (req, res) => {
 });
 
 module.exports = router;
-// export default router;

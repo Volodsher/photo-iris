@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
-// import jwt from 'jsonwebtoken';
-// import config from 'config';
 
 // export default function (req, res, next) {
 module.exports = function (req, res, next) {

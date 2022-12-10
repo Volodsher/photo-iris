@@ -5,13 +5,6 @@ const auth = require('../../middleware/auth');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
 // const checkObjectId = require('../../middleware/checkObjectId');
-// import express from 'express';
-// import { check, validationResult } from 'express-validator';
-// import auth from '../../middleware/auth.js';
-
-// import Post from '../../models/Post.js';
-// import User from '../../models/User.js';
-// const checkObjectId = require('../../middleware/checkObjectId');
 
 // @route  POST api/posts
 // @desc   Create a post

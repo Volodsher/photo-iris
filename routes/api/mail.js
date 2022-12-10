@@ -3,10 +3,6 @@ const router = express.Router();
 const nodemailer = require('nodemailer');
 const config = require('config');
 
-// import express from 'express';
-// import nodemailer from 'nodemailer';
-// import config from 'config';
-
 // for mail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -35,4 +31,3 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
-// export default router;
