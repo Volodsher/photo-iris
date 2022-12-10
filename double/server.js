@@ -1,13 +1,12 @@
 const express = require('express');
-const cors = require('cors');
+const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 
 const app = express();
-app.use(cors());
 connectDB();
 
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.json({ extended: false }));
 app.use(express.static('uploads'));
