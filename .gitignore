@@ -8,6 +8,7 @@ node_modules
 .pnp.js
 
 config/default.json
+double
 
 # testing
 /coverage

@@ -1,13 +1,14 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
+const config = require('config');
 
 // for mail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'volodsher@gmail.com',
-    pass: 'aqqfhjmnxsopacmq',
+    user: config.get('mailUser'),
+    pass: config.get('mailPass'),
   },
 });
 
@@ -29,4 +30,4 @@ router.get('/', async (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;

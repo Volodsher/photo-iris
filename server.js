@@ -1,13 +1,6 @@
-import express from 'express';
-import cors from 'cors';
-// import bodyParser from 'body-parser';
-import connectDB from './config/db.js';
-import users from './routes/api/users.js';
-import auth from './routes/api/auth.js';
-import posts from './routes/api/posts.js';
-import photoBlog from './routes/api/photoBlog.js';
-import mail from './routes/api/mail.js';
-import gallery from './routes/api/gallery.js';
+const express = require('express');
+const cors = require('cors');
+const connectDB = require('./config/db');
 
 const app = express();
 app.use(cors());
@@ -23,16 +16,12 @@ app.get('/api', (req, res) => {
   res.send('We did it');
 });
 
-// app.get('/api/gallery', (req, res) => {
-//   res.send('We did it ga;');
-// });
-
-app.use('/api/users', users);
-app.use('/api/auth', auth);
-app.use('/api/posts', posts);
-app.use('/api/photo-blog', photoBlog);
-app.use('/api/mail', mail);
-app.use('/api/gallery', gallery);
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/posts', require('./routes/api/posts'));
+app.use('/api/photo-blog', require('./routes/api/photoBlog'));
+app.use('/api/mail', require('./routes/api/mail'));
+app.use('/api/gallery', require('./routes/api/gallery'));
 
 const PORT = process.env.PORT || 5000;
 
