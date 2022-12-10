@@ -1,5 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://volod123:volod123@clusterphotoiris.k3pje.mongodb.net/photoIris?retryWrites=true&w=majority",
-  "jwtSecret": "lifeisgood",
-  "url": "http://localhost:5000/uploads/"
-}
