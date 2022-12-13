@@ -28,7 +28,7 @@ const Login = () => {
 
   // Redirect if logged in
   if (auth.isAuthenticated) {
-    return <Navigate to="/photo-iris-react/" />;
+    return <Navigate to="/" />;
   }
 
   return (

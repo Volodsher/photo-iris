@@ -54,7 +54,7 @@ export default function AboutMeShort(props) {
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </p>
-          <Link to="/photo-iris-react/blog">
+          <Link to="/blog">
             <MyButton
               className={styles.aboutMeButton}
               borderColor="--gray-light"

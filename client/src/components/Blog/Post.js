@@ -57,14 +57,14 @@ const Post = (props) => {
           action={deletePostAction}
           confirmName="Do you really want to delete a a post"
           toDispatch={true}
-          link="/photo-iris-react/"
-          goTo="/photo-iris-react/blog"
+          link="/"
+          goTo="/blog"
         />
       )} */}
       {isOpen && (
         <NewConfirm
           action={toDeletePost}
-          link="/photo-iris-react/blog"
+          link="/blog"
           toggleConfirm={toggleConfirm}
           confirmName="Do you really want to delete this post"
           isOpen={isOpen}
@@ -72,12 +72,12 @@ const Post = (props) => {
         />
       )}
       <div className={styles.postButtons}>
-        <Link to="/photo-iris-react/blog" className={styles.postLink}>
+        <Link to="/blog" className={styles.postLink}>
           <MyButton value="All Posts" className={styles.postButton} />
         </Link>
         {isAuthenticated && user.status === 'superuser' && (
           <Fragment>
-            <Link to="/photo-iris-react/posts/postForm" state={{ ...post }}>
+            <Link to="/posts/postForm" state={{ ...post }}>
               <MyButton value="Edit" className={styles.postButton} />
             </Link>
             <MyButton
@@ -99,7 +99,7 @@ const Post = (props) => {
       <p>{post.text}</p>
       {post.image && (
         <img
-          src={`${process.env.REACT_APP_URL}/blog/${post.image}`}
+          src={`/blog/${post.image}`}
           style={{ maxWidth: '100%', height: 'auto' }}
         />
       )}

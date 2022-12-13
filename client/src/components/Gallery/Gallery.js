@@ -23,7 +23,7 @@ export default function Gallery() {
           return (
             <img
               key={ind}
-              src={`${process.env.REACT_APP_URL}/gallery/${image}`}
+              src={`/gallery/${image}`}
               className={styles.galleryImage}
             />
           );

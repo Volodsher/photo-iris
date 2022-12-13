@@ -46,7 +46,7 @@ export default function ShortSession() {
               <h2>Charm</h2>
             </div>
           </div>
-          <Link to="/photo-iris-react/sessions">
+          <Link to="/sessions">
             <MyButton
               className={styles.shortSessionButton}
               borderColor="--white-color"

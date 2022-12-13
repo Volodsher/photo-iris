@@ -47,7 +47,7 @@ const PostForm = (props) => {
 
     if (fromPost !== null) {
       dispatch(updatePostAction({ _id, title, text, image }));
-      navigate(`/photo-iris-react/posts/${_id}`);
+      navigate(`/posts/${_id}`);
     } else {
       dispatch(addPostAction({ title, text, image }));
     }
@@ -136,7 +136,7 @@ const PostForm = (props) => {
           <Fragment>
             <p>old name {image}</p>
             <img
-              src={`${process.env.REACT_APP_URL}/blog/${prevImage}`}
+              src={`/blog/${prevImage}`}
               // src={imageUrl}
               style={{ margin: '2rem 0', maxWidth: '100%', height: 'auto' }}
             />

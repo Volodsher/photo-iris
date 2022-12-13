@@ -32,7 +32,7 @@ export default function ShortGallery() {
   return (
     <div className={styles.shortGalleryContainer}>
       <div className={styles.imageGrid}>{newGal}</div>
-      <Link to="/photo-iris-react/gallery">
+      <Link to="/gallery">
         <MyButton
           className={styles.shortGalleryButton}
           value="More photos"

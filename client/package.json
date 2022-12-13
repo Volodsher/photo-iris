@@ -2,7 +2,6 @@
   "allowedHosts": "all",
   "name": "photo-iris-react",
   "version": "0.1.0",
-  "homepage": "https://volodsher.github.io/photo-iris-react/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.2",

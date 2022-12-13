@@ -21,7 +21,7 @@ function Header(props) {
       <ul className={`${styles.menuList} ${styles.menuListFirst}`}>
         <li key="1">
           <NavLink
-            to="/photo-iris-react/"
+            to="/"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             end
           >
@@ -30,7 +30,7 @@ function Header(props) {
         </li>
         <li key="2">
           <NavLink
-            to="/photo-iris-react/blog"
+            to="/blog"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             end
           >
@@ -39,7 +39,7 @@ function Header(props) {
         </li>
         <li key="3">
           <NavLink
-            to="/photo-iris-react/sessions"
+            to="/sessions"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             end
           >
@@ -47,13 +47,13 @@ function Header(props) {
           </NavLink>
         </li>
       </ul>
-      <a href="/photo-iris-react/vhid">
+      <a href="/vhid">
         <img src={logo} className={styles.logo} alt="logo" />
       </a>
       <ul className={`${styles.menuList} ${styles.menuListSecond}`}>
         <li key="4">
           <NavLink
-            to="/photo-iris-react/gallery"
+            to="/gallery"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             end
           >
@@ -62,7 +62,7 @@ function Header(props) {
         </li>
         {/* <li key="5">
           <NavLink
-            to="/photo-iris-react/inspiration"
+            to="/inspiration"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             end
           >
@@ -76,7 +76,7 @@ function Header(props) {
           }}
         >
           <NavLink
-            to="/photo-iris-react/contact"
+            to="/contact"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             end
           >
@@ -85,7 +85,7 @@ function Header(props) {
           {auth.isAuthenticated && (
             <a
               onClick={() => dispatch(logout())}
-              href="/photo-iris-react/"
+              href="/"
               style={{
                 position: 'absolute',
                 top: '40px',
@@ -104,7 +104,7 @@ function Header(props) {
       {auth.isAuthenticated && (
         <a
           onClick={() => dispatch(logout())}
-          href="/photo-iris-react/"
+          href="/"
           className={styles.logout}
           style={{
             position: 'absolute',
@@ -125,22 +125,22 @@ function Header(props) {
       >
         <ul className={styles.menuList}>
           <li key="1" onClick={props.changeMenuStatus}>
-            <NavLink to="/photo-iris-react/">Home</NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li key="2" onClick={props.changeMenuStatus}>
-            <NavLink to="/photo-iris-react/blog">Blog</NavLink>
+            <NavLink to="/blog">Blog</NavLink>
           </li>
           <li key="3" onClick={props.changeMenuStatus}>
-            <NavLink to="/photo-iris-react/sessions">Sessions</NavLink>
+            <NavLink to="/sessions">Sessions</NavLink>
           </li>
           <li key="4" onClick={props.changeMenuStatus}>
-            <NavLink to="/photo-iris-react/gallery">Gallery</NavLink>
+            <NavLink to="/gallery">Gallery</NavLink>
           </li>
           {/* <li key="5" onClick={props.changeMenuStatus}>
-            <NavLink to="/photo-iris-react/inspiration">Inspiration</NavLink>
+            <NavLink to="/inspiration">Inspiration</NavLink>
           </li> */}
           <li key="6" onClick={props.changeMenuStatus}>
-            <NavLink to="/photo-iris-react/contact">Contact</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
           </li>
         </ul>
       </div>

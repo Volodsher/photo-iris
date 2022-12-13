@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import MyButton from '../layout/MyButton/MyButton';
 import styles from './Home.module.scss';
 import backShort from '../../images/shortGallery/Editar1.jpg';
+import int13 from '../../images/int13.JPG';
 
 export default function AdvertSession() {
   return (
@@ -10,7 +11,7 @@ export default function AdvertSession() {
         padding: '3rem 5vw 3rem 5vw',
         textAlign: 'right',
         margin: '0 -5vw',
-        backgroundImage: `url(${process.env.REACT_APP_URL}/int13.jpg)`,
+        backgroundImage: `url(${int13})`,
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'fixed',
         backgroundSize: 'cover',
@@ -31,7 +32,7 @@ export default function AdvertSession() {
       >
         Choose your photo session.
       </p>
-      <Link to="/photo-iris-react/sessions">
+      <Link to="/sessions">
         <MyButton
           className={styles.advertSession}
           value="Sessions"

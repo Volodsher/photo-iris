@@ -42,21 +42,18 @@ function App() {
         <Header menuOpen={menuOpen} changeMenuStatus={changeMenuStatus} />
         <main className="main">
           <Routes>
-            <Route exact path="/photo-iris-react/" element={<Home />} />
-            <Route exact path="/photo-iris-react/blog" element={<Blog />} />
-            <Route path="/photo-iris-react/sessions" element={<Sessions />} />
-            <Route path="/photo-iris-react/gallery" element={<Gallery />} />
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/blog" element={<Blog />} />
+            <Route path="/sessions" element={<Sessions />} />
+            <Route path="/gallery" element={<Gallery />} />
             {/* <Route
-              path="/photo-iris-react/inspiration"
+              path="/inspiration"
               element={<Inspiration />}
             /> */}
-            <Route path="/photo-iris-react/contact" element={<Contact />} />
-            <Route path="/photo-iris-react/posts/:id" element={<Post />} />
-            <Route path="/photo-iris-react/vhid" element={<Login />} />
-            <Route
-              path="/photo-iris-react/posts/postForm"
-              element={<PostForm />}
-            />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/posts/:id" element={<Post />} />
+            <Route path="/vhid" element={<Login />} />
+            <Route path="/posts/postForm" element={<PostForm />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
