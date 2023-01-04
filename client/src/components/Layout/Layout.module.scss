@@ -153,6 +153,22 @@
   }
 }
 
+// Picture
+.picture {
+  height: 100%;
+  width: 100%;
+}
+
+.pictureContainer {
+  background: var(--white-color);
+  height: 97%;
+  // max-width: 400px;
+  // height: 90vw;
+  border-radius: var(--radius);
+  padding: 0.3rem 0.3rem;
+  text-align: center;
+}
+
 // Confirm
 .confirmContainer {
   position: fixed;

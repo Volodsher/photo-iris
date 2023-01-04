@@ -1,0 +1,28 @@
+.cardGroup {
+  // display: flex;
+  // flex-direction: column;
+  // flex-wrap: wrap;
+  // justify-content: center;
+  margin: 3rem 0;
+  padding: 1.5rem;
+  gap: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.cardColumn {
+  display: flex;
+  flex-direction: column;
+  // flex-basis: 100%;
+  flex: 1;
+  gap: 2rem;
+}
+
+.cardSession {
+  box-shadow: 0 0 0 1px --gray-light;
+  // width: 50%;
+  min-width: 20rem;
+}
+

@@ -14,6 +14,7 @@ export default function MyButton(props) {
       }}
       className={props.className}
       onClick={props.handleCklick}
+      form={props.form}
     >
       {props.value}
     </button>

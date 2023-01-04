@@ -1,9 +1,20 @@
 import { useState, useEffect, Fragment } from 'react';
 import styles from './Gallery.module.scss';
 import Spinner from '../layout/Spinner';
+import Picture from '../layout/Picture';
 
 export default function Gallery() {
   const [images, setImages] = useState(null);
+  const [oneImage, setOneImage] = useState('');
+
+  const handleOneImageUrl = (imageUrl) => {
+    setOneImage(imageUrl);
+  };
+
+  const handleCleaarOneImage = () => {
+    setOneImage('');
+  };
+
   useEffect(async () => {
     try {
       await fetch('/api/gallery/')
@@ -20,13 +31,17 @@ export default function Gallery() {
     <Fragment>
       <div className={styles.galleryImagesBox}>
         {images.map((image, ind) => {
-          return (
+          return [
             <img
               key={ind}
               src={`/gallery/${image}`}
               className={styles.galleryImage}
-            />
-          );
+              onClick={() => handleOneImageUrl(`/gallery/${image}`)}
+            />,
+            oneImage.length > 0 && (
+              <Picture clearPicture={handleCleaarOneImage} picture={oneImage} />
+            ),
+          ];
         })}
       </div>
     </Fragment>

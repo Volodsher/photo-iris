@@ -30,29 +30,6 @@ function Header(props) {
         </li>
         <li key="2">
           <NavLink
-            to="/blog"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            end
-          >
-            Blog
-          </NavLink>
-        </li>
-        <li key="3">
-          <NavLink
-            to="/sessions"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            end
-          >
-            Sessions
-          </NavLink>
-        </li>
-      </ul>
-      <a href="/vhid">
-        <img src={logo} className={styles.logo} alt="logo" />
-      </a>
-      <ul className={`${styles.menuList} ${styles.menuListSecond}`}>
-        <li key="4">
-          <NavLink
             to="/gallery"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             end
@@ -60,17 +37,31 @@ function Header(props) {
             Gallery
           </NavLink>
         </li>
-        {/* <li key="5">
+      </ul>
+      <a href="/vhid">
+        <img src={logo} className={styles.logo} alt="logo" />
+      </a>
+      <ul className={`${styles.menuList} ${styles.menuListSecond}`}>
+        <li key="3">
           <NavLink
-            to="/inspiration"
+            to="/pricing"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             end
           >
-            Inspiration
+            Pricing
+          </NavLink>
+        </li>
+        {/* <li key="4">
+          <NavLink
+            to="/blog"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            end
+          >
+            Blog
           </NavLink>
         </li> */}
         <li
-          key="6"
+          key="5"
           style={{
             position: 'relative',
           }}
@@ -128,20 +119,20 @@ function Header(props) {
             <NavLink to="/">Home</NavLink>
           </li>
           <li key="2" onClick={props.changeMenuStatus}>
-            <NavLink to="/blog">Blog</NavLink>
+            <NavLink to="/gallery">Gallery</NavLink>
           </li>
           <li key="3" onClick={props.changeMenuStatus}>
-            <NavLink to="/sessions">Sessions</NavLink>
+            <NavLink to="/pricing">Pricing</NavLink>
           </li>
           <li key="4" onClick={props.changeMenuStatus}>
-            <NavLink to="/gallery">Gallery</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
           </li>
           {/* <li key="5" onClick={props.changeMenuStatus}>
             <NavLink to="/inspiration">Inspiration</NavLink>
           </li> */}
-          <li key="6" onClick={props.changeMenuStatus}>
+          {/* <li key="6" onClick={props.changeMenuStatus}>
             <NavLink to="/contact">Contact</NavLink>
-          </li>
+          </li> */}
         </ul>
       </div>
       <div

@@ -15,9 +15,11 @@ import NotFound from './components/layout/NotFound';
 import Login from './components/auth/Login';
 import Post from './components/Blog/Post';
 import PostForm from './components/Blog/PostForm';
+import Pricing from './components/Pricing/Pricing';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -43,17 +45,14 @@ function App() {
         <main className="main">
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/blog" element={<Blog />} />
-            <Route path="/sessions" element={<Sessions />} />
             <Route path="/gallery" element={<Gallery />} />
-            {/* <Route
-              path="/inspiration"
-              element={<Inspiration />}
-            /> */}
             <Route path="/contact" element={<Contact />} />
+            {/* <Route exact path="/blog" element={<Blog />} /> */}
+            {/* <Route path="/sessions" element={<Sessions />} /> */}
             <Route path="/posts/:id" element={<Post />} />
             <Route path="/vhid" element={<Login />} />
             <Route path="/posts/postForm" element={<PostForm />} />
+            <Route path="/pricing" element={<Pricing />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
