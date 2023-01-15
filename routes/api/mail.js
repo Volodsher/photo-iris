@@ -12,20 +12,33 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const mailOptions = {
+let mailOptions = {
   from: 'hello@example.com',
   to: 'volodsher@gmail.com',
   subject: 'Subject',
   text: 'Email content',
 };
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
+  console.log(req.body);
+  mailOptions = {
+    ...mailOptions,
+    subject: `Photo session: ${req.body.session}`,
+    text: `
+      \nName: ${req.body.guestName}.
+      \nPhoto session: ${req.body.session}.
+      \nEmail: ${req.body.guestEmail}.
+      \nPhone: ${req.body.guestPhone}.
+      \nMassage: ${req.body.textMessage}`,
+  };
+
+  console.log(typeof req.body);
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
     } else {
-      console.log('Email sent: ' + info.response);
-      res.send('you just sent a mail');
+      console.log('Email sent');
+      res.send('You just sent a mail!');
     }
   });
 });

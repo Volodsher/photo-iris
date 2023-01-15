@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import MyButton from './MyButton/MyButton';
 import Form from 'react-bootstrap/Form';
@@ -8,20 +9,12 @@ const initialValues = {
   guestName: '',
   guestEmail: '',
   guestPhone: '',
-  session: '',
-  textMesage: '',
+  session: 'Family',
+  textMessage: '',
 };
 
 function ContactForm(props) {
   const [message, setMessage] = useState(initialValues);
-
-  // const [session, setSession] = useState('Family');
-  // const [guestName, setGuestName] = useState('tttt');
-  // const [guestEmail, setGuestEmail] = useState('');
-  // const [questPhone, setGuestPhone] = useState('');
-  // const [message, setMessage] = useState('');
-
-  // const handleChange = (event) => setMessage(event.target.value);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,7 +22,38 @@ function ContactForm(props) {
       ...message,
       [name]: value,
     });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const sendMessage = async (payload) => {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      try {
+        const res = await axios.post('/api/mail', payload, config);
+        console.log(res);
+        alert(res.data);
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    sendMessage(message);
     console.log(message);
+
+    setMessage({
+      ...message,
+      guestName: '',
+      guestEmail: '',
+      guestPhone: '',
+      session: 'Family',
+      textMessage: '',
+    });
   };
 
   return (
@@ -39,7 +63,7 @@ function ContactForm(props) {
       style={{
         textAlign: 'left',
       }}
-      onSubmit={() => console.log('hello')}
+      onSubmit={handleSubmit}
     >
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
         Choose a session:
@@ -49,13 +73,13 @@ function ContactForm(props) {
           onChange={handleChange}
           style={{ margin: '0.5rem 0' }}
         >
-          <option>Family</option>
-          <option>Children</option>
-          <option>Portrait</option>
-          <option>Business</option>
-          <option>Pets</option>
-          <option>Beautiful moments</option>
-          <option>Other</option>
+          <option value="Family">Family</option>
+          <option value="Children">Children</option>
+          <option value="Portrait">Portrait</option>
+          <option value="Business">Business</option>
+          <option value="Pets">Pets</option>
+          <option value="Beautiful moments">Beautiful moments</option>
+          <option value="Other">Other</option>
         </Form.Select>
       </label>
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
@@ -98,7 +122,7 @@ function ContactForm(props) {
           rows="5"
           type="text"
           placeholder="phone number"
-          value={message.questPhone}
+          value={message.guestPhone}
           onChange={handleChange}
           style={{
             width: '100%',
@@ -108,11 +132,11 @@ function ContactForm(props) {
       <label className="mb-3" style={{ display: 'block', marginTop: '1.5rem' }}>
         Message: *
         <textarea
-          name="textMesage"
+          name="textMessage"
           cols="30"
           rows="10"
           placeholder="Write a message"
-          value={message.textMesage}
+          value={message.textMessage}
           onChange={handleChange}
           style={{
             width: '100%',
