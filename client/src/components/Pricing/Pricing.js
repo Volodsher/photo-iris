@@ -1,10 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Pricing.module.scss';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import MyButton from '../layout/MyButton/MyButton';
+import Confirm from '../layout/Confirm';
+import Book from '../layout/Book';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
@@ -14,82 +16,126 @@ const mustHaveText =
 
 const pricing = [
   {
-    title: 'Family',
+    key: 1,
+    title: 'Family Fun',
     image: '/pricing/family.jpg',
-    price: '500$',
-    about:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    mustHave: mustHaveText,
+    price: '200$',
+    about: `1hour session \n25 edited and retouched images`,
+    mustHave: '',
   },
   {
-    title: 'Children',
+    key: 2,
+    title: "Kids' Celebrations",
     image: '/pricing/children.jpg',
-    price: '500$',
-    about:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    mustHave: mustHaveText,
+    price: '200$',
+    about: '1 hour session \n25 edited and retouched images',
+    mustHave: '',
   },
   {
-    title: 'Business',
+    key: 3,
+    title: 'Love Story',
     image: '/pricing/business.jpg',
-    price: '500$',
-    about:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    mustHave: mustHaveText,
+    price: '200$',
+    about: '1 hour session 25 edited and retouched images',
+    mustHave: '',
   },
   {
+    key: 4,
+    title: 'Maternity',
+    image: '/pricing/business.jpg',
+    price: '200$',
+    about: '1 hour session /n25 edited and retouched images',
+    mustHave: '',
+  },
+  {
+    key: 5,
     title: 'Portrait',
     image: '/pricing/portrait.jpg',
-    price: '500$',
-    about:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    mustHave: mustHaveText,
+    price: '150$',
+    about: '45 min session \n10 edited and retouched images',
+    mustHave: '',
   },
   {
-    title: 'Pets',
+    key: 6,
+    title: 'Mini Session',
+    image: '/pricing/business.jpg',
+    price: '100$',
+    about: '30 min \n5 edited and retouched images',
+    mustHave: '',
+  },
+  {
+    key: 7,
+    title: 'Smile and Paws',
     image: '/pricing/pet.jpg',
-    price: '500$',
-    about:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    mustHave: mustHaveText,
+    price: '100$',
+    about: '30 min \n5 edited and retouched images',
+    mustHave: '',
   },
   {
-    title: 'Beautiful moments',
-    image: '/pricing/moments.jpg',
+    key: 8,
+    title: 'Business',
+    image: '/pricing/business.jpg',
+    price: '250$',
+    about: '1,5 hours session \n30-40 edited and retouched images',
+    mustHave: '',
+  },
+  {
+    key: 9,
+    title: 'Wedding',
+    image: '/pricing/business.jpg',
     price: '500$',
-    about:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    mustHave: mustHaveText,
+    about: '3 hours session \n100 edited and retouched images',
+    mustHave: '',
   },
 ];
 
-function GroupExample() {
+function Pricing() {
+  const [booking, setBooking] = useState('');
+
+  const handleBookingClick = () => {
+    setBooking('');
+  };
+
   return [
-    <h1 style={{ margin: '3rem 0' }}>Photography Pricing</h1>,
-    <div className={styles.cardGroup}>
+    <h1 key="1" style={{ margin: '3rem 0' }}>
+      Photography Pricing
+    </h1>,
+    <div key="2" className={styles.cardGroup}>
       <div className={styles.cardColumn}>
         {pricing
           .filter((session, ind) => ind % 2 === 0)
           .map((session, ind) => (
-            <Card
-              key={session.title}
-              style={{ minWidth: '250px', flexGrow: 1 }}
-            >
+            <Card key={session.key} style={{ minWidth: '250px', flexGrow: 1 }}>
               <Card.Img width="100%" variant="top" src={session.image} />
               <Card.Body>
                 <Card.Title>{session.title}</Card.Title>
-                <Card.Text style={{ textAlign: 'left' }}>
+                <Card.Text
+                  style={{ textAlign: 'left', whiteSpace: 'pre-wrap' }}
+                >
                   {session.about}
                 </Card.Text>
                 <Card.Text style={{ textAlign: 'left' }}>
-                  {session.mustHave}
+                  {session.price}
                 </Card.Text>
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">
-                  <MyButton value="Book" borderColor="--gray-light" />
+                  <MyButton
+                    value="Book"
+                    borderColor="--gray-light"
+                    handleClick={() => {
+                      setBooking(session.title);
+                    }}
+                  />
                 </small>
               </Card.Footer>
+              {booking === session.title && (
+                <Book
+                  session={session.title}
+                  handleClick={handleBookingClick}
+                />
+              )}
+              <p>{session.title}</p>
             </Card>
           ))}
       </div>
@@ -97,25 +143,37 @@ function GroupExample() {
         {pricing
           .filter((session, ind) => ind % 2 !== 0)
           .map((session) => (
-            <Card
-              key={session.title}
-              style={{ minWidth: '250px', flexGrow: 1 }}
-            >
+            <Card key={session.key} style={{ minWidth: '250px', flexGrow: 1 }}>
               <Card.Img width="100%" variant="top" src={session.image} />
               <Card.Body>
                 <Card.Title>{session.title}</Card.Title>
-                <Card.Text style={{ textAlign: 'left' }}>
+                <Card.Text
+                  style={{ textAlign: 'left', whiteSpace: 'pre-wrap' }}
+                >
                   {session.about}
                 </Card.Text>
                 <Card.Text style={{ textAlign: 'left' }}>
-                  {session.mustHave}
+                  {session.price}
                 </Card.Text>
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">
-                  <MyButton value="Book" borderColor="--gray-light" />
+                  <MyButton
+                    handleClick={() => {
+                      setBooking(session.title);
+                    }}
+                    value="Book"
+                    borderColor="--gray-light"
+                  />
                 </small>
               </Card.Footer>
+              <p>{session.title}</p>
+              {booking === session.title && (
+                <Book
+                  session={session.title}
+                  handleClick={handleBookingClick}
+                />
+              )}
             </Card>
           ))}
       </div>
@@ -123,4 +181,4 @@ function GroupExample() {
   ];
 }
 
-export default GroupExample;
+export default Pricing;

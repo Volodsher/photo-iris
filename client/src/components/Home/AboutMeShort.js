@@ -49,16 +49,18 @@ export default function AboutMeShort(props) {
             Iryna Sheremeta
           </h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Hello! My name is Iryna and I’m in love with photography. I would
+            like to share this love with you by creating beautiful images of
+            your life’s precious moments. I strive to make my photography
+            sessions fun, friendly and cozy so that you truly enjoy the
+            photoshoot itself and look forward to seeing the beauty we create
+            together. If it resonates with you, feel free to chat;)
           </p>
           <Link to="/blog">
             <MyButton
               className={styles.aboutMeButton}
               borderColor="--gray-light"
-              value="My Blog"
+              value="Contact"
             />
           </Link>
         </div>

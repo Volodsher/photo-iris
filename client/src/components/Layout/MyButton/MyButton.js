@@ -13,7 +13,7 @@ export default function MyButton(props) {
         color: `var(${props.color})`,
       }}
       className={props.className}
-      onClick={props.handleCklick}
+      onClick={props.handleClick}
       form={props.form}
     >
       {props.value}
@@ -26,6 +26,6 @@ MyButton.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
   className: PropTypes.string,
-  handleCklick: PropTypes.func,
+  handleClick: PropTypes.func,
   borderColor: PropTypes.string,
 };

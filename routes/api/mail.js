@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
   console.log(req.body);
   mailOptions = {
     ...mailOptions,
-    subject: `Photo session: ${req.body.session}`,
+    subject: `Photo session: ${req.body.session} for ${req.body.guestName}`,
     text: `
       \nName: ${req.body.guestName}.
       \nPhoto session: ${req.body.session}.

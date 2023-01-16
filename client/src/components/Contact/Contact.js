@@ -28,7 +28,7 @@ export default function Contact() {
         <p>Located in Ottawa, Canada</p>
       </section>
       <section style={{ width: '70vw', margin: '1rem auto' }}>
-        <ContactForm />
+        <ContactForm session="Family" />
       </section>
     </Fragment>
   );

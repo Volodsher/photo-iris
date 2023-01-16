@@ -9,12 +9,15 @@ const initialValues = {
   guestName: '',
   guestEmail: '',
   guestPhone: '',
-  session: 'Family',
+  session: '',
   textMessage: '',
 };
 
 function ContactForm(props) {
-  const [message, setMessage] = useState(initialValues);
+  const [message, setMessage] = useState({
+    ...initialValues,
+    session: props.session,
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -36,22 +39,22 @@ function ContactForm(props) {
 
       try {
         const res = await axios.post('/api/mail', payload, config);
-        console.log(res);
         alert(res.data);
+        props.handleClick();
       } catch (error) {
         alert(error.message);
+        props.handleClick();
       }
     };
 
     sendMessage(message);
-    console.log(message);
 
     setMessage({
       ...message,
       guestName: '',
       guestEmail: '',
       guestPhone: '',
-      session: 'Family',
+      session: 'Family Fun',
       textMessage: '',
     });
   };
@@ -73,12 +76,15 @@ function ContactForm(props) {
           onChange={handleChange}
           style={{ margin: '0.5rem 0' }}
         >
-          <option value="Family">Family</option>
-          <option value="Children">Children</option>
+          <option value="Family Fun">Family Fun</option>
+          <option value="Kids' Celebrations">Kids' Celebrations</option>
+          <option value="Love Story">Love Story</option>
+          <option value="Maternity">Maternity</option>
           <option value="Portrait">Portrait</option>
+          <option value="Mini Session">Mini Session</option>
+          <option value="Smile and Paws">Smile and Paws</option>
           <option value="Business">Business</option>
-          <option value="Pets">Pets</option>
-          <option value="Beautiful moments">Beautiful moments</option>
+          <option value="Wedding">Wedding</option>
           <option value="Other">Other</option>
         </Form.Select>
       </label>

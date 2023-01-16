@@ -169,6 +169,28 @@
   text-align: center;
 }
 
+// Book
+.bookContainer {
+  position: fixed;
+  z-index: 10;
+  background: rgba(249, 246, 246, 0.7);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow-y: scroll;
+
+}
+
+.book {
+  background: var(--white-color);
+  width: 80vw;
+  max-width: 600px;
+  border-radius: var(--radius);
+  padding: 2rem 1rem;
+  margin: 0 auto;
+}
+
 // Confirm
 .confirmContainer {
   position: fixed;
@@ -176,7 +198,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(249, 246, 246, 0.7);
   z-index: 10;
   display: flex;
   align-items: center;
