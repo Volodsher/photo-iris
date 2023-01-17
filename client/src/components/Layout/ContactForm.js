@@ -4,6 +4,8 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import MyButton from './MyButton/MyButton';
 import Form from 'react-bootstrap/Form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const initialValues = {
   guestName: '',
@@ -68,6 +70,21 @@ function ContactForm(props) {
       }}
       onSubmit={handleSubmit}
     >
+      <button
+        onClick={props.handleCancel}
+        type="button"
+        style={{
+          display: 'block',
+          margin: '0',
+
+          lineHeight: '0',
+          padding: '0 5px',
+          boxShadow: 'none',
+          float: 'right',
+        }}
+      >
+        <FontAwesomeIcon color="gray" icon={faXmark} size="xl" />
+      </button>
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
         Choose a session:
         <Form.Select

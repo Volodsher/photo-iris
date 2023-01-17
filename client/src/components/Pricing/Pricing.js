@@ -133,9 +133,9 @@ function Pricing() {
                 <Book
                   session={session.title}
                   handleClick={handleBookingClick}
+                  handleCancel={handleBookingClick}
                 />
               )}
-              <p>{session.title}</p>
             </Card>
           ))}
       </div>
@@ -167,11 +167,11 @@ function Pricing() {
                   />
                 </small>
               </Card.Footer>
-              <p>{session.title}</p>
               {booking === session.title && (
                 <Book
                   session={session.title}
                   handleClick={handleBookingClick}
+                  handleCancel={handleBookingClick}
                 />
               )}
             </Card>

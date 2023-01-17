@@ -13,7 +13,11 @@ function Book(props) {
   return (
     <aside className={styles.bookContainer}>
       <div className={styles.book}>
-        <ContactForm session={props.session} handleClick={props.handleClick} />
+        <ContactForm
+          session={props.session}
+          handleClick={props.handleClick}
+          handleCancel={props.handleCancel}
+        />
       </div>
     </aside>
   );
