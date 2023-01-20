@@ -7,6 +7,54 @@ import family from '../../images/sessions/fam15.jpg';
 import inthemoment from '../../images/sessions/int1.jpg';
 import charm from '../../images/sessions/chan9.jpg';
 
+const sessions = [
+  {
+    key: 1,
+    title: 'Family Fun',
+    image: '/pricing/family.jpg',
+  },
+  {
+    key: 2,
+    title: "Kids' Celebrations",
+    image: '/pricing/children.jpg',
+  },
+  {
+    key: 3,
+    title: 'Love Story',
+    image: '/pricing/business.jpg',
+  },
+  {
+    key: 4,
+    title: 'Maternity',
+    image: '/pricing/business.jpg',
+  },
+  {
+    key: 5,
+    title: 'Portrait',
+    image: '/pricing/portrait.jpg',
+  },
+  {
+    key: 6,
+    title: 'Mini Session',
+    image: '/pricing/business.jpg',
+  },
+  {
+    key: 7,
+    title: 'Smile and Paws',
+    image: '/pricing/pet.jpg',
+  },
+  {
+    key: 8,
+    title: 'Business',
+    image: '/pricing/business.jpg',
+  },
+  {
+    key: 9,
+    title: 'Wedding',
+    image: '/pricing/business.jpg',
+  },
+];
+
 export default function ShortSession() {
   return (
     <div className={styles.shortSession}>
@@ -20,41 +68,37 @@ export default function ShortSession() {
       </p>
       <div className={styles.shortSessionGallery}>
         <div className={styles.column}>
-          <div className={styles.imageItem}>
-            <img src={portrait} alt="" />
-            <div className={styles.overlay}>
-              <h2>Portrait</h2>
-            </div>
-          </div>
-          <div className={styles.imageItem}>
-            <img src={family} alt="" />
-            <div className={styles.overlay}>
-              <h2>Family</h2>
-            </div>
-          </div>
+          {sessions
+            .filter((session, ind) => ind % 2 !== 0)
+            .map((session) => (
+              <div key={session.key} className={styles.imageItem}>
+                <img src={session.image} alt="" />
+                <div className={styles.overlay}>
+                  <h2>{session.title}</h2>
+                </div>
+              </div>
+            ))}
         </div>
         <div className={styles.column}>
-          <div className={styles.imageItem}>
-            <img src={inthemoment} alt="" />
-            <div className={styles.overlay}>
-              <h2>In the moment</h2>
-            </div>
-          </div>
-          <div className={styles.imageItem}>
-            <img src={charm} alt="" />
-            <div className={styles.overlay}>
-              <h2>Charm</h2>
-            </div>
-          </div>
-          <Link to="/sessions">
-            <MyButton
-              className={styles.shortSessionButton}
-              borderColor="--white-color"
-              value="Sessions"
-            />
-          </Link>
+          {sessions
+            .filter((session, ind) => ind % 2 === 0)
+            .map((session) => (
+              <div key={session.key} className={styles.imageItem}>
+                <img src={session.image} alt="" />
+                <div className={styles.overlay}>
+                  <h2>{session.title}</h2>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
+      <Link to="/gallery">
+        <MyButton
+          className={styles.shortSessionButton}
+          borderColor="--white-color"
+          value="Sessions"
+        />
+      </Link>
     </div>
   );
 }

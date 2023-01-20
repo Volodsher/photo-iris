@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import MyButton from '../layout/MyButton/MyButton';
 import styles from './Home.module.scss';
-import portret from '../../images/portret.jpg';
+import portrait from '../../images/portrait.jpg';
 
 export default function AboutMeShort(props) {
   const [isVisible, setIsVisible] = useState(false);
@@ -36,8 +36,8 @@ export default function AboutMeShort(props) {
           className={`${styles.aboutMeImage} ${
             isVisible ? styles.isVisible : ''
           }`}
-          src={portret}
-          alt="Iryna's portret"
+          src={portrait}
+          alt="Iryna's portrait"
           ref={containerRef}
         />
         <div className={styles.abutMeTextDiv}>
@@ -56,7 +56,7 @@ export default function AboutMeShort(props) {
             photoshoot itself and look forward to seeing the beauty we create
             together. If it resonates with you, feel free to chat;)
           </p>
-          <Link to="/blog">
+          <Link to="/contact">
             <MyButton
               className={styles.aboutMeButton}
               borderColor="--gray-light"

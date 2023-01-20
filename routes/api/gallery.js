@@ -14,5 +14,12 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/:id', (req, res) => {
+  console.log(req.params.id);
+  fs.readdir(`./uploads/gallery/${req.params.id}`, (err, files) => {
+    res.send(files.filter((file) => file !== '.DS_Store'));
+  });
+});
+
 module.exports = router;
 // export default router;
