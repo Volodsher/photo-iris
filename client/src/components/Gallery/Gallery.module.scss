@@ -1,13 +1,14 @@
 .galleryImagesBox {
-  display:inline-block;    
-  line-height: 0;       
+  // display:inline-block;    
+  // line-height: 0;       
   column-count: 2;    
-  column-gap: 0.3rem; 
+  column-gap: 0.3rem;
+  padding-bottom: 2rem;
 }
 
 .galleryImagesBox > img {
  width: 100% !important;    
- height: auto !important;
+//  height: auto !important;
 //  padding: 0.15rem;
  margin-top: 0.3rem;
  border-radius: 0.5rem;

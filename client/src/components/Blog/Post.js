@@ -1,5 +1,4 @@
 import React, { useEffect, Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostAction } from '../../features/postSlice';
@@ -52,15 +51,6 @@ const Post = (props) => {
     <Spinner />
   ) : (
     <div className={styles.postContainer}>
-      {/* {isOpen && (
-        <Confirm
-          action={deletePostAction}
-          confirmName="Do you really want to delete a a post"
-          toDispatch={true}
-          link="/"
-          goTo="/blog"
-        />
-      )} */}
       {isOpen && (
         <NewConfirm
           action={toDeletePost}
@@ -106,7 +96,5 @@ const Post = (props) => {
     </div>
   );
 };
-
-Post.propTypes = {};
 
 export default Post;

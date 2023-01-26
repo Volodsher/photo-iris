@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import styles from './Blog.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faThumbsUp,
   faThumbsDown,
@@ -43,8 +42,6 @@ const PostItem = ({
           <MyButton
             className={styles.postButton}
             value="Read more"
-            // color="--gray-light"
-            // padding="0.3rem"
             borderColor="--gray-ultralight"
           />
         </Link>

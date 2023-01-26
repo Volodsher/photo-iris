@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import styles from './Blog.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { openConfirm } from '../../features/confirmSlice';
@@ -10,7 +9,7 @@ import MyButton from '../layout/MyButton/MyButton';
 import Confirm from '../layout/Confirm';
 import axios from 'axios';
 
-const PostForm = (props) => {
+const PostForm = () => {
   const { isOpen, payload } = useSelector((store) => store.confirm);
   const dispatch = useDispatch();
 
@@ -24,7 +23,6 @@ const PostForm = (props) => {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState();
   const [deleteImage, setDeleteImage] = useState(5);
-  // const postData = { title, text };
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -178,9 +176,5 @@ const PostForm = (props) => {
     </div>
   );
 };
-
-// PostForm.propTypes = {
-//   addPost: PropTypes.func.isRequired,
-// };
 
 export default PostForm;

@@ -36,7 +36,7 @@ const pricing = [
     title: 'Love Story',
     image: '/pricing/business.jpg',
     price: '200$',
-    about: '1 hour session 25 edited and retouched images',
+    about: '1 hour session \n25 edited and retouched images',
     mustHave: '',
   },
   {
@@ -44,7 +44,7 @@ const pricing = [
     title: 'Maternity',
     image: '/pricing/business.jpg',
     price: '200$',
-    about: '1 hour session /n25 edited and retouched images',
+    about: '1 hour session \n25 edited and retouched images',
     mustHave: '',
   },
   {

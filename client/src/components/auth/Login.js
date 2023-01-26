@@ -1,11 +1,8 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MyButton from '../layout/MyButton/MyButton';
 import { loginUser } from '../../features/authSlice';
-import styles from './Login.module.scss';
-import PropTypes from 'prop-types';
-import { isAsyncThunkAction } from '@reduxjs/toolkit';
 
 const Login = () => {
   const auth = useSelector((store) => store.auth);
@@ -66,7 +63,5 @@ const Login = () => {
     </div>
   );
 };
-
-Login.propTypes = {};
 
 export default Login;

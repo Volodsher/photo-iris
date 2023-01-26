@@ -198,12 +198,23 @@
   gap: 0.7rem;
 }
 
+.imageItem {
+  transition: transform 0.3s;
+}
+
 .imageItem img {
   width: 100%;
   border-radius: 0.5rem;
   object-fit: cover;
-  color: var(--gray-dark)
+  color: var(--gray-dark);
 }
+
+.imageItem:hover {
+ transform: translateY(-0.5rem);
+ cursor: pointer;
+}
+
+
 
 .advertSession {
   color: var(--gray-dark);

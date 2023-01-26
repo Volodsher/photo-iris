@@ -32,7 +32,7 @@ export default function AdvertSession() {
       >
         Choose your photo session.
       </p>
-      <Link to="/sessions">
+      <Link to="/gallery">
         <MyButton
           className={styles.advertSession}
           value="Sessions"
