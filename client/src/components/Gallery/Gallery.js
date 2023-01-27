@@ -32,16 +32,17 @@ export default function Gallery() {
   // }, [divHeight])
 
   useEffect(() => {
-    if (!galleryRef.current) return;
+    // if (!galleryRef?.current) return;
+    // if (!window?.ResizeObserver) return;
     // let refHeight = 0;
     // if (galleryRef.current) refHeight = galleryRef.current.offsetHeight;
     const observer = new ResizeObserver(() => {
-      setDivHeight(galleryRef.current.offsetHeight);
+      if (galleryRef.current) setDivHeight(galleryRef.current.offsetHeight);
     });
-    if (galleryRef.current) observer.observe(galleryRef.current);
+    if (galleryRef?.current) observer.observe(galleryRef.current);
 
+    // return () => observer.disconnect();
     return () => {
-      console.log(galleryRef);
       if (galleryRef.current) {
         console.log('out from gallery - unobserve');
         observer.unobserve(galleryRef);

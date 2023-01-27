@@ -90,7 +90,11 @@ export default function ShortSession() {
           {sessions
             .filter((session, ind) => ind % 2 !== 0)
             .map((session) => (
-              <Link key={session.key} to={session.link}>
+              <Link
+                key={session.key}
+                to={session.link}
+                style={{ textDecoration: 'none' }}
+              >
                 <div key={session.key} className={styles.imageItem}>
                   <img src={session.image} alt="" />
                   <div className={styles.overlay}>
@@ -104,12 +108,18 @@ export default function ShortSession() {
           {sessions
             .filter((session, ind) => ind % 2 === 0)
             .map((session) => (
-              <div key={session.key} className={styles.imageItem}>
-                <img src={session.image} alt="" />
-                <div className={styles.overlay}>
-                  <h2>{session.title}</h2>
+              <Link
+                key={session.key}
+                to={session.link}
+                style={{ textDecoration: 'none' }}
+              >
+                <div key={session.key} className={styles.imageItem}>
+                  <img src={session.image} alt="" />
+                  <div className={styles.overlay}>
+                    <h2>{session.title}</h2>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
         </div>
       </div>
