@@ -8,46 +8,55 @@ const initialGalleries = [
   {
     id: 'family',
     title: 'Family Fun',
+    link: '/pricing#family',
     images: [],
   },
   {
     id: 'kids',
     title: "Kids' Celebrations",
+    link: '/pricing#kids',
     images: [],
   },
   {
     id: 'lovestory',
     title: 'Love Story',
+    link: '/pricing#lovestory',
     images: [],
   },
   {
     id: 'maternity',
     title: 'Maternity',
+    link: '/pricing#maternity',
     images: [],
   },
   {
     id: 'portrait',
     title: 'Portrait',
+    link: '/pricing#portrait',
     images: [],
   },
   {
     id: 'mini',
     title: 'Mini Session',
+    link: '/pricing#mini',
     images: [],
   },
   {
     id: 'smileandpaws',
     title: 'Smile and Paws',
+    link: '/pricing#smileandpaws',
     images: [],
   },
   {
     id: 'business',
     title: 'Business',
+    link: '/pricing#business',
     images: [],
   },
   {
     id: 'wedding',
     title: 'Wedding',
+    link: '/pricing#wedding',
     images: [],
   },
 ];
