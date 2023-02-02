@@ -35,7 +35,7 @@ const sessions = [
     id: 'maternity',
     link: '/gallery#maternity',
     title: 'Maternity',
-    image: '/pricing/business.jpg',
+    image: '/gallery/maternity.jpg',
   },
   {
     key: 5,
