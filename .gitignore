@@ -6,6 +6,7 @@ publicPhoto/node_modules
 
 uploads/
 **/uplaods
+uploads
 
 /.pnp
 .pnp.js
