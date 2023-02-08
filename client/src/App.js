@@ -17,6 +17,7 @@ import Post from './components/Blog/Post';
 import PostForm from './components/Blog/PostForm';
 import Pricing from './components/Pricing/Pricing';
 import setAuthToken from './utils/setAuthToken';
+import ScrollButton from './components/layout/ScrollButton';
 import { loadUser } from './features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -56,6 +57,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
+        <ScrollButton />
         <Footer />
       </div>
     </Router>

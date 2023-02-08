@@ -42,10 +42,10 @@ function ContactForm(props) {
       try {
         const res = await axios.post('/api/mail', payload, config);
         alert(res.data);
-        props.handleClick();
+        props.handleClick && props.handleClick();
       } catch (error) {
         alert(error.message);
-        props.handleClick();
+        props.handleClick && props.handleClick();
       }
     };
 
@@ -102,6 +102,7 @@ function ContactForm(props) {
           <option value="Smile and Paws">Smile and Paws</option>
           <option value="Business">Business</option>
           <option value="Wedding">Wedding</option>
+          <option value="Food Feast">Food Feast</option>
           <option value="Other">Other</option>
         </Form.Select>
       </label>

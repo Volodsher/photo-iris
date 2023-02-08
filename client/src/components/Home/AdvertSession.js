@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import MyButton from '../layout/MyButton/MyButton';
 import styles from './Home.module.scss';
-import backShort from '../../images/shortGallery/Editar1.jpg';
 import int13 from '../../images/int13.JPG';
 
 export default function AdvertSession() {

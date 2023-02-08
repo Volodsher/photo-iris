@@ -1,12 +1,6 @@
 import { Link } from 'react-router-dom';
 import MyButton from '../layout/MyButton/MyButton';
 import styles from './Home.module.scss';
-import one from '../../images/shortGallery/Editar1.jpg';
-import portrait from '../../images/sessions/port2.jpg';
-import family from '../../images/sessions/fam15.jpg';
-import inthemoment from '../../images/sessions/int1.jpg';
-import charm from '../../images/sessions/chan9.jpg';
-import { HashLink } from 'react-router-hash-link';
 
 const sessions = [
   {
@@ -14,63 +8,70 @@ const sessions = [
     id: 'family',
     link: '/gallery#family',
     title: 'Family Fun',
-    image: '/pricing/family.jpg',
+    image: '/sessions/family.jpg',
   },
   {
     key: 2,
     id: 'kids',
     link: '/gallery#kids',
-    title: "Kids' Celebrations",
-    image: '/pricing/children.jpg',
-  },
-  {
-    key: 3,
-    id: 'lovestory',
-    link: '/gallery#lovestory',
-    title: 'Love Story',
-    image: '/pricing/business.jpg',
+    title: "Kids' Adventures",
+    image: '/sessions/kids.jpg',
   },
   {
     key: 4,
     id: 'maternity',
     link: '/gallery#maternity',
     title: 'Maternity',
-    image: '/gallery/maternity.jpg',
+    image: '/sessions/maternity.jpg',
+  },
+  {
+    key: 3,
+    id: 'lovestory',
+    link: '/gallery#lovestory',
+    title: 'Love Story',
+    image: '/sessions/lovestory.jpg',
   },
   {
     key: 5,
     id: 'portrait',
     link: '/gallery#portrait',
     title: 'Portrait',
-    image: '/pricing/portrait.jpg',
+    image: '/sessions/portrait.jpg',
   },
   {
     key: 6,
     id: 'mini',
     link: '/gallery#mini',
     title: 'Mini Session',
-    image: '/pricing/business.jpg',
+    image: '/sessions/mini.jpg',
   },
   {
     key: 7,
     id: 'smileandpaws',
     link: '/gallery#smileandpaws',
     title: 'Smile and Paws',
-    image: '/pricing/pet.jpg',
+    image: '/sessions/smileandpaws.jpg',
   },
   {
     key: 8,
     id: 'business',
     link: '/gallery#business',
     title: 'Business',
-    image: '/pricing/business.jpg',
+    image: '/sessions/business.jpg',
   },
   {
     key: 9,
     id: 'wedding',
     link: '/gallery#wedding',
     title: 'Wedding',
-    image: '/pricing/business.jpg',
+    image: '/sessions/wedding.jpg',
+  },
+  {
+    key: 10,
+    id: 'food',
+    link: '/gallery#food',
+    title: 'Food Feast',
+    image: '/sessions/food.jpg',
   },
 ];
 

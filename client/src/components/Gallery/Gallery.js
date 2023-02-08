@@ -5,6 +5,20 @@ import Spinner from '../layout/Spinner';
 import Picture from '../layout/Picture';
 import MyButton from '../layout/MyButton/MyButton';
 
+const galleryTitle = [
+  'Family Fun',
+  "Kids' Adventure",
+  'Love Story',
+  'Maternity',
+  'Portrait',
+  'Mini Session',
+  'Smiles and Paws',
+  'Business',
+  'Wedding',
+  'Food Feast',
+  'Art',
+];
+
 export default function Gallery() {
   const [sessions, setSessions] = useState([]);
   const [oneImage, setOneImage] = useState('');
@@ -67,7 +81,9 @@ export default function Gallery() {
                     key={ind}
                     src={`/gallery/${session.id}/${image}`}
                     className={styles.galleryImage}
-                    onClick={() => handleOneImageUrl(`/gallery/${image}`)}
+                    onClick={() =>
+                      handleOneImageUrl(`/gallery/${session.id}/${image}`)
+                    }
                   />,
                   oneImage.length > 0 && (
                     <Picture
@@ -79,9 +95,11 @@ export default function Gallery() {
                 ];
               })}
             </div>
-            <Link to={session.link}>
-              <MyButton borderColor="--gray-light" value="Book" />
-            </Link>
+            {session.last && (
+              <Link to={session.link}>
+                <MyButton borderColor="--gray-light" value="Book" />
+              </Link>
+            )}
           </div>
         ))
       )}
