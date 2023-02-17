@@ -102,7 +102,7 @@ function ContactForm(props) {
           <option value="Smile and Paws">Smile and Paws</option>
           <option value="Business">Business</option>
           <option value="Wedding">Wedding</option>
-          <option value="Food Feast">Food Feast</option>
+          <option value="Food Photography">Food Photography</option>
           <option value="Other">Other</option>
         </Form.Select>
       </label>

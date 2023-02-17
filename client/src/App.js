@@ -20,6 +20,7 @@ import setAuthToken from './utils/setAuthToken';
 import ScrollButton from './components/layout/ScrollButton';
 import { loadUser } from './features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { getSessionAction } from './features/sessionsSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 if (localStorage.token) {
@@ -27,6 +28,7 @@ if (localStorage.token) {
 }
 
 function App() {
+  const { sessions, loading } = useSelector((store) => store.session);
   const auth = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const [menuOpen, toOpenMenu] = useState(false);
@@ -36,6 +38,7 @@ function App() {
 
   useEffect(() => {
     dispatch(loadUser());
+    dispatch(getSessionAction());
   }, []);
 
   return (

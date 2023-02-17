@@ -75,7 +75,8 @@ h2 {
   margin: auto;
   min-height: 100vh; /* will cover the 100% of viewport */
   text-align: center;
-  overflow: hidden;
+  /* overflow: hidden; */ 
+  overflow: clip;
   /* padding-bottom: calc(2*var(--p1));  height of footer */
   padding-bottom: 8rem; /* height of footer */
 }

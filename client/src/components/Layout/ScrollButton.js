@@ -35,7 +35,7 @@ function ScrollButton(props) {
         display: visible ? 'block' : 'none',
       }}
     >
-      <FontAwesomeIcon icon={faCircleArrowUp} onClick={scrollToTop} size="3x" />
+      <FontAwesomeIcon icon={faCircleArrowUp} onClick={scrollToTop} size="2x" />
     </div>
   );
 }

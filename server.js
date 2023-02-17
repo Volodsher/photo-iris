@@ -21,7 +21,7 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/photo-blog', require('./routes/api/photoBlog'));
 app.use('/api/mail', require('./routes/api/mail'));
-app.use('/api/gallery', require('./routes/api/gallery'));
+app.use('/api/sessions', require('./routes/api/sessions'));
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,81 +1,85 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MyButton from '../layout/MyButton/MyButton';
 import styles from './Home.module.scss';
+import { useSelector } from 'react-redux';
 
-const sessions = [
+const shortSessionsInitial = [
   {
-    key: 1,
-    id: 'family',
-    link: '/gallery#family',
-    title: 'Family Fun',
-    image: '/sessions/family.jpg',
-  },
-  {
-    key: 2,
+    column: 1,
+    number: 1,
     id: 'kids',
-    link: '/gallery#kids',
-    title: "Kids' Adventures",
-    image: '/sessions/kids.jpg',
+    key: 11,
   },
   {
-    key: 4,
-    id: 'maternity',
-    link: '/gallery#maternity',
-    title: 'Maternity',
-    image: '/sessions/maternity.jpg',
+    column: 2,
+    number: 1,
+    id: 'family',
+    key: 21,
   },
   {
-    key: 3,
+    column: 1,
+    number: 2,
     id: 'lovestory',
-    link: '/gallery#lovestory',
-    title: 'Love Story',
-    image: '/sessions/lovestory.jpg',
+    key: 12,
   },
   {
-    key: 5,
-    id: 'portrait',
-    link: '/gallery#portrait',
-    title: 'Portrait',
-    image: '/sessions/portrait.jpg',
+    column: 2,
+    number: 2,
+    id: 'maternity',
+    key: 22,
   },
   {
-    key: 6,
+    column: 1,
+    number: 3,
     id: 'mini',
-    link: '/gallery#mini',
-    title: 'Mini Session',
-    image: '/sessions/mini.jpg',
+    key: 13,
   },
   {
-    key: 7,
-    id: 'smileandpaws',
-    link: '/gallery#smileandpaws',
-    title: 'Smile and Paws',
-    image: '/sessions/smileandpaws.jpg',
+    column: 2,
+    number: 3,
+    id: 'portrait',
+    key: 23,
   },
   {
-    key: 8,
+    column: 1,
+    number: 4,
     id: 'business',
-    link: '/gallery#business',
-    title: 'Business',
-    image: '/sessions/business.jpg',
+    key: 14,
   },
   {
-    key: 9,
-    id: 'wedding',
-    link: '/gallery#wedding',
-    title: 'Wedding',
-    image: '/sessions/wedding.jpg',
+    column: 2,
+    number: 4,
+    id: 'smileandpaws',
+    key: 24,
   },
   {
-    key: 10,
+    column: 1,
+    number: 5,
     id: 'food',
-    link: '/gallery#food',
-    title: 'Food Feast',
-    image: '/sessions/food.jpg',
+    key: 15,
+  },
+  {
+    column: 2,
+    number: 5,
+    id: 'wedding',
+    key: 25,
   },
 ];
 
 export default function ShortSession() {
+  const { sessions, loading } = useSelector((store) => store.session);
+  const [shortSessions, setShortSessions] = useState(shortSessionsInitial);
+
+  useEffect(() => {
+    setShortSessions(
+      shortSessionsInitial.map((el) => {
+        const elSession = sessions.find((session) => session.id === el.id);
+        return { ...el, ...elSession };
+      })
+    );
+  }, [sessions]);
+
   return (
     <div className={styles.shortSession}>
       <h1>Photo Sessions</h1>
@@ -86,44 +90,47 @@ export default function ShortSession() {
         My camera is my magic wand that can immortalize the passage of time in a
         single click, looking with the heart.
       </p>
-      <div className={styles.shortSessionGallery}>
-        <div className={styles.column}>
-          {sessions
-            .filter((session, ind) => ind % 2 !== 0)
-            .map((session) => (
-              <Link
-                key={session.key}
-                to={session.link}
-                style={{ textDecoration: 'none' }}
-              >
-                <div key={session.key} className={styles.imageItem}>
-                  <img src={session.image} alt="" />
-                  <div className={styles.overlay}>
-                    <h2>{session.title}</h2>
+      {!loading && (
+        <div className={styles.shortSessionGallery}>
+          <div className={styles.column}>
+            {shortSessions
+              .filter((session, ind) => ind % 2 === 0)
+              .map((session) => (
+                <Link
+                  // key={session.number}
+                  key={session.key}
+                  to={session.link}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div className={styles.imageItem}>
+                    <img src={session.image} alt="" />
+                    <div className={styles.overlay}>
+                      <h2>{session.title}</h2>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
-        </div>
-        <div className={styles.column}>
-          {sessions
-            .filter((session, ind) => ind % 2 === 0)
-            .map((session) => (
-              <Link
-                key={session.key}
-                to={session.link}
-                style={{ textDecoration: 'none' }}
-              >
-                <div key={session.key} className={styles.imageItem}>
-                  <img src={session.image} alt="" />
-                  <div className={styles.overlay}>
-                    <h2>{session.title}</h2>
+                </Link>
+              ))}
+          </div>
+          <div className={styles.column}>
+            {shortSessions
+              .filter((session, ind) => ind % 2 !== 0)
+              .map((session) => (
+                <Link
+                  key={session.number}
+                  to={session.link}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div className={styles.imageItem}>
+                    <img src={session.image} alt="" />
+                    <div className={styles.overlay}>
+                      <h2>{session.title}</h2>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+          </div>
         </div>
-      </div>
+      )}
       <Link to="/gallery">
         <MyButton
           className={styles.shortSessionButton}

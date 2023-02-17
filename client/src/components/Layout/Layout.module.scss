@@ -1,13 +1,25 @@
 // header
+
+.headerWrapper {
+    border-bottom: 0.3rem solid var(--primary-color);
+
+    h1 {
+      text-shadow: 2px 2px #e3c193;
+    }
+}
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
   padding: 0.6rem 1.25rem;
   height: 10rem;
-  border-bottom: 0.3rem solid var(--primary-color);
   color: var(--gray-light);
+  justify-items: center;
+  align-items: center;
 }
 
 .logo {
@@ -19,7 +31,7 @@
 
 .menuList {
   display: flex;
-  max-width: 30%;
+  // max-width: 30%;
   padding: 0;
   // color: var(--gray-light);
   list-style-type: none;
@@ -43,11 +55,13 @@
 }
 
 .menuListFirst {
-  justify-content: flex-end;
+  justify-self: end;
+  // justify-content: flex-end;
 }
 
 .menuListSecond {
-  justify-content: flex-start;
+  // justify-content: flex-start;
+  justify-self: start;
 }
 
 .sideMenu,

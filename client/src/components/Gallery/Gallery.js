@@ -1,29 +1,25 @@
-import { useState, useEffect, useRef, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from './Gallery.module.scss';
 import Spinner from '../layout/Spinner';
 import Picture from '../layout/Picture';
 import MyButton from '../layout/MyButton/MyButton';
-
-const galleryTitle = [
-  'Family Fun',
-  "Kids' Adventure",
-  'Love Story',
-  'Maternity',
-  'Portrait',
-  'Mini Session',
-  'Smiles and Paws',
-  'Business',
-  'Wedding',
-  'Food Feast',
-  'Art',
-];
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Gallery() {
-  const [sessions, setSessions] = useState([]);
+  const { sessions, loading } = useSelector((store) => store.session);
   const [oneImage, setOneImage] = useState('');
   const [divHeight, setDivHeight] = useState(0);
+  const [openSMGallery, setOpenSMGallery] = useState(false);
   const galleryRef = useRef();
+
+  const location = useLocation();
+
+  const openMenuGallery = () => {
+    setOpenSMGallery(!openSMGallery);
+  };
 
   const handleOneImageUrl = (imageUrl) => {
     setOneImage(imageUrl);
@@ -42,32 +38,83 @@ export default function Gallery() {
     return () => observer.disconnect();
   }, [galleryRef]);
 
-  useEffect(async () => {
-    try {
-      await fetch('/api/gallery/')
-        .then((res) => res.json())
-        .then((data) => {
-          setSessions(data);
-        });
-    } catch (error) {
-      console.error(error.message);
-    }
-  }, []);
-
   useEffect(() => {
     if (sessions.length > 0) {
       const scroll = (id) => {
         const section = document.querySelector(`#${id}`);
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       };
-      if (window.location.href.split('#').length === 2) {
+      if (
+        !loading &&
+        sessions.length > 0 &&
+        window.location.href.split('#').length === 2
+      ) {
         scroll(window.location.href.split('#')[1]);
       }
     }
-  }, [sessions, divHeight]);
+  }, [sessions, divHeight, location, loading]);
 
   return (
-    <div ref={galleryRef} style={{ paddingBottom: '3rem' }}>
+    <div
+      ref={galleryRef}
+      className={styles.gallery}
+      style={{ paddingBottom: '3rem' }}
+    >
+      <div
+        style={{
+          position: 'sticky',
+          top: '70px',
+          marginTop: '0.5rem',
+          marginBottom: '-1rem',
+        }}
+      >
+        <button
+          onClick={openMenuGallery}
+          style={{
+            display: 'lfex',
+            color: 'var(--primary-color)',
+            borderRadius: '1rem',
+            backgroundColor: 'rgba(255, 255, 255, 0.6)',
+            boxShadow: 'none',
+          }}
+        >
+          <FontAwesomeIcon icon={faCamera} size="2x" />
+          <p style={{ marginBottom: '0', marginTop: '-7px' }}>sessions</p>
+        </button>
+      </div>
+      <div
+        style={
+          openSMGallery
+            ? {
+                display: 'flex',
+                position: 'fixed',
+                zIndex: '100',
+                width: '100%',
+                height: '100vh',
+                left: '0',
+                top: '0',
+                justifyContent: 'flex-start',
+              }
+            : { display: 'none' }
+        }
+      >
+        <div className={styles.sideMenuGallery}>
+          <ul className={styles.menuSessionsList}>
+            {sessions.map((el) => {
+              if (el.title !== '') {
+                return (
+                  <li key={el.id} onClick={openMenuGallery}>
+                    <Link to={`/gallery#${el.id}`}>{el.title}</Link>
+                  </li>
+                );
+              }
+            })}
+          </ul>
+        </div>
+        <div className={styles.shadowSessions} onClick={openMenuGallery}>
+          <FontAwesomeIcon style={{ cursor: 'pointer' }} icon={faXmark} />
+        </div>
+      </div>
       {sessions.length === 0 ? (
         <Spinner />
       ) : (
@@ -96,7 +143,7 @@ export default function Gallery() {
               })}
             </div>
             {session.last && (
-              <Link to={session.link}>
+              <Link to={session.priceLink}>
                 <MyButton borderColor="--gray-light" value="Book" />
               </Link>
             )}
@@ -105,5 +152,4 @@ export default function Gallery() {
       )}
     </div>
   );
-  // );
 }

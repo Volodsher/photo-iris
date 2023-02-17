@@ -1,109 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styles from './Pricing.module.scss';
 import Card from 'react-bootstrap/Card';
 import MyButton from '../layout/MyButton/MyButton';
 import Book from '../layout/Book';
 
-const mustHaveText =
-  'HST is added separately from the price. Additional costs for make-up (at the request of the client), photo studio rentals, photo permits (if needed), costume rentals are NOT INCLUDED in a price. We require a 10% deposit to book your date.';
-
-const pricing = [
-  {
-    key: 1,
-    id: 'family',
-    title: 'Family Fun',
-    image: '/sessions/family.jpg',
-    price: '200$',
-    about: `1hour session \n25 edited and retouched images`,
-    mustHave: '',
-  },
-  {
-    key: 2,
-    id: 'kids',
-    title: "Kids' Adventures",
-    image: '/sessions/kids.jpg',
-    price: '200$',
-    about: '1 hour session \n25 edited and retouched images',
-    mustHave: '',
-  },
-  {
-    key: 3,
-    id: 'lovestory',
-    title: 'Love Story',
-    image: '/sessions/lovestory.jpg',
-    price: '200$',
-    about: '1 hour session \n25 edited and retouched images',
-    mustHave: '',
-  },
-  {
-    key: 4,
-    id: 'maternity',
-    title: 'Maternity',
-    image: '/sessions/maternity.jpg',
-    price: '200$',
-    about: '1 hour session \n25 edited and retouched images',
-    mustHave: '',
-  },
-  {
-    key: 5,
-    id: 'portrait',
-    title: 'Portrait',
-    image: '/sessions/portrait.jpg',
-    price: '150$',
-    about: '45 min session \n10 edited and retouched images',
-    mustHave: '',
-  },
-  {
-    key: 6,
-    id: 'mini',
-    title: 'Mini Session',
-    image: '/sessions/mini.jpg',
-    price: '100$',
-    about: '30 min \n5 edited and retouched images',
-    mustHave: '',
-  },
-  {
-    key: 7,
-    id: 'smileandpaws',
-    title: 'Smile and Paws',
-    image: '/sessions/smileandpaws.jpg',
-    price: '100$',
-    about: '30 min \n5 edited and retouched images',
-    mustHave: '',
-  },
-  {
-    key: 8,
-    id: 'business',
-    title: 'Business',
-    image: '/sessions/business.jpg',
-    price: '250$',
-    about: '1,5 hours session \n30 edited and retouched images',
-    mustHave: '',
-  },
-  {
-    key: 9,
-    id: 'wedding',
-    title: 'Wedding',
-    image: '/sessions/wedding.jpg',
-    price: '500$',
-    about: '3 hours session \n100 edited and retouched images',
-    mustHave: '',
-  },
-  {
-    key: 10,
-    id: 'food',
-    title: 'Food Feast',
-    image: '/sessions/food.jpg',
-    price: '200$',
-    about: '1 hours session \n 30 edited and retouched images',
-    mustHave: '',
-  },
-];
-
 function Pricing() {
   const [booking, setBooking] = useState('');
   const [divHeight, setDivHeight] = useState(0);
+  const { sessions, loading } = useSelector((store) => store.session);
 
+  const pricing = sessions.filter((el) => el.title !== '');
   const pricingRef = useRef();
 
   const handleBookingClick = () => {
@@ -125,10 +32,10 @@ function Pricing() {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       console.log('in 5sec');
     };
-    if (window.location.href.split('#').length === 2) {
+    if (!loading && window.location.href.split('#').length === 2) {
       scroll(window.location.href.split('#')[1]);
     }
-  }, [divHeight]);
+  }, [divHeight, loading]);
 
   return [
     <h1 key="1" style={{ margin: '3rem 0' }}>

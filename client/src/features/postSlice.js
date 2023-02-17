@@ -2,8 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 
-// const url = 'http://localhost:5000/';
-
 const initialState = {
   posts: [],
   post: null,
