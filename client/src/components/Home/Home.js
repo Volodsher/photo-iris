@@ -6,7 +6,7 @@ import ShortSession from './ShortSessions';
 import AdvertSession from './AdvertSession';
 import { Fragment } from 'react';
 
-export default function Home(props) {
+export default function Home() {
   return (
     <Fragment>
       <Slideshow />

@@ -12,6 +12,9 @@ function Picture(props) {
   );
 }
 
-Picture.propTypes = {};
+Picture.propTypes = {
+  picture: PropTypes.string.isRequired,
+  clearPicture: PropTypes.func.isRequired,
+};
 
 export default Picture;

@@ -78,6 +78,12 @@ function Confirm(props) {
   );
 }
 
-Confirm.propTypes = {};
+Confirm.propTypes = {
+  confirmName: PropTypes.string,
+  goTo: PropTypes.string,
+  link: PropTypes.string,
+  toDispatch: PropTypes.func,
+  action: PropTypes.func,
+};
 
 export default Confirm;

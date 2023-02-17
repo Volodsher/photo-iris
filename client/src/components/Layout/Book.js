@@ -23,6 +23,10 @@ function Book(props) {
   );
 }
 
-Book.propTypes = {};
+Book.propTypes = {
+  session: PropTypes.array,
+  handleClick: PropTypes.func,
+  handleCancel: PropTypes.func,
+};
 
 export default Book;

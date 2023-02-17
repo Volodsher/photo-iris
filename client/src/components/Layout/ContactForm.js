@@ -205,6 +205,10 @@ function ContactForm(props) {
   );
 }
 
-ContactForm.propTypes = {};
+ContactForm.propTypes = {
+  session: PropTypes.object,
+  handleClick: PropTypes.func,
+  handleCancel: PropTypes.func,
+};
 
 export default ContactForm;

@@ -46,6 +46,14 @@ function NewConfirm(props) {
   );
 }
 
-NewConfirm.propTypes = {};
+NewConfirm.propTypes = {
+  confirmName: PropTypes.string.isRequired,
+  payload: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+  link: PropTypes.string,
+  action: PropTypes.func.isRequired,
+  toggleConfirm: PropTypes.func.isRequired,
+};
 
 export default NewConfirm;

@@ -3,19 +3,16 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import styles from './Blog.module.scss';
-import {
-  faThumbsUp,
-  faThumbsDown,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
-import PostForm from './PostForm';
+// import {
+//   faThumbsUp,
+//   faThumbsDown,
+//   faTimes,
+// } from '@fortawesome/free-solid-svg-icons';
+// import PostForm from './PostForm';
 import MyButton from '../layout/MyButton/MyButton';
 import { useDispatch, useSelector } from 'react-redux';
 
 const PostItem = ({
-  // addLike,
-  // removeLike,
-  // auth,
   post: { _id, text, title, date, image },
   showActions,
   toggleConfirm,
@@ -67,12 +64,11 @@ PostItem.defaultProps = {
   showActions: true,
 };
 
-// PostItem.propTypes = {
-//   post: PropTypes.object.isRequired,
-//   auth: PropTypes.object.isRequired,
-//   addLike: PropTypes.func.isRequired,
-//   removeLike: PropTypes.func.isRequired,
-//   deletePost: PropTypes.func.isRequired,
-// };
+PostItem.propTypes = {
+  post: PropTypes.object.isRequired,
+  showActions: PropTypes.object.isRequired,
+  toggleConfirm: PropTypes.object.isRequired,
+  postPayload: PropTypes.object.isRequired,
+};
 
 export default PostItem;
