@@ -21,6 +21,8 @@ function ContactForm(props) {
     session: props.session,
   });
 
+  const [checked, setChecked] = useState(false);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setMessage({
@@ -29,6 +31,9 @@ function ContactForm(props) {
     });
   };
 
+  const handleAgreement = () => {
+    setChecked(!checked);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -59,6 +64,8 @@ function ContactForm(props) {
       session: 'Family Fun',
       textMessage: '',
     });
+
+    setChecked(false);
   };
 
   return (
@@ -168,7 +175,25 @@ function ContactForm(props) {
           required
         />
       </label>
-      <div style={{ width: '100%', textAlign: 'center' }}>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={handleAgreement}
+            style={{
+              width: '1rem',
+              height: '1rem',
+              marginRight: '1rem',
+            }}
+            required
+          />
+          By submitting my contact information through the contact form on this
+          website, I agree to share my information with the website owner for
+          the purpose of communication regarding my inquiry.
+        </label>
+      </div>
+      <div style={{ width: '100%', textAlign: 'center', margin: '2rem 0' }}>
         <MyButton
           type="submit"
           value="Send a message"
