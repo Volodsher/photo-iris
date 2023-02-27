@@ -10,6 +10,7 @@ import { faCamera, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Gallery() {
   const { sessions, loading } = useSelector((store) => store.session);
+  const [oneImageUrl, setOneImageUrl] = useState('');
   const [oneImage, setOneImage] = useState('');
   const [divHeight, setDivHeight] = useState(0);
   const [openSMGallery, setOpenSMGallery] = useState(false);
@@ -22,11 +23,15 @@ export default function Gallery() {
   };
 
   const handleOneImageUrl = (imageUrl) => {
-    setOneImage(imageUrl);
+    setOneImageUrl(imageUrl);
   };
 
-  const handleCleaarOneImage = () => {
-    setOneImage('');
+  const toggleOneImage = (id) => {
+    setOneImage(id);
+  };
+
+  const handleCleaarOneImageUrl = () => {
+    setOneImageUrl('');
   };
 
   useEffect(() => {
@@ -42,7 +47,7 @@ export default function Gallery() {
     if (sessions.length > 0) {
       const scroll = (id) => {
         const section = document.querySelector(`#${id}`);
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        section.scrollIntoView({ block: 'start' });
       };
       if (
         !loading &&
@@ -60,6 +65,21 @@ export default function Gallery() {
       className={styles.gallery}
       style={{ paddingBottom: '3rem' }}
     >
+      {oneImage !== '' && (
+        <FontAwesomeIcon
+          style={{
+            position: 'fixed',
+            zIndex: '102',
+            color: 'var(--red-light)',
+            cursor: 'pointer',
+            top: '1rem',
+            right: '1rem',
+          }}
+          icon={faXmark}
+          size="xl"
+          onClick={() => toggleOneImage('')}
+        />
+      )}
       <div
         style={{
           position: 'sticky',
@@ -104,7 +124,7 @@ export default function Gallery() {
               if (el.title !== '') {
                 return (
                   <li key={el.id} onClick={openMenuGallery}>
-                    <Link to={`/gallery#${el.id}`}>{el.title}</Link>
+                    <Link to={`/mygallery#${el.id}`}>{el.title}</Link>
                   </li>
                 );
               }
@@ -128,15 +148,18 @@ export default function Gallery() {
                     key={ind}
                     src={`/gallery/${session.id}/${image}`}
                     className={styles.galleryImage}
-                    onClick={() =>
-                      handleOneImageUrl(`/gallery/${session.id}/${image}`)
-                    }
+                    onClick={() => {
+                      handleOneImageUrl(`/gallery/${session.id}/${image}`);
+                      toggleOneImage(`${session.id}${image}`);
+                    }}
+                    alt={`one of ${session.title} session photo`}
                   />,
-                  oneImage.length > 0 && (
+                  oneImage === `${session.id}${image}` && (
                     <Picture
                       key={session.id}
-                      clearPicture={handleCleaarOneImage}
-                      picture={oneImage}
+                      clearPicture={handleCleaarOneImageUrl}
+                      picture={oneImageUrl}
+                      toggleOneImage={toggleOneImage}
                     />
                   ),
                 ];

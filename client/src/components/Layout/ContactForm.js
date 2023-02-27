@@ -4,6 +4,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import MyButton from './MyButton/MyButton';
 import Form from 'react-bootstrap/Form';
+import styles from './Layout.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -101,7 +102,7 @@ function ContactForm(props) {
           style={{ margin: '0.5rem 0' }}
         >
           <option value="Family Fun">Family Fun</option>
-          <option value="Kids' Celebrations">Kids' Celebrations</option>
+          <option value="Kids' Adventures">Kids' Celebrations</option>
           <option value="Love Story">Love Story</option>
           <option value="Maternity">Maternity</option>
           <option value="Portrait">Portrait</option>
@@ -195,6 +196,7 @@ function ContactForm(props) {
       </div>
       <div style={{ width: '100%', textAlign: 'center', margin: '2rem 0' }}>
         <MyButton
+          className={styles.contactButton}
           type="submit"
           value="Send a message"
           borderColor="--gray-light"
@@ -206,7 +208,7 @@ function ContactForm(props) {
 }
 
 ContactForm.propTypes = {
-  session: PropTypes.object,
+  session: PropTypes.string,
   handleClick: PropTypes.func,
   handleCancel: PropTypes.func,
 };

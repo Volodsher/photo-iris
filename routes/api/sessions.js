@@ -12,7 +12,7 @@ const initialSessions = [
     key: 1,
     id: 'family',
     title: 'Family Fun',
-    link: '/gallery#family',
+    link: '/mygallery#family',
     priceLink: '/pricing#family',
     image: '/sessions/family.jpg',
     price: '195$',
@@ -52,7 +52,8 @@ const initialSessions = [
     key: 6,
     id: 'famT',
     title: '',
-    link: '/pricing#family',
+    // link: '/pricing#family',
+    priceLink: '/pricing#family',
     images: [],
     last: true,
   },
@@ -60,7 +61,7 @@ const initialSessions = [
     key: 7,
     id: 'kids',
     title: "Kids' Adventures",
-    link: '/gallery#kids',
+    link: '/mygallery#kids',
     priceLink: '/pricing#kids',
     image: '/sessions/kids.jpg',
     price: '150$',
@@ -73,7 +74,7 @@ const initialSessions = [
     key: 8,
     id: 'lovestory',
     title: 'Love Story',
-    link: '/gallery#lovestory',
+    link: '/mygallery#lovestory',
     priceLink: '/pricing#lovestory',
     image: '/sessions/lovestory.jpg',
     price: '195$',
@@ -86,7 +87,7 @@ const initialSessions = [
     key: 9,
     id: 'maternity',
     title: 'Maternity',
-    link: '/gallery#maternity',
+    link: '/mygallery#maternity',
     priceLink: '/pricing#maternity',
     image: '/sessions/maternity.jpg',
     price: '195$',
@@ -99,7 +100,7 @@ const initialSessions = [
     key: 10,
     id: 'portrait',
     title: 'Portrait',
-    link: '/gallery#portrait',
+    link: '/mygallery#portrait',
     priceLink: '/pricing#portrait',
     image: '/sessions/portrait.jpg',
     price: '150$',
@@ -112,7 +113,7 @@ const initialSessions = [
     key: 11,
     id: 'mini',
     title: 'Mini Session',
-    link: '/gallery#mini',
+    link: '/mygallery#mini',
     priceLink: '/pricing#mini',
     image: '/sessions/mini.jpg',
     price: '120$',
@@ -125,7 +126,7 @@ const initialSessions = [
     key: 12,
     id: 'smileandpaws',
     title: 'Smile and Paws',
-    link: '/gallery#smileandpaws',
+    link: '/mygallery#smileandpaws',
     priceLink: '/pricing#smileandpaws',
     image: '/sessions/smileandpaws.jpg',
     price: '120$',
@@ -138,7 +139,7 @@ const initialSessions = [
     key: 13,
     id: 'business',
     title: 'Business',
-    link: '/gallery#business',
+    link: '/mygallery#business',
     priceLink: '/pricing#business',
     image: '/sessions/business.jpg',
     price: '250$',
@@ -151,7 +152,7 @@ const initialSessions = [
     key: 14,
     id: 'wedding',
     title: 'Wedding',
-    link: '/gallery#wedding',
+    link: '/mygallery#wedding',
     priceLink: '/pricing#wedding',
     image: '/sessions/wedding.jpg',
     price: '450$',
@@ -164,7 +165,7 @@ const initialSessions = [
     key: 15,
     id: 'food',
     title: 'Food Photography',
-    link: '/gallery#food',
+    link: '/mygallery#food',
     priceLink: '/pricing#food',
     image: '/sessions/food.jpg',
     price: '150$',
@@ -182,7 +183,7 @@ const initialSessions = [
 
 // good and simple GET all names from a forlder as array
 // router.get('/', (req, res) => {
-//   fs.readdir('./uploads/gallery', (err, files) => {
+//   fs.readdir('./uploads/mygallery', (err, files) => {
 //     res.send(files.filter((file) => file !== '.DS_Store'));
 //   });
 // });
@@ -190,12 +191,12 @@ const initialSessions = [
 // new JSON with sessions and image arrays
 // fs.readdir which is asynchronous
 // router.get('/', (req, res) => {
-//   const sessions = initialSessions.map((gallery, ind) => {
+//   const sessions = initialSessions.map((mygallery, ind) => {
 //     let images = [];
 
-//     fs.readdir(`./uploads/gallery/${gallery.id}`, (err, files) => {
+//     fs.readdir(`./uploads/mygallery/${mygallery.id}`, (err, files) => {
 //       images = files.filter((file) => file !== '.DS_Store');
-//       sessions[ind] = { ...gallery, images: images };
+//       sessions[ind] = { ...mygallery, images: images };
 //     });
 //   });
 

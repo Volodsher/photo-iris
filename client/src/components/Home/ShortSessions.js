@@ -72,72 +72,75 @@ export default function ShortSession() {
   const [shortSessions, setShortSessions] = useState(shortSessionsInitial);
 
   useEffect(() => {
-    setShortSessions(
-      shortSessionsInitial.map((el) => {
+    if (!loading) {
+      const seseionsFromServer = shortSessionsInitial.map((el) => {
         const elSession = sessions.find((session) => session.id === el.id);
         return { ...el, ...elSession };
-      })
-    );
-  }, [sessions]);
+      });
+      setShortSessions(seseionsFromServer);
+    }
+  }, [sessions, loading]);
 
   return (
-    <div className={styles.shortSession}>
-      <h1>Photo Sessions</h1>
-      <p className="global-shortExplanation">
-        I invite you to save every detail of your story, forever.
-      </p>
-      <p className="global-shortExplanation2">
-        My camera is my magic wand that can immortalize the passage of time in a
-        single click, looking with the heart.
-      </p>
-      {!loading && (
-        <div className={styles.shortSessionGallery}>
-          <div className={styles.column}>
-            {shortSessions
-              .filter((session, ind) => ind % 2 === 0)
-              .map((session) => (
-                <Link
-                  // key={session.number}
-                  key={session.key}
-                  to={session.link}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <div className={styles.imageItem}>
-                    <img src={session.image} alt="" />
-                    <div className={styles.overlay}>
-                      <h2>{session.title}</h2>
+    !loading && (
+      <div className={styles.shortSession}>
+        <h1>Photo Sessions</h1>
+        <p className="global-shortExplanation">
+          I invite you to save every detail of your story, forever.
+        </p>
+        <p className="global-shortExplanation2">
+          My camera is my magic wand that can immortalize the passage of time in
+          a single click, looking with the heart.
+        </p>
+        {!loading && (
+          <div className={styles.shortSessionGallery}>
+            <div className={styles.column}>
+              {shortSessions
+                .filter((session, ind) => ind % 2 === 0)
+                .map((session) => (
+                  <Link
+                    // key={session.number}
+                    key={session.key}
+                    to={session.link}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <div className={styles.imageItem}>
+                      <img src={session.image} alt="" />
+                      <div className={styles.overlay}>
+                        <h2>{session.title}</h2>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
-          </div>
-          <div className={styles.column}>
-            {shortSessions
-              .filter((session, ind) => ind % 2 !== 0)
-              .map((session) => (
-                <Link
-                  key={session.number}
-                  to={session.link}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <div className={styles.imageItem}>
-                    <img src={session.image} alt="" />
-                    <div className={styles.overlay}>
-                      <h2>{session.title}</h2>
+                  </Link>
+                ))}
+            </div>
+            <div className={styles.column}>
+              {shortSessions
+                .filter((session, ind) => ind % 2 !== 0)
+                .map((session) => (
+                  <Link
+                    key={session.number}
+                    to={session.link}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <div className={styles.imageItem}>
+                      <img src={session.image} alt="" />
+                      <div className={styles.overlay}>
+                        <h2>{session.title}</h2>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))}
+            </div>
           </div>
-        </div>
-      )}
-      <Link to="/gallery">
-        <MyButton
-          className={styles.shortSessionButton}
-          borderColor="--white-color"
-          value="Sessions"
-        />
-      </Link>
-    </div>
+        )}
+        <Link to="/mygallery">
+          <MyButton
+            className={styles.shortSessionButton}
+            borderColor="--white-color"
+            value="Sessions"
+          />
+        </Link>
+      </div>
+    )
   );
 }

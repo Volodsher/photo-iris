@@ -66,6 +66,7 @@ function Pricing() {
               <Card.Footer>
                 <small className="text-muted">
                   <MyButton
+                    className={styles.priceButton}
                     value="Book"
                     borderColor="--gray-light"
                     handleClick={() => {
@@ -108,6 +109,7 @@ function Pricing() {
               <Card.Footer>
                 <small className="text-muted">
                   <MyButton
+                    className={styles.priceButton}
                     handleClick={() => {
                       setBooking(session.title);
                     }}

@@ -168,25 +168,40 @@
 }
 
 // Picture
-.picture {
-  max-height: 100%;
-  max-width: 100%;
+
+.pictureWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(249, 246, 246, 1);
+  z-index: 101;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
 }
 
 .pictureContainer {
   display: flex;
   align-items: center;
-  background: var(--white-color);
+  // background: var(--white-color);
   height: 97%;
   border-radius: var(--radius);
   padding: 0.3rem 0.3rem;
   text-align: center;
+  justify-content: center;
+}
+
+.picture {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 // Book
 .bookContainer {
   position: fixed;
-  z-index: 10;
+  z-index: 101;
   background: rgba(249, 246, 246, 0.7);
   width: 100%;
   height: 100%;
@@ -215,7 +230,7 @@
   width: 100%;
   height: 100%;
   background: rgba(249, 246, 246, 0.7);
-  z-index: 10;
+  z-index: 101;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -279,4 +294,8 @@
 
 .scrollButton:hover {
   color: var(--gray-light); /* Add a dark-grey background on hover */
+}
+
+.contactButton {
+  color: var(--gray-dark);
 }

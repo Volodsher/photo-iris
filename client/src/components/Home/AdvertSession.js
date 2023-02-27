@@ -31,10 +31,10 @@ export default function AdvertSession() {
       >
         Choose your photo session.
       </p>
-      <Link to="/gallery">
+      <Link to="/mygallery">
         <MyButton
           className={styles.advertSession}
-          value="Sessions"
+          value="Book"
           borderColor="--gray-dark"
         />
       </Link>

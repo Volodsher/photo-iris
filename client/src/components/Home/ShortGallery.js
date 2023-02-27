@@ -34,7 +34,7 @@ export default function ShortGallery() {
   return (
     <div className={styles.shortGalleryContainer}>
       <div className={styles.imageGrid}>{newGal}</div>
-      <Link to="/gallery">
+      <Link to="/mygallery">
         <MyButton
           className={styles.shortGalleryButton}
           value="More photos"

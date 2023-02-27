@@ -47,7 +47,7 @@ function Header(props) {
           </li>
           <li key="2">
             <NavLink
-              to="/gallery"
+              to="/mygallery"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               end
             >
@@ -136,7 +136,7 @@ function Header(props) {
               <NavLink to="/">Home</NavLink>
             </li>
             <li key="2" onClick={props.changeMenuStatus}>
-              <NavLink to="/gallery">Gallery</NavLink>
+              <NavLink to="/mygallery">Gallery</NavLink>
             </li>
             <li key="3" onClick={props.changeMenuStatus}>
               <NavLink to="/pricing">Pricing</NavLink>
