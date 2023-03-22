@@ -59,9 +59,26 @@ function Pricing() {
                 >
                   {session.about}
                 </Card.Text>
+                <Card.Text
+                  style={{ textAlign: 'left', whiteSpace: 'pre-wrap' }}
+                >
+                  <span style={{ fontWeight: 'bold' }}>Bonus: </span>
+                  {session.mustHave}
+                </Card.Text>
                 <Card.Text style={{ textAlign: 'left' }}>
                   {session.price}
                 </Card.Text>
+                {session.additional && (
+                  <Card.Text
+                    style={{
+                      textAlign: 'left',
+                      whiteSpace: 'pre-wrap',
+                      fontSize: '0.8rem',
+                    }}
+                  >
+                    {session.additional}
+                  </Card.Text>
+                )}
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">
@@ -101,6 +118,12 @@ function Pricing() {
                   style={{ textAlign: 'left', whiteSpace: 'pre-wrap' }}
                 >
                   {session.about}
+                </Card.Text>
+                <Card.Text
+                  style={{ textAlign: 'left', whiteSpace: 'pre-wrap' }}
+                >
+                  <span style={{ fontWeight: 'bold' }}>Bonus: </span>
+                  {session.mustHave}
                 </Card.Text>
                 <Card.Text style={{ textAlign: 'left' }}>
                   {session.price}

@@ -4,8 +4,10 @@ const auth = require('../../middleware/auth');
 
 const fs = require('fs');
 
-const mustHaveText =
+const mustHaveText1 =
   'HST is added separately from the price. Additional costs for make-up (at the request of the client), photo studio rentals, photo permits (if needed), costume rentals are NOT INCLUDED in a price. We require a 10% deposit to book your date.';
+
+const mustHaveText2 = 'printed photo enlargement on premium photo paper';
 
 const initialSessions = [
   {
@@ -16,8 +18,8 @@ const initialSessions = [
     priceLink: '/pricing#family',
     image: '/sessions/family.jpg',
     price: '195$',
-    about: `1hour session \n25 edited and retouched images`,
-    mustHave: '',
+    about: `1 hour session \n25 edited and retouched high resolution digital images`,
+    mustHave: ` 1 ${mustHaveText2}`,
     images: [],
   },
   {
@@ -65,8 +67,9 @@ const initialSessions = [
     priceLink: '/pricing#kids',
     image: '/sessions/kids.jpg',
     price: '150$',
-    about: '45 min session \n15 edited and retouched images',
-    mustHave: '',
+    about:
+      '45 min session \n15 edited and retouched high resolution digital images',
+    mustHave: ` 1 ${mustHaveText2}`,
     images: [],
     last: true,
   },
@@ -78,8 +81,9 @@ const initialSessions = [
     priceLink: '/pricing#lovestory',
     image: '/sessions/lovestory.jpg',
     price: '195$',
-    about: '1 hour session \n25 edited and retouched images',
-    mustHave: '',
+    about:
+      '1 hour session \n25 edited and retouched high resolution digital images',
+    mustHave: ` 1 ${mustHaveText2}`,
     images: [],
     last: true,
   },
@@ -91,8 +95,9 @@ const initialSessions = [
     priceLink: '/pricing#maternity',
     image: '/sessions/maternity.jpg',
     price: '195$',
-    about: '1 hour session \n25 edited and retouched images',
-    mustHave: '',
+    about:
+      '1 hour session \n25 edited and retouched high resolution digital images',
+    mustHave: ` 1 ${mustHaveText2}`,
     images: [],
     last: true,
   },
@@ -104,8 +109,9 @@ const initialSessions = [
     priceLink: '/pricing#portrait',
     image: '/sessions/portrait.jpg',
     price: '150$',
-    about: '45 min session \n10 edited and retouched images',
-    mustHave: '',
+    about:
+      '45 min session \n10 edited and retouched high resolution digital images',
+    mustHave: ` 1 ${mustHaveText2}`,
     images: [],
     last: true,
   },
@@ -117,8 +123,8 @@ const initialSessions = [
     priceLink: '/pricing#mini',
     image: '/sessions/mini.jpg',
     price: '120$',
-    about: '30 min \n5 edited and retouched images',
-    mustHave: '',
+    about: '30 min \n5 edited and retouched high resolution digital images',
+    mustHave: ` 1 ${mustHaveText2}`,
     images: [],
     last: true,
   },
@@ -130,8 +136,8 @@ const initialSessions = [
     priceLink: '/pricing#smileandpaws',
     image: '/sessions/smileandpaws.jpg',
     price: '120$',
-    about: '30 min \n5 edited and retouched images',
-    mustHave: '',
+    about: '30 min \n5 edited and retouched high resolution digital images',
+    mustHave: ` 1 ${mustHaveText2}`,
     images: [],
     last: true,
   },
@@ -143,8 +149,9 @@ const initialSessions = [
     priceLink: '/pricing#business',
     image: '/sessions/business.jpg',
     price: '250$',
-    about: '1,5 hours session \n30 edited and retouched images',
-    mustHave: '',
+    about:
+      '1,5 hours session \n30 edited and retouched high resolution digital images',
+    mustHave: ` 1 ${mustHaveText2}`,
     images: [],
     last: true,
   },
@@ -156,8 +163,11 @@ const initialSessions = [
     priceLink: '/pricing#wedding',
     image: '/sessions/wedding.jpg',
     price: '450$',
-    about: '3 hours session \n50-75 edited and retouched images',
-    mustHave: '',
+    about:
+      '3 hours session \n20-40* edited and retouched high resolution digital images',
+    additional:
+      '* 20 high resolution digital images (Photoshoot on a sailboat)  \n  40 high resolution digital images (On-location)',
+    mustHave: ` 3 ${mustHaveText2}`,
     images: [],
     last: true,
   },
@@ -169,8 +179,9 @@ const initialSessions = [
     priceLink: '/pricing#food',
     image: '/sessions/food.jpg',
     price: '150$',
-    about: '45 min session \n 15 edited and retouched images',
-    mustHave: '',
+    about:
+      '45 min session \n 15 edited and retouched high resolution digital images',
+    mustHave: ` 1 ${mustHaveText2}`,
     images: [],
     last: true,
   },
