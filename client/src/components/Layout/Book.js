@@ -17,6 +17,7 @@ function Book(props) {
           session={props.session}
           handleClick={props.handleClick}
           handleCancel={props.handleCancel}
+          xmark={true}
         />
       </div>
     </aside>

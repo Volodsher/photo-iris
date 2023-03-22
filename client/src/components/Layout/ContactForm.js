@@ -8,7 +8,7 @@ import styles from './Layout.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const initialValues = {
+const initialMessage = {
   guestName: '',
   guestEmail: '',
   guestPhone: '',
@@ -16,13 +16,47 @@ const initialValues = {
   textMessage: '',
 };
 
-function ContactForm(props) {
+function ContactForm({ session, handleClick, handleCancel, xmark }) {
   const [message, setMessage] = useState({
-    ...initialValues,
-    session: props.session,
+    ...initialMessage,
+    session: session,
   });
-
+  const [errors, setErrors] = useState({ ...initialMessage });
   const [checked, setChecked] = useState(false);
+
+  const validate = (fieldValues = message) => {
+    let newErrors = { ...errors };
+
+    if ('guestName' in fieldValues) {
+      newErrors.guestName = fieldValues.guestName
+        ? ''
+        : 'This field is required';
+    }
+
+    if ('guestEmail' in fieldValues) {
+      newErrors.guestEmail = fieldValues.guestEmail
+        ? ''
+        : 'This field is required';
+      if (fieldValues.guestEmail)
+        newErrors.guestEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(
+          fieldValues.guestEmail
+        )
+          ? ''
+          : 'Email is not valid.';
+    }
+
+    if ('guestPhone' in fieldValues) {
+      newErrors.guestPhone = '';
+    }
+
+    if ('textMessage' in fieldValues)
+      newErrors.textMessage =
+        fieldValues.textMessage.length !== 0 ? '' : 'This field is required';
+
+    setErrors({
+      ...newErrors,
+    });
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,13 +64,36 @@ function ContactForm(props) {
       ...message,
       [name]: value,
     });
+
+    validate({ [name]: value });
+  };
+
+  const handleSuccess = () => {
+    setMessage({
+      ...initialMessage,
+    });
+  };
+
+  const formIsValid = (fieldValues = message) => {
+    const isValid =
+      fieldValues.guestName &&
+      fieldValues.guestEmail &&
+      fieldValues.textMessage &&
+      Object.values(errors).every((error) => error === '');
+
+    return isValid;
   };
 
   const handleAgreement = () => {
     setChecked(!checked);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    validate();
+    const isValid =
+      Object.values(errors).every((error) => error === '') && formIsValid();
 
     const sendMessage = async (payload) => {
       const config = {
@@ -48,25 +105,31 @@ function ContactForm(props) {
       try {
         const res = await axios.post('/api/mail', payload, config);
         alert(res.data);
-        props.handleClick && props.handleClick();
+
+        setMessage({
+          ...message,
+          guestName: '',
+          guestEmail: '',
+          guestPhone: '',
+          session: 'Family Fun',
+          textMessage: '',
+        });
+
+        setChecked(false);
+        handleClick && handleClick();
       } catch (error) {
-        alert(error.message);
-        props.handleClick && props.handleClick();
+        error.response.data.errors.map((er) =>
+          setErrors({ ...errors, [er.param]: er.msg })
+        );
+        alert(error.response.data.errors.map((al) => al.msg));
+        // alert(error.message);
+        // handleClick && handleClick();
       }
     };
 
-    sendMessage(message);
-
-    setMessage({
-      ...message,
-      guestName: '',
-      guestEmail: '',
-      guestPhone: '',
-      session: 'Family Fun',
-      textMessage: '',
-    });
-
-    setChecked(false);
+    if (isValid) {
+      sendMessage(message);
+    }
   };
 
   return (
@@ -78,21 +141,24 @@ function ContactForm(props) {
       }}
       onSubmit={handleSubmit}
     >
-      <button
-        onClick={props.handleCancel}
-        type="button"
-        style={{
-          display: 'block',
-          margin: '0',
+      {xmark && (
+        <button
+          onClick={handleCancel}
+          type="button"
+          style={{
+            display: 'block',
+            margin: '0',
 
-          lineHeight: '0',
-          padding: '0 5px',
-          boxShadow: 'none',
-          float: 'right',
-        }}
-      >
-        <FontAwesomeIcon color="gray" icon={faXmark} size="xl" />
-      </button>
+            lineHeight: '0',
+            padding: '0 5px',
+            boxShadow: 'none',
+            float: 'right',
+          }}
+        >
+          <FontAwesomeIcon color="gray" icon={faXmark} size="xl" />
+        </button>
+      )}
+
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
         Choose a session:
         <Form.Select
@@ -115,7 +181,10 @@ function ContactForm(props) {
         </Form.Select>
       </label>
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
-        Your Name: *
+        Your Name: *{' '}
+        {errors.guestName && (
+          <span style={{ color: 'red' }}>Name is required</span>
+        )}
         <input
           name="guestName"
           value={message.guestName}
@@ -127,11 +196,14 @@ function ContactForm(props) {
           style={{
             width: '100%',
           }}
-          required
+          // required
         />
       </label>
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
-        Your Email: *
+        Your Email: *{' '}
+        {errors.guestEmail && (
+          <span style={{ color: 'red' }}>Email is required</span>
+        )}
         <input
           name="guestEmail"
           cols="30"
@@ -143,11 +215,14 @@ function ContactForm(props) {
           style={{
             width: '100%',
           }}
-          required
+          // required
         />
       </label>
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
-        Your Phone:
+        Your Phone:{' '}
+        {errors.guestPhone && (
+          <span style={{ color: 'red' }}>Only numbers</span>
+        )}
         <input
           name="guestPhone"
           cols="30"
@@ -162,7 +237,10 @@ function ContactForm(props) {
         />
       </label>
       <label className="mb-3" style={{ display: 'block', marginTop: '1.5rem' }}>
-        Message: *
+        Message: *{' '}
+        {errors.textMessage && (
+          <span style={{ color: 'red' }}>Text is required</span>
+        )}
         <textarea
           name="textMessage"
           cols="30"
@@ -173,7 +251,7 @@ function ContactForm(props) {
           style={{
             width: '100%',
           }}
-          required
+          // required
         />
       </label>
       <div>
@@ -194,6 +272,14 @@ function ContactForm(props) {
           the purpose of communication regarding my inquiry.
         </label>
       </div>
+
+      {(errors.guestName !== '' ||
+        errors.guestEmail !== '' ||
+        errors.guestPhone !== '' ||
+        errors.textMessage !== '') && (
+        <p style={{ color: 'red' }}> Check the form</p>
+      )}
+
       <div style={{ width: '100%', textAlign: 'center', margin: '2rem 0' }}>
         <MyButton
           className={styles.contactButton}

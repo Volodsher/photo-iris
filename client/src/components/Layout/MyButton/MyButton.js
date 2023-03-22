@@ -1,22 +1,30 @@
 import PropTypes from 'prop-types';
 
-export default function MyButton(props) {
+export default function MyButton({
+  type,
+  value,
+  color,
+  className,
+  handleClick,
+  form,
+  borderColor,
+}) {
   return (
     <button
-      type={props.type}
-      value={props.value}
+      type={type}
+      value={value}
       style={{
-        border: `0.1rem solid var(${props.borderColor})`,
+        border: `0.1rem solid var(${borderColor})`,
         borderRadius: '0.4rem',
         padding: `0.5rem 1rem`,
-        // padding: `${props.padding} ${props.padding}`, // to overwrite padding
-        color: `var(${props.color})`,
+        // padding: `${padding} ${padding}`, // to overwrite padding
+        color: `var(${color})`,
       }}
-      className={props.className}
-      onClick={props.handleClick}
-      form={props.form}
+      className={className}
+      onClick={handleClick}
+      form={form}
     >
-      {props.value}
+      {value}
     </button>
   );
 }
