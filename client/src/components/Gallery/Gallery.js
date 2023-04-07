@@ -70,7 +70,7 @@ export default function Gallery() {
           style={{
             position: 'fixed',
             zIndex: '102',
-            color: 'var(--red-light)',
+            color: 'var(--primary-color)',
             cursor: 'pointer',
             top: '1rem',
             right: '1rem',

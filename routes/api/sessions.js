@@ -185,6 +185,19 @@ const initialSessions = [
     images: [],
     last: true,
   },
+  {
+    key: 16,
+    id: 'pet',
+    title: 'Pet Photography',
+    link: '/mygallery#pet',
+    priceLink: '/pricing#pet',
+    image: '/sessions/pet.jpg',
+    price: '120$',
+    about: '30 min \n5 edited and retouched high resolution digital images',
+    mustHave: ` 1 ${mustHaveText2}`,
+    images: [],
+    last: true,
+  },
 ];
 
 // old stuff

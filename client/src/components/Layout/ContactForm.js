@@ -177,6 +177,7 @@ function ContactForm({ session, handleClick, handleCancel, xmark }) {
           <option value="Business">Business</option>
           <option value="Wedding">Wedding</option>
           <option value="Food Photography">Food Photography</option>
+          <option value="Pet Photography">Pet Photography</option>
           <option value="Other">Other</option>
         </Form.Select>
       </label>
