@@ -24,7 +24,7 @@ function Header(props) {
           display: 'flex',
           justifyContent: 'center',
           gap: '5rem',
-          marginBottom: '-3rem',
+          marginBottom: '-2.5rem',
           padding: '0 1rem',
           lineHeight: '0.8',
         }}

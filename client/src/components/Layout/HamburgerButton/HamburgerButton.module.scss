@@ -1,51 +1,52 @@
 .hamburgerMenuButton {
-    display: none;
-    justify-self: end;
-    width: 22px;
-    margin-right: 1rem;
-  }
+  display: none;
+  justify-self: end;
+  width: 22px;
+  // margin-right: 1rem;
+  margin-top: 1rem;
+}
 
-  .firstLine {
-    height: 3px;
-    width: 100%;
-    border-radius: 2px;
-    background-color: rgb(32, 31, 31);
-    transform-origin: left;
-    transition: 0.5s;
-  }
+.firstLine {
+  height: 3px;
+  width: 100%;
+  border-radius: 2px;
+  background-color: rgb(32, 31, 31);
+  transform-origin: left;
+  transition: 0.5s;
+}
 
-  .firstLineAngle {
-    transform: rotate(45deg);
-  }
+.firstLineAngle {
+  transform: rotate(45deg);
+}
 
-  .secondLine {
-    height: 3px;
-    width: 22px;
-    border-radius: 2px;
-    background-color: rgb(32, 31, 31);
-    margin: 5px 0 5px 0;
-    transition: 0.5s;
-  }
+.secondLine {
+  height: 3px;
+  width: 22px;
+  border-radius: 2px;
+  background-color: rgb(32, 31, 31);
+  margin: 5px 0 5px 0;
+  transition: 0.5s;
+}
 
-  .secondLineAngle {
-    opacity: 0;
-  }
+.secondLineAngle {
+  opacity: 0;
+}
 
-  .thirdLine {
-    height: 3px;
-    width: 22px;
-    border-radius: 2px;
-    background-color: rgb(32, 31, 31);
-    transition: 0.5s;
-    transform-origin: left;
-  }
-  
-  .thirdLineAngle {
-    transform: rotate(-45deg);
-  }
+.thirdLine {
+  height: 3px;
+  width: 22px;
+  border-radius: 2px;
+  background-color: rgb(32, 31, 31);
+  transition: 0.5s;
+  transform-origin: left;
+}
 
-  @media (max-width: 800px) {
-    .hamburgerMenuButton {
-      display: block;
-    }
+.thirdLineAngle {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 800px) {
+  .hamburgerMenuButton {
+    display: block;
   }
+}

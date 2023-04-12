@@ -165,7 +165,7 @@ function ContactForm({ session, handleClick, handleCancel, xmark }) {
           name="session"
           value={message.session}
           onChange={handleChange}
-          style={{ margin: '0.5rem 0' }}
+          style={{ margin: '0.5rem 0', borderRadius: '0', width: '100%' }}
         >
           <option value="Family Fun">Family Fun</option>
           <option value="Kids' Adventures">Kids' Celebrations</option>
@@ -183,9 +183,6 @@ function ContactForm({ session, handleClick, handleCancel, xmark }) {
       </label>
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
         Your Name: *{' '}
-        {errors.guestName && (
-          <span style={{ color: 'red' }}>Name is required</span>
-        )}
         <input
           name="guestName"
           value={message.guestName}
@@ -199,12 +196,12 @@ function ContactForm({ session, handleClick, handleCancel, xmark }) {
           }}
           // required
         />
+        {errors.guestName && (
+          <span style={{ color: 'red' }}>Name is required</span>
+        )}
       </label>
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
         Your Email: *{' '}
-        {errors.guestEmail && (
-          <span style={{ color: 'red' }}>Email is required</span>
-        )}
         <input
           name="guestEmail"
           cols="30"
@@ -218,12 +215,12 @@ function ContactForm({ session, handleClick, handleCancel, xmark }) {
           }}
           // required
         />
+        {errors.guestEmail && (
+          <span style={{ color: 'red' }}>Email is required</span>
+        )}
       </label>
       <label style={{ display: 'block', marginTop: '1.5rem' }}>
         Your Phone:{' '}
-        {errors.guestPhone && (
-          <span style={{ color: 'red' }}>Only numbers</span>
-        )}
         <input
           name="guestPhone"
           cols="30"
@@ -236,12 +233,12 @@ function ContactForm({ session, handleClick, handleCancel, xmark }) {
             width: '100%',
           }}
         />
+        {errors.guestPhone && (
+          <span style={{ color: 'red' }}>Only numbers</span>
+        )}
       </label>
       <label className="mb-3" style={{ display: 'block', marginTop: '1.5rem' }}>
         Message: *{' '}
-        {errors.textMessage && (
-          <span style={{ color: 'red' }}>Text is required</span>
-        )}
         <textarea
           name="textMessage"
           cols="30"
@@ -254,6 +251,9 @@ function ContactForm({ session, handleClick, handleCancel, xmark }) {
           }}
           // required
         />
+        {errors.textMessage && (
+          <span style={{ color: 'red' }}>Text is required</span>
+        )}
       </label>
       <div>
         <label>
