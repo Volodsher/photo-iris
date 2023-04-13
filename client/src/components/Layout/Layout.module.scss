@@ -1,11 +1,11 @@
 // header
 
 .headerWrapper {
-    border-bottom: 0.3rem solid var(--primary-color);
+  border-bottom: 0.3rem solid var(--primary-color);
 
-    h1 {
-      text-shadow: 2px 2px #e3c193;
-    }
+  h1 {
+    text-shadow: 2px 2px #e3c193;
+  }
 }
 .header {
   // display: flex;
@@ -37,7 +37,7 @@
   list-style-type: none;
   background-color: none;
   margin: 0;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 0.8rem;
@@ -91,13 +91,14 @@
     display: block;
   }
 
-  .menuListFirst, .menuListSecond {
+  .menuListFirst,
+  .menuListSecond {
     display: none;
   }
 
   .menuList {
     flex-direction: column;
-    height:100vw;
+    height: 100vw;
     justify-content: space-around;
     font-size: 1.5rem;
     font-weight: bold;
@@ -120,11 +121,11 @@
     background-color: var(--red-light);
     transition: 0.5s;
   }
-  
+
   .sideMenuOpen {
     transform: translate3d(100%, 0, 0);
   }
-  
+
   .shadow {
     z-index: 2;
     display: block;
@@ -137,7 +138,7 @@
     opacity: 0.5;
     transition: 0.5s;
   }
-  
+
   .shadowOpen {
     transform: translate3d(-100%, 0, 0);
   }
@@ -208,7 +209,6 @@
   top: 0;
   left: 0;
   overflow-y: scroll;
-
 }
 
 .book {
@@ -219,8 +219,6 @@
   padding: 1rem 1rem;
   margin: 0 auto;
 }
-
-
 
 // Confirm
 .confirmContainer {
@@ -298,4 +296,8 @@
 
 .contactButton {
   color: var(--gray-dark);
+}
+
+select {
+  -webkit-appearance: none;
 }

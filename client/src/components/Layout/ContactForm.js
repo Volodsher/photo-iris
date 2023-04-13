@@ -241,15 +241,15 @@ function ContactForm({ session, handleClick, handleCancel, xmark }) {
         Message: *{' '}
         <textarea
           name="textMessage"
-          cols="30"
-          rows="10"
+          // cols="30"
+          rows="3"
           placeholder="Write a message"
           value={message.textMessage}
           onChange={handleChange}
           style={{
             width: '100%',
           }}
-          // required
+          required
         />
         {errors.textMessage && (
           <span style={{ color: 'red' }}>Text is required</span>
