@@ -10,6 +10,7 @@ import { faCamera, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Gallery() {
   const { sessions, loading } = useSelector((store) => store.session);
+  const [newSessions, setNewSessions] = useState(sessions);
   const [oneImageUrl, setOneImageUrl] = useState('');
   const [oneImage, setOneImage] = useState('');
   const [divHeight, setDivHeight] = useState(0);
@@ -44,20 +45,41 @@ export default function Gallery() {
   }, [galleryRef]);
 
   useEffect(() => {
-    if (sessions.length > 0) {
+    if (newSessions.length > 0) {
       const scroll = (id) => {
         const section = document.querySelector(`#${id}`);
         section.scrollIntoView({ block: 'start' });
       };
       if (
         !loading &&
-        sessions.length > 0 &&
+        newSessions.length > 0 &&
         window.location.href.split('#').length === 2
       ) {
         scroll(window.location.href.split('#')[1]);
       }
     }
-  }, [sessions, divHeight, location, loading]);
+  }, [newSessions, divHeight, location, loading]);
+
+  useEffect(() => {
+    if (window.location.href.includes('#')) {
+      const onlyIdSessions = sessions.filter((ses) => {
+        return (
+          ses.id.substring(0, 3) ===
+          window.location.href.split('#')[1].substring(0, 3)
+        );
+      });
+
+      const withougIdSessions = sessions.filter((ses) => {
+        return (
+          ses.id.substring(0, 3) !==
+          window.location.href.split('#')[1].substring(0, 3)
+        );
+      });
+      setNewSessions([...onlyIdSessions, ...withougIdSessions]);
+    }
+  }, [sessions]);
+
+  useEffect(() => console.log(newSessions), [newSessions]);
 
   return (
     <div
@@ -135,10 +157,10 @@ export default function Gallery() {
           <FontAwesomeIcon style={{ cursor: 'pointer' }} icon={faXmark} />
         </div>
       </div>
-      {sessions.length === 0 ? (
+      {newSessions.length === 0 ? (
         <Spinner />
       ) : (
-        sessions.map((session) => (
+        newSessions.map((session) => (
           <div key={session.id} id={session.id}>
             <h1 style={{ margin: '3rem 0' }}>{session.title}</h1>
             <div key={session.id} className={styles.galleryImagesBox}>
