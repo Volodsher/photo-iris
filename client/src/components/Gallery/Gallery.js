@@ -10,7 +10,7 @@ import { faCamera, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Gallery() {
   const { sessions, loading } = useSelector((store) => store.session);
-  const [newSessions, setNewSessions] = useState(sessions);
+  const [newSessions, setNewSessions] = useState([]);
   const [oneImageUrl, setOneImageUrl] = useState('');
   const [oneImage, setOneImage] = useState('');
   const [divHeight, setDivHeight] = useState(0);
@@ -76,10 +76,10 @@ export default function Gallery() {
         );
       });
       setNewSessions([...onlyIdSessions, ...withougIdSessions]);
+    } else {
+      setNewSessions(sessions);
     }
   }, [sessions]);
-
-  useEffect(() => console.log(newSessions), [newSessions]);
 
   return (
     <div
