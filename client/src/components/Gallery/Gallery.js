@@ -58,7 +58,7 @@ export default function Gallery() {
         scroll(window.location.href.split('#')[1]);
       }
     }
-  }, [newSessions, divHeight, location, loading]);
+  }, [newSessions, location, loading]);
 
   useEffect(() => {
     if (window.location.href.includes('#')) {
