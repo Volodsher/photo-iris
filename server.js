@@ -20,28 +20,28 @@ const con = mysql.createConnection({
 
 // to work with DB
 
-con.connect(function (err) {
-  if (err) throw err;
-  console.log('Connected!');
-
-  const sql = 'INSERT INTO customers (name, adress) values ("Iryna", "Ottawa")';
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log('Added  ');
-  });
-});
-
 // con.connect(function (err) {
 //   if (err) throw err;
 //   console.log('Connected!');
 
-//   const sql =
-//     'CREATE TABLE customers3 (name VARCHAR(255), adress VARCHAR(255))';
+//   const sql = 'INSERT INTO customers (name, adress) values ("Iryna", "Ottawa")';
 //   con.query(sql, function (err, result) {
 //     if (err) throw err;
-//     console.log('Table created');
+//     console.log('Added  ');
 //   });
 // });
+
+con.connect(function (err) {
+  if (err) throw err;
+  console.log('Connected!');
+
+  const sql =
+    'CREATE TABLE users1 (name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))';
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log('Table created');
+  });
+});
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
