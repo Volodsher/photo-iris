@@ -1,22 +1,24 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
-const dotenv = require('dotenv');
-dotenv.config();
+const connectDBMySQL = require('./config/dbMySQL');
 
-const mysql = require('mysql');
+// const dotenv = require('dotenv');
+// dotenv.config();
+
+// const mysql = require('mysql');
 
 const app = express();
 app.use(cors());
 connectDB();
 
-const con = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  port: process.env.DB_PORT,
-  database: process.env.DB,
-});
+// const con = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASS,
+//   port: process.env.DB_PORT,
+//   database: process.env.DB,
+// });
 
 // to work with DB
 
@@ -31,16 +33,16 @@ const con = mysql.createConnection({
 //   });
 // });
 
-con.connect(function (err) {
+connectDBMySQL.connect(function (err) {
   if (err) throw err;
   console.log('Connected!');
 
-  const sql =
-    'CREATE TABLE users1 (name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))';
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log('Table created');
-  });
+  // const sql =
+  //   'CREATE TABLE users1 (name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))';
+  // con.query(sql, function (err, result) {
+  //   if (err) throw err;
+  //   console.log('Table created');
+  // });
 });
 
 // app.use(bodyParser.urlencoded({ extended: false }));
