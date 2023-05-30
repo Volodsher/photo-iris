@@ -74,6 +74,24 @@ router.post(
           res.json({ token });
         }
       );
+
+      connectDBMySQL.getConnection((err, connection) => {
+        if (err) {
+          console.error(err);
+        }
+
+        const sql = 'SELECT * FROM users'; // Example query
+        connection.query(sql, (err, results) => {
+          connection.release(); // Release the connection back to the pool
+
+          if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Database error' });
+          }
+
+          console.log(results);
+        });
+      });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
