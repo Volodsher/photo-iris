@@ -7,18 +7,7 @@ const { check, validationResult } = require('express-validator');
 const config = require('config');
 const User = require('../../models/User');
 const normalize = require('normalize-url');
-
-const dotenv = require('dotenv');
-dotenv.config();
-const mysql = require('mysql');
-
-// const con = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASS,
-//   port: process.env.DB_PORT,
-//   database: process.env.DB,
-// });
+const connectDBMySQL = require('../../config/dbMySQL');
 
 // @route    POST api/users
 // @desc     Register user
@@ -75,8 +64,6 @@ router.post(
           id: user.id,
         },
       };
-
-      console.log(payload);
 
       jwt.sign(
         payload,

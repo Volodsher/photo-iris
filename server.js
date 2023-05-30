@@ -12,6 +12,24 @@ const app = express();
 app.use(cors());
 connectDB();
 
+connectDBMySQL.getConnection((err, connection) => {
+  if (err) {
+    console.error(err);
+  }
+
+  const sql = 'SELECT * FROM users'; // Example query
+  connection.query(sql, (err, results) => {
+    connection.release(); // Release the connection back to the pool
+
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    console.log(results);
+  });
+});
+
 // const con = mysql.createConnection({
 //   host: process.env.DB_HOST,
 //   user: process.env.DB_USER,
@@ -33,17 +51,17 @@ connectDB();
 //   });
 // });
 
-connectDBMySQL.connect(function (err) {
-  if (err) throw err;
-  console.log('Connected!');
+// connectDBMySQL.getConnection(function (err) {
+//   if (err) throw err;
+//   console.log('Connected!');
 
-  // const sql =
-  //   'CREATE TABLE users1 (name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))';
-  // con.query(sql, function (err, result) {
-  //   if (err) throw err;
-  //   console.log('Table created');
-  // });
-});
+//   // const sql =
+//   //   'CREATE TABLE users1 (name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))';
+//   // con.query(sql, function (err, result) {
+//   //   if (err) throw err;
+//   //   console.log('Table created');
+//   // });
+// });
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
