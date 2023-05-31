@@ -31,6 +31,30 @@ router.post(
     try {
       let user = await User.findOne({ $or: [{ name }, { email }] });
 
+      connectDBMySQL.getConnection((err, connection) => {
+        if (err) {
+          console.error(err);
+        }
+
+        const sql = `SELECT 1 FROM users WHERE name = '${name}' OR email = '${email}' LIMIT 1;`;
+
+        connection.query(sql, (err, results) => {
+          connection.release(); // Release the connection back to the pool
+
+          if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Database error' });
+          }
+
+          // console.log(results);
+          if (results === 1) {
+            return res.status(400).json({
+              errors: [{ msg: 'User with such name or email already exists' }],
+            });
+          }
+        });
+      });
+
       if (user) {
         return res.status(400).json({
           errors: [{ msg: 'User with such name or email already exists' }],
