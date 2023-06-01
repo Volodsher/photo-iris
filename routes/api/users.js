@@ -46,8 +46,8 @@ router.post(
             return res.status(500).json({ error: 'Database error' });
           }
 
-          // console.log(results);
-          if (results === 1) {
+          console.log(results);
+          if (results) {
             return res.status(400).json({
               errors: [{ msg: 'User with such name or email already exists' }],
             });
@@ -104,17 +104,24 @@ router.post(
           console.error(err);
         }
 
-        const sql = 'SELECT * FROM users'; // Example query
-        connection.query(sql, (err, results) => {
-          connection.release(); // Release the connection back to the pool
+        // const sql = `INSERT INTO users ('${user.name}', '${user.email}', '${user.password}') VALUES (?, ?)`;
+        // const sql = `INSERT INTO users(id, name, email, password) VALUES (1, '${user.name}', '${user.email}', '${user.password}')`;
+        const sql = `INSERT INTO users(id, name, email, password) VALUES (?, ?, ?, ?)`;
 
-          if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Database error' });
+        connection.query(
+          sql,
+          [1, user.name, user.email, user.password],
+          (err, results) => {
+            connection.release(); // Release the connection back to the pool
+
+            if (err) {
+              console.error(err);
+              return res.status(500).json({ error: 'Database error' });
+            }
+
+            console.log(results);
           }
-
-          console.log(results);
-        });
+        );
       });
     } catch (err) {
       console.error(err.message);
