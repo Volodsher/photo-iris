@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 const config = require('config');
 const connectDBMySQL = require('../../config/dbMySQL');
+const { v4: uuidv4 } = require('uuid');
 
 // @route    POST api/users
 // @desc     Register user
@@ -42,11 +43,9 @@ router.post(
 
         if (rows.length > 0) {
           connection.release();
-          return res
-            .status(400)
-            .json({
-              errors: [{ msg: 'User with such name or email already exists' }],
-            });
+          return res.status(400).json({
+            errors: [{ msg: 'User with such name or email already exists' }],
+          });
         }
 
         bcrypt.genSalt(10, (err, salt) => {
@@ -63,11 +62,13 @@ router.post(
               return res.status(500).json({ error: 'Server error' });
             }
 
+            const userId = uuidv4();
+
             const insertUserQuery =
-              'INSERT INTO users(name, email, password) VALUES (?, ?, ?)';
+              'INSERT INTO users(id, name, email, password) VALUES (?, ?, ?, ?)';
             connection.query(
               insertUserQuery,
-              [name, email, hashedPassword],
+              [userId, name, email, hashedPassword],
               (err, results) => {
                 connection.release();
 
@@ -75,8 +76,6 @@ router.post(
                   console.error(err);
                   return res.status(500).json({ error: 'Database error' });
                 }
-
-                const userId = results.insertId;
 
                 const payload = {
                   user: {
