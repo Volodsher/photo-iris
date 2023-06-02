@@ -13,6 +13,7 @@ const initialSessions = [
   {
     key: 1,
     id: 'family',
+    name: 'family',
     title: 'Family Fun',
     link: '/mygallery#family',
     priceLink: '/pricing#family',
@@ -25,6 +26,7 @@ const initialSessions = [
   {
     key: 2,
     id: 'famA',
+    name: 'famA',
     title: '',
     link: '/pricing#family',
     images: [],
@@ -32,6 +34,7 @@ const initialSessions = [
   {
     key: 3,
     id: 'famKr',
+    name: 'famKr',
     title: '',
     link: '/pricing#family',
     images: [],
@@ -39,6 +42,7 @@ const initialSessions = [
   {
     key: 4,
     id: 'famN',
+    name: 'famN',
     title: '',
     link: '/pricing#family',
     images: [],
@@ -46,6 +50,7 @@ const initialSessions = [
   {
     key: 5,
     id: 'famO',
+    name: 'famO',
     title: '',
     link: '/pricing#family',
     images: [],
@@ -53,6 +58,7 @@ const initialSessions = [
   {
     key: 6,
     id: 'famT',
+    name: 'famT',
     title: '',
     // link: '/pricing#family',
     priceLink: '/pricing#family',
@@ -62,6 +68,7 @@ const initialSessions = [
   {
     key: 7,
     id: 'kids',
+    name: 'kids',
     title: "Kids' Adventures",
     link: '/mygallery#kids',
     priceLink: '/pricing#kids',
@@ -76,6 +83,7 @@ const initialSessions = [
   {
     key: 8,
     id: 'lovestory',
+    name: 'lovestory',
     title: 'Love Story',
     link: '/mygallery#lovestory',
     priceLink: '/pricing#lovestory',
@@ -90,6 +98,7 @@ const initialSessions = [
   {
     key: 9,
     id: 'maternity',
+    name: 'maternity',
     title: 'Maternity',
     link: '/mygallery#maternity',
     priceLink: '/pricing#maternity',
@@ -104,6 +113,7 @@ const initialSessions = [
   {
     key: 10,
     id: 'portrait',
+    name: 'portrait',
     title: 'Portrait',
     link: '/mygallery#portrait',
     priceLink: '/pricing#portrait',
@@ -118,6 +128,7 @@ const initialSessions = [
   {
     key: 11,
     id: 'mini',
+    name: 'mini',
     title: 'Mini Session',
     link: '/mygallery#mini',
     priceLink: '/pricing#mini',
@@ -131,6 +142,7 @@ const initialSessions = [
   {
     key: 12,
     id: 'smileandpaws',
+    name: 'smileandpaws',
     title: 'Smile and Paws',
     link: '/mygallery#smileandpaws',
     priceLink: '/pricing#smileandpaws',
@@ -144,6 +156,7 @@ const initialSessions = [
   {
     key: 13,
     id: 'business',
+    name: 'business',
     title: 'Business',
     link: '/mygallery#business',
     priceLink: '/pricing#business',
@@ -158,6 +171,7 @@ const initialSessions = [
   {
     key: 14,
     id: 'wedding',
+    name: 'wedding',
     title: 'Wedding',
     link: '/mygallery#wedding',
     priceLink: '/pricing#wedding',
@@ -174,6 +188,7 @@ const initialSessions = [
   {
     key: 15,
     id: 'food',
+    name: 'food',
     title: 'Food Photography',
     link: '/mygallery#food',
     priceLink: '/pricing#food',
@@ -188,6 +203,7 @@ const initialSessions = [
   {
     key: 16,
     id: 'pet',
+    name: 'pet',
     title: 'Pet Photography',
     link: '/mygallery#pet',
     priceLink: '/pricing#pet',
