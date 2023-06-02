@@ -3,56 +3,13 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const connectDBMySQL = require('./config/dbMySQL');
 
-// const dotenv = require('dotenv');
-// dotenv.config();
-
-// const mysql = require('mysql');
-
 const app = express();
 app.use(cors());
 connectDB();
 
-// connectDBMySQL.getConnection((err, connection) => {
-//   if (err) {
-//     console.error(err);
-//   }
-
-//   const sql = 'SELECT * FROM users'; // Example query
-//   connection.query(sql, (err, results) => {
-//     connection.release(); // Release the connection back to the pool
-
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).json({ error: 'Database error' });
-//     }
-
-//     console.log(results);
-//   });
-// });
-
-// const con = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASS,
-//   port: process.env.DB_PORT,
-//   database: process.env.DB,
-// });
-
-// to work with DB
-
-// con.connect(function (err) {
-//   if (err) throw err;
-//   console.log('Connected!');
-
-//   const sql = 'INSERT INTO customers (name, adress) values ("Iryna", "Ottawa")';
-//   con.query(sql, function (err, result) {
-//     if (err) throw err;
-//     console.log('Added  ');
-//   });
-// });
-
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
+
 app.use(express.json());
 app.use(express.json({ extended: false }));
 app.use(express.static('uploads'));
