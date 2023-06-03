@@ -25,7 +25,7 @@ function Book(props) {
 }
 
 Book.propTypes = {
-  session: PropTypes.array,
+  session: PropTypes.string,
   handleClick: PropTypes.func,
   handleCancel: PropTypes.func,
 };
