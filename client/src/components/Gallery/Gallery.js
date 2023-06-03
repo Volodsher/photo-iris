@@ -46,8 +46,10 @@ export default function Gallery() {
 
   useEffect(() => {
     if (newSessions.length > 0) {
+      // const scroll = (id) => {
       const scroll = (id) => {
         const section = document.querySelector(`#${id}`);
+        // const section = document.querySelector(`#${name}`); - doesnt work with this attribute
         section.scrollIntoView({ block: 'start' });
       };
       if (
@@ -58,24 +60,29 @@ export default function Gallery() {
         scroll(window.location.href.split('#')[1]);
       }
     }
-  }, [newSessions, location, loading]);
+  }, [newSessions, divHeight, location, loading]);
 
   useEffect(() => {
     if (window.location.href.includes('#')) {
-      const onlyIdSessions = sessions.filter((ses) => {
+      // const onlyIdSessions = sessions.filter((ses) => {
+      const requestedSessions = sessions.filter((ses) => {
         return (
-          ses.id.substring(0, 3) ===
+          // ses.id.substring(0, 3) ===
+          ses.name.substring(0, 3) ===
           window.location.href.split('#')[1].substring(0, 3)
         );
       });
 
-      const withougIdSessions = sessions.filter((ses) => {
+      // const withougIdSessions = sessions.filter((ses) => {
+      const restSessions = sessions.filter((ses) => {
         return (
-          ses.id.substring(0, 3) !==
+          // ses.id.substring(0, 3) !==
+          ses.name.substring(0, 3) !==
           window.location.href.split('#')[1].substring(0, 3)
         );
       });
-      setNewSessions([...onlyIdSessions, ...withougIdSessions]);
+      // setNewSessions([...onlyIdSessions, ...withougIdSessions]);
+      setNewSessions([...requestedSessions, ...restSessions]);
     } else {
       setNewSessions(sessions);
     }
@@ -146,7 +153,7 @@ export default function Gallery() {
               if (el.title !== '') {
                 return (
                   <li key={el.id} onClick={openMenuGallery}>
-                    <Link to={`/mygallery#${el.id}`}>{el.title}</Link>
+                    <Link to={`/mygallery#${el.name}`}>{el.title}</Link>
                   </li>
                 );
               }
@@ -161,22 +168,27 @@ export default function Gallery() {
         <Spinner />
       ) : (
         newSessions.map((session) => (
-          <div key={session.id} id={session.id}>
+          // <div key={session.id} id={session.id}>
+          <div key={session.id} id={session.name}>
             <h1 style={{ margin: '3rem 0' }}>{session.title}</h1>
             <div key={session.id} className={styles.galleryImagesBox}>
               {session.images?.map((image, ind) => {
                 return [
                   <img
                     key={ind}
-                    src={`/gallery/${session.id}/${image}`}
+                    // src={`/gallery/${session.id}/${image}`}
+                    src={`/gallery/${session.name}/${image}`}
                     className={styles.galleryImage}
                     onClick={() => {
-                      handleOneImageUrl(`/gallery/${session.id}/${image}`);
-                      toggleOneImage(`${session.id}${image}`);
+                      // handleOneImageUrl(`/gallery/${session.id}/${image}`);
+                      handleOneImageUrl(`/gallery/${session.name}/${image}`);
+                      // toggleOneImage(`${session.id}${image}`);
+                      toggleOneImage(`${session.name}${image}`);
                     }}
                     alt={`one of ${session.title} session photo`}
                   />,
-                  oneImage === `${session.id}${image}` && (
+                  // oneImage === `${session.id}${image}` && (
+                  oneImage === `${session.name}${image}` && (
                     <Picture
                       key={session.id}
                       clearPicture={handleCleaarOneImageUrl}

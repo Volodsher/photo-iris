@@ -11,7 +11,7 @@ const mustHaveText2 = 'printed photo enlargement on premium photo paper';
 
 const initialSessions = [
   {
-    key: 1,
+    // key: 1,
     // id: 'family',
     id: 'qw',
     name: 'family',
@@ -25,7 +25,7 @@ const initialSessions = [
     images: [],
   },
   {
-    key: 2,
+    // key: 2,
     // id: 'famA',
     id: 'qwe',
     name: 'famA',
@@ -34,7 +34,7 @@ const initialSessions = [
     images: [],
   },
   {
-    key: 3,
+    // key: 3,
     // id: 'famKr',
     id: 'qwer',
     name: 'famKr',
@@ -43,7 +43,7 @@ const initialSessions = [
     images: [],
   },
   {
-    key: 4,
+    // key: 4,
     // id: 'famN',
     id: 'qwert',
     name: 'famN',
@@ -52,7 +52,7 @@ const initialSessions = [
     images: [],
   },
   {
-    key: 5,
+    // key: 5,
     // id: 'famO',
     id: 'qwerty',
     name: 'famO',
@@ -61,7 +61,7 @@ const initialSessions = [
     images: [],
   },
   {
-    key: 6,
+    // key: 6,
     // id: 'famT',
     id: 'qwertyu',
     name: 'famT',
@@ -72,7 +72,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 7,
+    // key: 7,
     // id: 'kids',
     id: 'qwertyui',
     name: 'kids',
@@ -88,7 +88,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 8,
+    // key: 8,
     // id: 'lovestory',
     id: 'qwertyuio',
     name: 'lovestory',
@@ -104,7 +104,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 9,
+    // key: 9,
     // id: 'maternity',
     id: 'qwertyuiop',
     name: 'maternity',
@@ -120,7 +120,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 10,
+    // key: 10,
     // id: 'portrait',
     id: 'qwertyuiop[',
     name: 'portrait',
@@ -136,7 +136,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 11,
+    // key: 11,
     // id: 'mini',
     id: 'qwertyuiop[]',
     name: 'mini',
@@ -151,7 +151,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 12,
+    // key: 12,
     // id: 'smileandpaws',
     id: 'qwertyuiop[]q',
     name: 'smileandpaws',
@@ -166,7 +166,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 13,
+    // key: 13,
     // id: 'business',
     id: 'qwertyuiop[]qw',
     name: 'business',
@@ -182,7 +182,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 14,
+    // key: 14,
     // id: 'wedding',
     id: 'qwertyuiop[]qwe',
     name: 'wedding',
@@ -200,7 +200,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 15,
+    // key: 15,
     // id: 'food',
     id: 'qwertyuiop[]qwer',
     name: 'food',
@@ -216,7 +216,7 @@ const initialSessions = [
     last: true,
   },
   {
-    key: 16,
+    // key: 16,
     // id: 'pet',
     id: 'qwertyuiop[]qwert',
     name: 'pet',
