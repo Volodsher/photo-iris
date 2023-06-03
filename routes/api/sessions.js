@@ -12,7 +12,8 @@ const mustHaveText2 = 'printed photo enlargement on premium photo paper';
 const initialSessions = [
   {
     key: 1,
-    id: 'family',
+    // id: 'family',
+    id: 'qw',
     name: 'family',
     title: 'Family Fun',
     link: '/mygallery#family',
@@ -25,7 +26,8 @@ const initialSessions = [
   },
   {
     key: 2,
-    id: 'famA',
+    // id: 'famA',
+    id: 'qwe',
     name: 'famA',
     title: '',
     link: '/pricing#family',
@@ -33,7 +35,8 @@ const initialSessions = [
   },
   {
     key: 3,
-    id: 'famKr',
+    // id: 'famKr',
+    id: 'qwer',
     name: 'famKr',
     title: '',
     link: '/pricing#family',
@@ -41,7 +44,8 @@ const initialSessions = [
   },
   {
     key: 4,
-    id: 'famN',
+    // id: 'famN',
+    id: 'qwert',
     name: 'famN',
     title: '',
     link: '/pricing#family',
@@ -49,7 +53,8 @@ const initialSessions = [
   },
   {
     key: 5,
-    id: 'famO',
+    // id: 'famO',
+    id: 'qwerty',
     name: 'famO',
     title: '',
     link: '/pricing#family',
@@ -57,7 +62,8 @@ const initialSessions = [
   },
   {
     key: 6,
-    id: 'famT',
+    // id: 'famT',
+    id: 'qwertyu',
     name: 'famT',
     title: '',
     // link: '/pricing#family',
@@ -67,7 +73,8 @@ const initialSessions = [
   },
   {
     key: 7,
-    id: 'kids',
+    // id: 'kids',
+    id: 'qwertyui',
     name: 'kids',
     title: "Kids' Adventures",
     link: '/mygallery#kids',
@@ -82,7 +89,8 @@ const initialSessions = [
   },
   {
     key: 8,
-    id: 'lovestory',
+    // id: 'lovestory',
+    id: 'qwertyuio',
     name: 'lovestory',
     title: 'Love Story',
     link: '/mygallery#lovestory',
@@ -97,7 +105,8 @@ const initialSessions = [
   },
   {
     key: 9,
-    id: 'maternity',
+    // id: 'maternity',
+    id: 'qwertyuiop',
     name: 'maternity',
     title: 'Maternity',
     link: '/mygallery#maternity',
@@ -112,7 +121,8 @@ const initialSessions = [
   },
   {
     key: 10,
-    id: 'portrait',
+    // id: 'portrait',
+    id: 'qwertyuiop[',
     name: 'portrait',
     title: 'Portrait',
     link: '/mygallery#portrait',
@@ -127,7 +137,8 @@ const initialSessions = [
   },
   {
     key: 11,
-    id: 'mini',
+    // id: 'mini',
+    id: 'qwertyuiop[]',
     name: 'mini',
     title: 'Mini Session',
     link: '/mygallery#mini',
@@ -141,7 +152,8 @@ const initialSessions = [
   },
   {
     key: 12,
-    id: 'smileandpaws',
+    // id: 'smileandpaws',
+    id: 'qwertyuiop[]q',
     name: 'smileandpaws',
     title: 'Smile and Paws',
     link: '/mygallery#smileandpaws',
@@ -155,7 +167,8 @@ const initialSessions = [
   },
   {
     key: 13,
-    id: 'business',
+    // id: 'business',
+    id: 'qwertyuiop[]qw',
     name: 'business',
     title: 'Business',
     link: '/mygallery#business',
@@ -170,7 +183,8 @@ const initialSessions = [
   },
   {
     key: 14,
-    id: 'wedding',
+    // id: 'wedding',
+    id: 'qwertyuiop[]qwe',
     name: 'wedding',
     title: 'Wedding',
     link: '/mygallery#wedding',
@@ -187,7 +201,8 @@ const initialSessions = [
   },
   {
     key: 15,
-    id: 'food',
+    // id: 'food',
+    id: 'qwertyuiop[]qwer',
     name: 'food',
     title: 'Food Photography',
     link: '/mygallery#food',
@@ -202,7 +217,8 @@ const initialSessions = [
   },
   {
     key: 16,
-    id: 'pet',
+    // id: 'pet',
+    id: 'qwertyuiop[]qwert',
     name: 'pet',
     title: 'Pet Photography',
     link: '/mygallery#pet',
@@ -246,7 +262,8 @@ const initialSessions = [
 router.get('/', (req, res) => {
   const sessions = initialSessions.map((session, ind) => {
     let images = fs
-      .readdirSync(`./uploads/gallery/${session.id}`)
+      // .readdirSync(`./uploads/gallery/${session.id}`)
+      .readdirSync(`./uploads/gallery/${session.name}`)
       .filter((file) => file !== '.DS_Store');
     return { ...session, images: images };
   });
