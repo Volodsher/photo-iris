@@ -7,74 +7,85 @@ import { useSelector } from 'react-redux';
 const shortSessionsInitial = [
   {
     column: 1,
-    number: 1,
-    id: 'kids',
-    key: 11,
+    // number: 1,
+    name: 'kids',
+    // id: 'kids',
+    // key: 11,
   },
   {
     column: 2,
-    number: 1,
-    id: 'family',
-    key: 21,
+    // number: 1,
+    name: 'family',
+    // id: 'family',
+    // key: 21,
   },
   {
     column: 1,
-    number: 2,
-    id: 'lovestory',
-    key: 12,
+    // number: 2,
+    name: 'lovestory',
+    // id: 'lovestory',
+    // key: 12,
   },
   {
     column: 2,
-    number: 2,
-    id: 'maternity',
-    key: 22,
+    // number: 2,
+    name: 'maternity',
+    // id: 'maternity',
+    // key: 22,
   },
   {
     column: 1,
-    number: 3,
-    id: 'mini',
-    key: 13,
+    // number: 3,
+    name: 'mini',
+    // id: 'mini',
+    // key: 13,
   },
   {
     column: 2,
-    number: 3,
-    id: 'portrait',
-    key: 23,
+    // number: 3,
+    name: 'portrait',
+    // id: 'portrait',
+    // key: 23,
   },
   {
     column: 1,
-    number: 4,
-    id: 'business',
-    key: 14,
+    // number: 4,
+    name: 'business',
+    // id: 'business',
+    // key: 14,
   },
   {
     column: 2,
-    number: 4,
-    id: 'smileandpaws',
-    key: 24,
+    // number: 4,
+    name: 'smileandpaws',
+    // id: 'smileandpaws',
+    // key: 24,
   },
   {
     column: 1,
-    number: 5,
-    id: 'food',
-    key: 15,
+    // number: 5,
+    name: 'food',
+    // id: 'food',
+    // key: 15,
   },
   {
     column: 2,
-    number: 5,
-    id: 'wedding',
-    key: 25,
+    // number: 5,
+    name: 'wedding',
+    // id: 'wedding',
+    // key: 25,
   },
 ];
 
 export default function ShortSession() {
   const { sessions, loading } = useSelector((store) => store.session);
-  const [shortSessions, setShortSessions] = useState(shortSessionsInitial);
+  const [shortSessions, setShortSessions] = useState([]);
 
   useEffect(() => {
     if (!loading) {
       const seseionsFromServer = shortSessionsInitial.map((el) => {
-        const elSession = sessions.find((session) => session.id === el.id);
+        // const elSession = sessions.find((session) => session.id === el.id);
+        const elSession = sessions.find((session) => session.name === el.name);
         return { ...el, ...elSession };
       });
       setShortSessions(seseionsFromServer);
@@ -100,7 +111,8 @@ export default function ShortSession() {
                 .map((session) => (
                   <Link
                     // key={session.number}
-                    key={session.key}
+                    // key={session.key}
+                    key={session.id}
                     to={session.link}
                     style={{ textDecoration: 'none' }}
                   >
@@ -118,7 +130,8 @@ export default function ShortSession() {
                 .filter((session, ind) => ind % 2 !== 0)
                 .map((session) => (
                   <Link
-                    key={session.number}
+                    // key={session.number}
+                    key={session.id}
                     to={session.link}
                     style={{ textDecoration: 'none' }}
                   >
