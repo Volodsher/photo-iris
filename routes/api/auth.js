@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const connectDBMySQL = require('../../config/dbMySQL');
 
 const User = require('../../models/User');
 
@@ -41,42 +42,112 @@ router.post(
     const { nameOrEmail, password } = req.body;
 
     try {
-      let user = await User.findOne({
-        $or: [{ email: nameOrEmail }, { name: nameOrEmail }],
+      // Mongoose
+      // let user = await User.findOne({
+      //   $or: [{ email: nameOrEmail }, { name: nameOrEmail }],
+      // });
+
+      connectDBMySQL.getConnection((err, connection) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: 'Database error' });
+        }
+
+        const checkUserQuery =
+          'SELECT * FROM users WHERE name = ? OR password = ? LIMIT 1';
+        connection.query(
+          checkUserQuery,
+          [nameOrEmail, password],
+          async (err, rows) => {
+            if (err) {
+              console.error(err);
+              connection.release();
+              return res.status(500).json({ error: 'Database error' });
+            }
+
+            let user; // Declare the user variable
+
+            if (rows.length > 0) {
+              user = rows[0]; // Assign the user data to the variable
+              console.log(user);
+              connection.release();
+            } else {
+              connection.release();
+              return res.status(404).json({ error: 'User not found' });
+            }
+
+            // Remaining code to validate the user and generate a JWT token
+            try {
+              if (!user) {
+                return res
+                  .status(400)
+                  .json({ errors: [{ msg: 'Invalid Credentials ' }] });
+              }
+
+              const isMatch = await bcrypt.compare(password, user.password);
+              console.log(isMatch);
+
+              if (!isMatch) {
+                return res
+                  .status(400)
+                  .json({ errors: [{ msg: 'Invalid Credentials' }] });
+              }
+
+              const payload = {
+                user: {
+                  id: user.id,
+                },
+              };
+
+              jwt.sign(
+                payload,
+                config.get('jwtSecret'),
+                { expiresIn: 36000 },
+                (err, token) => {
+                  if (err) throw err;
+                  res.json({ token });
+                }
+              );
+            } catch (error) {
+              console.log(error.message);
+              res.status(500).send('Server error');
+            }
+          }
+        );
       });
 
-      if (!user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials ' }] });
-      }
+      // if (!user) {
+      //   return res
+      //     .status(400)
+      //     .json({ errors: [{ msg: 'Invalid Credentials ' }] });
+      // }
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      // const isMatch = await bcrypt.compare(password, user.password);
 
-      if (!isMatch) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials' }] });
-      }
+      // if (!isMatch) {
+      //   return res
+      //     .status(400)
+      //     .json({ errors: [{ msg: 'Invalid Credentials' }] });
+      // }
 
-      const payload = {
-        user: {
-          id: user.id,
-        },
-      };
+      // const payload = {
+      //   user: {
+      //     id: user.id,
+      //   },
+      // };
 
-      jwt.sign(
-        payload,
-        config.get('jwtSecret'),
-        { expiresIn: 36000 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      // jwt.sign(
+      //   payload,
+      //   config.get('jwtSecret'),
+      //   { expiresIn: 36000 },
+      //   (err, token) => {
+      //     if (err) throw err;
+      //     res.json({ token });
+      //   }
+      // );
     } catch (error) {
       console.log(error.message);
-      res.status(500).send('Server error');
+      res.status(500).send('Server error last');
     }
   }
 );

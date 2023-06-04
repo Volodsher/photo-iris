@@ -11,8 +11,6 @@ const mustHaveText2 = 'printed photo enlargement on premium photo paper';
 
 const initialSessions = [
   {
-    // key: 1,
-    // id: 'family',
     id: 'qw',
     name: 'family',
     title: 'Family Fun',
@@ -25,8 +23,6 @@ const initialSessions = [
     images: [],
   },
   {
-    // key: 2,
-    // id: 'famA',
     id: 'qwe',
     name: 'famA',
     title: '',
@@ -34,8 +30,6 @@ const initialSessions = [
     images: [],
   },
   {
-    // key: 3,
-    // id: 'famKr',
     id: 'qwer',
     name: 'famKr',
     title: '',
@@ -43,8 +37,6 @@ const initialSessions = [
     images: [],
   },
   {
-    // key: 4,
-    // id: 'famN',
     id: 'qwert',
     name: 'famN',
     title: '',
@@ -52,8 +44,6 @@ const initialSessions = [
     images: [],
   },
   {
-    // key: 5,
-    // id: 'famO',
     id: 'qwerty',
     name: 'famO',
     title: '',
@@ -61,19 +51,14 @@ const initialSessions = [
     images: [],
   },
   {
-    // key: 6,
-    // id: 'famT',
     id: 'qwertyu',
     name: 'famT',
     title: '',
-    // link: '/pricing#family',
     priceLink: '/pricing#family',
     images: [],
     last: true,
   },
   {
-    // key: 7,
-    // id: 'kids',
     id: 'qwertyui',
     name: 'kids',
     title: "Kids' Adventures",
@@ -88,8 +73,6 @@ const initialSessions = [
     last: true,
   },
   {
-    // key: 8,
-    // id: 'lovestory',
     id: 'qwertyuio',
     name: 'lovestory',
     title: 'Love Story',
@@ -104,8 +87,6 @@ const initialSessions = [
     last: true,
   },
   {
-    // key: 9,
-    // id: 'maternity',
     id: 'qwertyuiop',
     name: 'maternity',
     title: 'Maternity',
@@ -120,8 +101,6 @@ const initialSessions = [
     last: true,
   },
   {
-    // key: 10,
-    // id: 'portrait',
     id: 'qwertyuiop[',
     name: 'portrait',
     title: 'Portrait',
@@ -136,8 +115,6 @@ const initialSessions = [
     last: true,
   },
   {
-    // key: 11,
-    // id: 'mini',
     id: 'qwertyuiop[]',
     name: 'mini',
     title: 'Mini Session',
@@ -151,8 +128,6 @@ const initialSessions = [
     last: true,
   },
   {
-    // key: 12,
-    // id: 'smileandpaws',
     id: 'qwertyuiop[]q',
     name: 'smileandpaws',
     title: 'Smile and Paws',
@@ -166,8 +141,6 @@ const initialSessions = [
     last: true,
   },
   {
-    // key: 13,
-    // id: 'business',
     id: 'qwertyuiop[]qw',
     name: 'business',
     title: 'Business',
@@ -182,8 +155,6 @@ const initialSessions = [
     last: true,
   },
   {
-    // key: 14,
-    // id: 'wedding',
     id: 'qwertyuiop[]qwe',
     name: 'wedding',
     title: 'Wedding',
@@ -200,8 +171,6 @@ const initialSessions = [
     last: true,
   },
   {
-    // key: 15,
-    // id: 'food',
     id: 'qwertyuiop[]qwer',
     name: 'food',
     title: 'Food Photography',
@@ -216,8 +185,6 @@ const initialSessions = [
     last: true,
   },
   {
-    // key: 16,
-    // id: 'pet',
     id: 'qwertyuiop[]qwert',
     name: 'pet',
     title: 'Pet Photography',
