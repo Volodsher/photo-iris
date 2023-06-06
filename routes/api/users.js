@@ -63,12 +63,14 @@ router.post(
             }
 
             const userId = uuidv4();
+            const date = new Date().toJSON().slice(0, 10);
+            console.log(date);
 
             const insertUserQuery =
-              'INSERT INTO users(id, name, email, password) VALUES (?, ?, ?, ?)';
+              'INSERT INTO users(id, name, email, password, date) VALUES (?, ?, ?, ?, ?)';
             connection.query(
               insertUserQuery,
-              [userId, name, email, hashedPassword],
+              [userId, name, email, hashedPassword, date],
               (err, results) => {
                 connection.release();
 

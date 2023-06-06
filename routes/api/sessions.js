@@ -4,10 +4,7 @@ const auth = require('../../middleware/auth');
 
 const fs = require('fs');
 
-const mustHaveText1 =
-  'HST is added separately from the price. Additional costs for make-up (at the request of the client), photo studio rentals, photo permits (if needed), costume rentals are NOT INCLUDED in a price. We require a 10% deposit to book your date.';
-
-const mustHaveText2 = 'printed photo enlargement on premium photo paper';
+const commonSessionsText = 'printed photo enlargement on premium photo paper';
 
 const initialSessions = [
   {
@@ -19,7 +16,7 @@ const initialSessions = [
     image: '/sessions/family.jpg',
     price: '195$',
     about: `1 hour session \n25 edited and retouched high resolution digital images`,
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
   },
   {
@@ -68,7 +65,7 @@ const initialSessions = [
     price: '150$',
     about:
       '45 min session \n15 edited and retouched high resolution digital images',
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -82,7 +79,7 @@ const initialSessions = [
     price: '195$',
     about:
       '1 hour session \n25 edited and retouched high resolution digital images',
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -96,7 +93,7 @@ const initialSessions = [
     price: '195$',
     about:
       '1 hour session \n25 edited and retouched high resolution digital images',
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -110,7 +107,7 @@ const initialSessions = [
     price: '150$',
     about:
       '45 min session \n10 edited and retouched high resolution digital images',
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -123,7 +120,7 @@ const initialSessions = [
     image: '/sessions/mini.jpg',
     price: '120$',
     about: '30 min \n5 edited and retouched high resolution digital images',
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -136,7 +133,7 @@ const initialSessions = [
     image: '/sessions/smileandpaws.jpg',
     price: '120$',
     about: '30 min \n5 edited and retouched high resolution digital images',
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -150,7 +147,7 @@ const initialSessions = [
     price: '250$',
     about:
       '1,5 hours session \n30 edited and retouched high resolution digital images',
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -166,7 +163,7 @@ const initialSessions = [
       '3 hours session \n20-40* edited and retouched high resolution digital images',
     additional:
       '* 20 high resolution digital images (Photoshoot on a sailboat)  \n  40 high resolution digital images (On-location)',
-    mustHave: ` 3 ${mustHaveText2}`,
+    mustHave: ` 3 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -180,7 +177,7 @@ const initialSessions = [
     price: '150$',
     about:
       '45 min session \n 15 edited and retouched high resolution digital images',
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -193,7 +190,7 @@ const initialSessions = [
     image: '/sessions/pet.jpg',
     price: '120$',
     about: '30 min \n5 edited and retouched high resolution digital images',
-    mustHave: ` 1 ${mustHaveText2}`,
+    mustHave: ` 1 ${commonSessionsText}`,
     images: [],
     last: true,
   },
@@ -226,6 +223,11 @@ const initialSessions = [
 // new JSON with sessions and image arrays
 // fs.readdirSync - this one is treaky because can stop Node server.
 // But it's a simple application so there shouldn't be any mistakes. Let's leave it until refactoring.
+
+// @route POST api/sessions
+// @desc   Create a session
+// @access Private
+
 router.get('/', (req, res) => {
   const sessions = initialSessions.map((session, ind) => {
     let images = fs
