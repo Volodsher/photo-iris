@@ -15,8 +15,34 @@ const User = require('../../models/User');
 
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
+    // const user = await User.findById(req.user.id).select('-password');
+
+    connectDBMySQL.getConnection((err, connection) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Database error' });
+      }
+
+      const getUserQuery =
+        'SELECT id, name, email, status FROM users WHERE id = ? LIMIT 1';
+
+      connection.query(getUserQuery, [req.user.id], async (err, rows) => {
+        if (err) {
+          console.error(err);
+          connection.release();
+          return res.status(500).json({ error: 'Database error' });
+        }
+
+        if (rows.length > 0) {
+          // console.log(rows[0]);
+          connection.release();
+          res.json(rows[0]);
+        } else {
+          connection.release();
+          return res.status(404).json({ error: 'Invalid Credentials' });
+        }
+      });
+    });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
@@ -54,10 +80,10 @@ router.post(
         }
 
         const checkUserQuery =
-          'SELECT * FROM users WHERE name = ? OR password = ? LIMIT 1';
+          'SELECT * FROM users WHERE name = ? OR email = ? LIMIT 1';
         connection.query(
           checkUserQuery,
-          [nameOrEmail, password],
+          [nameOrEmail, nameOrEmail],
           async (err, rows) => {
             if (err) {
               console.error(err);
@@ -73,7 +99,7 @@ router.post(
               connection.release();
             } else {
               connection.release();
-              return res.status(404).json({ error: 'User not found' });
+              return res.status(404).json({ error: 'Invalid Credentials' });
             }
 
             // Remaining code to validate the user and generate a JWT token
