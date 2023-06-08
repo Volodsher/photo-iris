@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
+const { check, validationResult } = require('express-validator');
+const connectDBMySQL = require('../../config/dbMySQL');
+const { v4: uuidv4 } = require('uuid');
 
 const fs = require('fs');
 
@@ -224,9 +227,9 @@ const initialSessions = [
 // fs.readdirSync - this one is treaky because can stop Node server.
 // But it's a simple application so there shouldn't be any mistakes. Let's leave it until refactoring.
 
-// @route POST api/sessions
-// @desc   Create a session
-// @access Private
+// @route  GET api/sessions
+// @desc   Get all sessions
+// @access Public
 
 router.get('/', (req, res) => {
   const sessions = initialSessions.map((session, ind) => {
@@ -240,10 +243,108 @@ router.get('/', (req, res) => {
   res.send(sessions);
 });
 
+// @route  GET api/sessions
+// @desc   Get session's pictures by session id
+// @access Public
+
 router.get('/:id', (req, res) => {
   console.log(req.params.id);
   fs.readdir(`./uploads/gallery/${req.params.id}`, (err, files) => {
     res.send(files.filter((file) => file !== '.DS_Store'));
+  });
+});
+
+// @route  POST api/sessions
+// @desc   Create a session
+// @access Private
+router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const {
+    id,
+    name,
+    title,
+    link,
+    priceLink,
+    image,
+    price,
+    about,
+    mustHave,
+    images,
+    last,
+  } = req.body;
+
+  connectDBMySQL.getConnection((err, connection) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    const checkUserQuery = 'SELECT 1 FROM sessions WHERE name = ? LIMIT 1';
+    connection.query(checkUserQuery, [name], (err, rows) => {
+      if (err) {
+        console.error(err);
+        connection.release();
+        return res.status(500).json({ error: 'Database error' });
+      }
+
+      if (rows.length > 0) {
+        connection.release();
+        return res.status(400).json({
+          errors: [{ msg: 'Sessions with such name already exists' }],
+        });
+      }
+
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) {
+          console.error(err);
+          connection.release();
+          return res.status(500).json({ error: 'Server error' });
+        }
+
+        const userId = uuidv4();
+        const date = new Date().toJSON().slice(0, 10);
+        console.log(date);
+
+        const insertUserQuery =
+          'INSERT INTO users(id, name, email, password, date) VALUES (?, ?, ?, ?, ?)';
+        connection.query(
+          insertUserQuery,
+          [userId, name, email, hashedPassword, date],
+          (err, results) => {
+            connection.release();
+
+            if (err) {
+              console.error(err);
+              return res.status(500).json({ error: 'Database error' });
+            }
+
+            const payload = {
+              user: {
+                id: userId,
+              },
+            };
+
+            jwt.sign(
+              payload,
+              config.get('jwtSecret'),
+              { expiresIn: 36000 },
+              (err, token) => {
+                if (err) {
+                  console.error(err);
+                  return res.status(500).json({ error: 'Server error' });
+                }
+
+                res.json({ token });
+              }
+            );
+          }
+        );
+      });
+    });
   });
 });
 
