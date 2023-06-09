@@ -264,7 +264,6 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
   }
 
   const {
-    id,
     name,
     title,
     link,
@@ -276,11 +275,12 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
     images,
     last,
   } = req.body;
+  console.log(last);
 
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.error(err);
-      return res.status(500).json({ error: 'Database error' });
+      return res.status(500).json({ error: 'Database error 1' });
     }
 
     const checkUserQuery = 'SELECT 1 FROM sessions WHERE name = ? LIMIT 1';
@@ -288,7 +288,7 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
       if (err) {
         console.error(err);
         connection.release();
-        return res.status(500).json({ error: 'Database error' });
+        return res.status(500).json({ error: 'Database error 2' });
       }
 
       if (rows.length > 0) {
@@ -298,52 +298,39 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
         });
       }
 
-      bcrypt.genSalt(10, (err, salt) => {
-        if (err) {
-          console.error(err);
+      const id = uuidv4();
+      const date = new Date().toJSON().slice(0, 10);
+      console.log(typeof date);
+
+      const addNewSession =
+        'INSERT INTO sessions (id, name, title, link, priceLink, image, price, about, mustHave, images, last, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+      connection.query(
+        addNewSession,
+        [
+          id,
+          name,
+          title,
+          link,
+          priceLink,
+          image,
+          price,
+          about,
+          mustHave,
+          images,
+          last,
+          date,
+        ],
+        (err, results) => {
           connection.release();
-          return res.status(500).json({ error: 'Server error' });
-        }
 
-        const userId = uuidv4();
-        const date = new Date().toJSON().slice(0, 10);
-        console.log(date);
-
-        const insertUserQuery =
-          'INSERT INTO users(id, name, email, password, date) VALUES (?, ?, ?, ?, ?)';
-        connection.query(
-          insertUserQuery,
-          [userId, name, email, hashedPassword, date],
-          (err, results) => {
-            connection.release();
-
-            if (err) {
-              console.error(err);
-              return res.status(500).json({ error: 'Database error' });
-            }
-
-            const payload = {
-              user: {
-                id: userId,
-              },
-            };
-
-            jwt.sign(
-              payload,
-              config.get('jwtSecret'),
-              { expiresIn: 36000 },
-              (err, token) => {
-                if (err) {
-                  console.error(err);
-                  return res.status(500).json({ error: 'Server error' });
-                }
-
-                res.json({ token });
-              }
-            );
+          if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Database error 3' });
           }
-        );
-      });
+
+          res.json(results);
+        }
+      );
     });
   });
 });
