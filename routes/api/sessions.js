@@ -199,11 +199,6 @@ const initialSessions = [
   },
 ];
 
-// old stuff
-// import express from 'express';
-// import auth from '../../middleware/auth.js';
-// import fs from 'fs';
-
 // good and simple GET all names from a forlder as array
 // router.get('/', (req, res) => {
 //   fs.readdir('./uploads/mygallery', (err, files) => {
@@ -231,16 +226,60 @@ const initialSessions = [
 // @desc   Get all sessions
 // @access Public
 
-router.get('/', (req, res) => {
-  const sessions = initialSessions.map((session, ind) => {
-    let images = fs
-      // .readdirSync(`./uploads/gallery/${session.id}`)
-      .readdirSync(`./uploads/gallery/${session.name}`)
-      .filter((file) => file !== '.DS_Store');
-    return { ...session, images: images };
-  });
+// router.get('/', (req, res) => {
+//   connectDBMySQL.getConnection((err, connection) => {
+//     if (err) {
+//       console.error(err);
+//       return res.status(500).json({ error: 'Database error 1' });
+//     }
+//   });
 
-  res.send(sessions);
+//   const getAllSessions = 'SELECT * FROM sessions';
+//   connection.query(getAllSessions, (err, rows) => {
+//     if (err) {
+//       console.error(err);
+//       connection.release();
+//       return res.status(500).json({ error: 'Database error 2' });
+//     }
+
+//     if (rows.length > 0) {
+//       connection.release();
+//       return res.status(400).json({
+//         errors: [{ msg: 'Sessions with such name already exists' }],
+//       });
+//     }
+//   })
+
+//   const sessions = initialSessions.map((session, ind) => {
+//     let images = fs
+//       // .readdirSync(`./uploads/gallery/${session.id}`)
+//       .readdirSync(`./uploads/gallery/${session.name}`)
+//       .filter((file) => file !== '.DS_Store');
+//     return { ...session, images: images };
+//   });
+
+//   res.send(sessions);
+// });
+
+router.get('/', (req, res) => {
+  connectDBMySQL.getConnection((err, connection) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Database error 1' });
+    }
+
+    const getAllSessions = 'SELECT * FROM sessions';
+    connection.query(getAllSessions, (err, rows) => {
+      connection.release();
+
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Database error 2' });
+      }
+
+      res.send(rows);
+    });
+  });
 });
 
 // @route  GET api/sessions
@@ -275,7 +314,6 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
     images,
     last,
   } = req.body;
-  console.log(last);
 
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
@@ -300,7 +338,6 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
 
       const id = uuidv4();
       const date = new Date().toJSON().slice(0, 10);
-      console.log(typeof date);
 
       const addNewSession =
         'INSERT INTO sessions (id, name, title, link, priceLink, image, price, about, mustHave, images, last, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
@@ -328,7 +365,8 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
             return res.status(500).json({ error: 'Database error 3' });
           }
 
-          res.json(results);
+          results.message = 'You successfully added a new session!';
+          res.json(results.message);
         }
       );
     });
