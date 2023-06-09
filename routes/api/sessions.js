@@ -268,7 +268,7 @@ router.get('/', (req, res) => {
       return res.status(500).json({ error: 'Database error 1' });
     }
 
-    const getAllSessions = 'SELECT * FROM sessions';
+    const getAllSessions = 'SELECT * FROM sessions ORDER BY session_order ASC';
     connection.query(getAllSessions, (err, rows) => {
       connection.release();
 
@@ -277,11 +277,13 @@ router.get('/', (req, res) => {
         return res.status(500).json({ error: 'Database error 2' });
       }
 
-      res.send(rows);
+      const sessionsWithText = rows.map((ses) => {
+        return { ...ses, mustHave: `1 ${commonSessionsText}` };
+      });
+      res.send(sessionsWithText);
     });
   });
 });
-
 // @route  GET api/sessions
 // @desc   Get session's pictures by session id
 // @access Public
@@ -304,6 +306,7 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
 
   const {
     name,
+    session_order,
     title,
     link,
     priceLink,
@@ -338,14 +341,16 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
 
       const id = uuidv4();
       const date = new Date().toJSON().slice(0, 10);
+      console.log(date);
 
       const addNewSession =
-        'INSERT INTO sessions (id, name, title, link, priceLink, image, price, about, mustHave, images, last, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        'INSERT INTO sessions (id, name, session_order, title, link, priceLink, image, price, about, mustHave, images, last, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
       connection.query(
         addNewSession,
         [
           id,
           name,
+          session_order,
           title,
           link,
           priceLink,
