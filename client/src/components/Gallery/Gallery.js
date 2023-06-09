@@ -199,7 +199,7 @@ export default function Gallery() {
                 ];
               })}
             </div>
-            {session.last && (
+            {session.last === 1 && (
               <Link to={session.priceLink}>
                 <MyButton borderColor="--gray-light" value="Book" />
               </Link>
