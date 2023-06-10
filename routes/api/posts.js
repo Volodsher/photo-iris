@@ -59,12 +59,6 @@ router.post(
         }
       );
     });
-    // try {
-    //   res.json(post);
-    // } catch (error) {
-    //   console.error(error.message);
-    //   res.status(500).send('Server Error');
-    // }
   }
 );
 
@@ -72,13 +66,45 @@ router.post(
 // @desc   Get all posts
 // @access Public
 router.get('/', async (req, res) => {
-  try {
-    const posts = await Post.find().sort({ date: -1 });
-    res.json(posts);
-  } catch (error) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
+  connectDBMySQL.getConnection((err, connection) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Database error 1' });
+    }
+
+    const getAllPosts = 'SELECT * FROM posts ORDER BY date ASC';
+    connection.query(getAllPosts, (err, rows) => {
+      connection.release();
+
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Database error 2' });
+      }
+
+      // const sessionsWithText = rows.map((ses) => {
+      //   return {
+      //     ...ses,
+      //     mustHave: ses.mustHave + commonSessionsText,
+      //   };
+      // });
+
+      // const fullSessions = sessionsWithText.map((mygallery, ind) => {
+      //   let images = fs
+      //     .readdirSync(`./uploads/gallery/${mygallery.name}`)
+      //     .filter((file) => file !== '.DS_Store');
+      //   return { ...mygallery, images: images };
+      // });
+
+      res.send(rows);
+    });
+  });
+  // try {
+  //   const posts = await Post.find().sort({ date: -1 });
+  //   res.json(posts);
+  // } catch (error) {
+  //   console.error(err.message);
+  //   res.status(500).send('Server Error');
+  // }
 });
 
 // @route   GET api/posts/:id
