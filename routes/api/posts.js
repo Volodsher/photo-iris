@@ -81,30 +81,9 @@ router.get('/', async (req, res) => {
         return res.status(500).json({ error: 'Database error 2' });
       }
 
-      // const sessionsWithText = rows.map((ses) => {
-      //   return {
-      //     ...ses,
-      //     mustHave: ses.mustHave + commonSessionsText,
-      //   };
-      // });
-
-      // const fullSessions = sessionsWithText.map((mygallery, ind) => {
-      //   let images = fs
-      //     .readdirSync(`./uploads/gallery/${mygallery.name}`)
-      //     .filter((file) => file !== '.DS_Store');
-      //   return { ...mygallery, images: images };
-      // });
-
       res.send(rows);
     });
   });
-  // try {
-  //   const posts = await Post.find().sort({ date: -1 });
-  //   res.json(posts);
-  // } catch (error) {
-  //   console.error(err.message);
-  //   res.status(500).send('Server Error');
-  // }
 });
 
 // @route   GET api/posts/:id
