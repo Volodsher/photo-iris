@@ -4,8 +4,6 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
-const connectDBMySQL = require('../../config/dbMySQL');
-const { v4: uuidv4 } = require('uuid');
 // const checkObjectId = require('../../middleware/checkObjectId');
 
 // @route  POST api/posts
@@ -14,7 +12,6 @@ const { v4: uuidv4 } = require('uuid');
 router.post(
   '/',
   auth,
-  check('title', 'Title is required').notEmpty(),
   check('text', 'Text is required').notEmpty(),
   async (req, res) => {
     const errors = validationResult(req);
@@ -22,49 +19,25 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, text, images } = req.body;
+    try {
+      const user = await User.findById(req.user.id).select('-password');
 
-    const id = uuidv4();
-    const date = new Date().toJSON().slice(0, 10);
+      const newPost = new Post({
+        title: req.body.title,
+        text: req.body.text,
+        name: user.name,
+        avatar: user.avatar,
+        image: req.body.image,
+        // user: req.user.id,
+      });
 
-    const newPost = {
-      id,
-      title,
-      text,
-      images,
-      date,
-    };
+      const post = await newPost.save();
 
-    connectDBMySQL.getConnection((err, connection) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Database error 1' });
-      }
-
-      const addNewPost =
-        'INSERT INTO posts (id, title, text, images, date) VALUES (?, ?, ?, ?, ?)';
-      connection.query(
-        addNewPost,
-        [id, title, text, images, date],
-        (err, results) => {
-          connection.release();
-
-          if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Database error 3' });
-          }
-
-          results.message = 'You successfully added a new post!';
-          res.json(results.message);
-        }
-      );
-    });
-    // try {
-    //   res.json(post);
-    // } catch (error) {
-    //   console.error(error.message);
-    //   res.status(500).send('Server Error');
-    // }
+      res.json(post);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server Error');
+    }
   }
 );
 

@@ -313,7 +313,6 @@ router.post('/', check('name', 'Name is required').notEmpty(), (req, res) => {
 
       const id = uuidv4();
       const date = new Date().toJSON().slice(0, 10);
-      console.log(date);
 
       const addNewSession =
         'INSERT INTO sessions (id, name, session_order, title, link, priceLink, image, price, about, additional, mustHave, images, last, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
