@@ -155,28 +155,6 @@ router.get('/:id', (req, res) => {
 //   }
 // });
 router.delete('/:id', auth, (req, res) => {
-  // try {
-  //   const post =  Post.findById(req.params.id);
-
-  //   if (!post) {
-  //     return res.status(404).json({ msg: 'Post not found' });
-  //   }
-
-  //   // Check user
-  //   const user = await User.findById(req.user.id).select('-password');
-  //   if (user.status !== 'superuser') {
-  //     return res.status(401).json({ msg: 'User not authorized' });
-  //   }
-
-  //   // Remove post
-  //   await post.remove();
-
-  //   res.json({ msg: 'Post removed' });
-  // } catch (error) {
-  //   console.error(error.message);
-  //   res.status(500).send('Server Error');
-  // }
-
   const { id } = req.params;
 
   connectDBMySQL.getConnection((err, connection) => {
@@ -185,8 +163,8 @@ router.delete('/:id', auth, (req, res) => {
       return res.status(500).json({ error: 'Database error 1' });
     }
 
-    const checkUserQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
-    connection.query(checkUserQuery, [req.params.id], (err, rows) => {
+    const checkPostQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
+    connection.query(checkPostQuery, [req.params.id], (err, rows) => {
       if (err) {
         console.error(err);
         connection.release();
@@ -219,26 +197,92 @@ router.delete('/:id', auth, (req, res) => {
 // @route PUT api/posts/:id
 // @desc Edit a post
 // @access Private
+// Old version with MongoDB
+// router.put('/:id', auth, async (req, res) => {
+//   let post = await Post.findById(req.params.id);
+
+//   if (!post) {
+//     return res.status(404).json({ msg: 'Post not found' });
+//   }
+
+//   // Check user
+//   const user = await User.findById(req.user.id).select('-password');
+//   if (user.status !== 'superuser') {
+//     return res.status(401).json({ msg: 'User not authorized' });
+//   }
+
+//   // Edit the post
+//   const { title, text, image } = req.body;
+//   Object.assign(post, { title, text, image });
+
+//   await post.save();
+
+//   res.json(post);
+// });
 router.put('/:id', auth, async (req, res) => {
-  let post = await Post.findById(req.params.id);
+  // let post = await Post.findById(req.params.id);
+  connectDBMySQL.getConnection((err, connection) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ error: 'Database error 1' });
+    }
 
-  if (!post) {
-    return res.status(404).json({ msg: 'Post not found' });
-  }
+    const checkPostQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
+    connection.query(checkPostQuery, [req.params.id], (err, rows) => {
+      if (err) {
+        console.error(err);
+        connection.release();
+        return res.status(500).json({ error: 'Database rorror 2' });
+      }
 
-  // Check user
-  const user = await User.findById(req.user.id).select('-password');
-  if (user.status !== 'superuser') {
-    return res.status(401).json({ msg: 'User not authorized' });
-  }
+      if (rows.length === 0) {
+        connection.release();
+        return res.status(400).json({
+          errors: [{ msg: "Post with such name doesn't exists" }],
+        });
+      }
 
-  // Edit the post
-  const { title, text, image } = req.body;
-  Object.assign(post, { title, text, image });
+      const edit_date = new Date().toJSON().slice(0, 10);
+      const edited = true;
+      const id = req.params.id;
+      const { title, text, images, date } = req.body;
+      const updatePost =
+        'UPDATE posts SET title = ?, text = ?, images = ?, date = ?, edited = ?, edit_date = ? WHERE id = ?;';
 
-  await post.save();
+      connection.query(
+        updatePost,
+        [title, text, images, date, edited, edit_date, id],
+        (err, results) => {
+          connection.release();
 
-  res.json(post);
+          if (err) {
+            console.log(err);
+            return res.status(500).json({ error: 'Database error 3' });
+          }
+          console.log(results);
+          results.message = `You just edited post: ${title}`;
+          res.json(results.message);
+        }
+      );
+    });
+  });
+  // if (!post) {
+  //   return res.status(404).json({ msg: 'Post not found' });
+  // }
+
+  // // Check user
+  // const user = await User.findById(req.user.id).select('-password');
+  // if (user.status !== 'superuser') {
+  //   return res.status(401).json({ msg: 'User not authorized' });
+  // }
+
+  // // Edit the post
+  // const { title, text, image } = req.body;
+  // Object.assign(post, { title, text, image });
+
+  // await post.save();
+
+  // res.json(post);
 });
 
 module.exports = router;
