@@ -5,7 +5,7 @@ const connectDBMySQL = require('./config/dbMySQL');
 
 const app = express();
 app.use(cors());
-connectDB();
+// connectDB();
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());

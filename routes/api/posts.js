@@ -16,7 +16,7 @@ router.post(
   auth,
   check('title', 'Title is required').notEmpty(),
   check('text', 'Text is required').notEmpty(),
-  async (req, res) => {
+  (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -65,7 +65,7 @@ router.post(
 // @route  GET api/posts
 // @desc   Get all posts
 // @access Public
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.error(err);
@@ -89,21 +89,41 @@ router.get('/', async (req, res) => {
 // @route   GET api/posts/:id
 // @dexc    Get post by ID
 // @access  Private
-router.get('/:id', async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
+// router.get('/:id', async (req, res) => {
+// try {
+//   const post = await Post.findById(req.params.id);
 
-    if (!post) {
-      return res.status(404).json({ msg: 'Post not found' });
+//   if (!post) {
+//     return res.status(404).json({ msg: 'Post not found' });
+//   }
+//   res.json(post);
+// } catch (error) {
+//   console.error(error.message);
+//   if (error.kind === 'ObjectId') {
+//     return res.status(404).json({ msg: 'Post not found' });
+//   }
+//   res.status(500).send('Server Error');
+// }
+// });
+router.get('/:id', (req, res) => {
+  connectDBMySQL.getConnection((err, connection) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Database error 1' });
     }
-    res.json(post);
-  } catch (error) {
-    console.error(error.message);
-    if (error.kind === 'ObjectId') {
-      return res.status(404).json({ msg: 'Post not found' });
-    }
-    res.status(500).send('Server Error');
-  }
+
+    const getOnePosts = `SELECT * FROM posts WHERE id = "${req.params.id}"`;
+    connection.query(getOnePosts, (err, rows) => {
+      connection.release();
+
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Database error 2' });
+      }
+
+      res.send(rows);
+    });
+  });
 });
 
 // @route DELETE api/posts/:id
