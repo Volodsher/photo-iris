@@ -89,6 +89,7 @@ router.get('/', (req, res) => {
 // @route   GET api/posts/:id
 // @dexc    Get post by ID
 // @access  Private
+// Old version with MongoDB
 // router.get('/:id', async (req, res) => {
 // try {
 //   const post = await Post.findById(req.params.id);
@@ -112,8 +113,8 @@ router.get('/:id', (req, res) => {
       return res.status(500).json({ error: 'Database error 1' });
     }
 
-    const getOnePosts = `SELECT * FROM posts WHERE id = "${req.params.id}"`;
-    connection.query(getOnePosts, (err, rows) => {
+    const getOnePosts = `SELECT * FROM posts WHERE id = ?`;
+    connection.query(getOnePosts, [req.params.id], (err, rows) => {
       connection.release();
 
       if (err) {
@@ -129,28 +130,90 @@ router.get('/:id', (req, res) => {
 // @route DELETE api/posts/:id
 // @desc Delete a post
 // @access Private
-router.delete('/:id', auth, async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
+// Old version with MongoDB
+// router.delete('/:id', auth, async (req, res) => {
+//   try {
+//     const post = await Post.findById(req.params.id);
 
-    if (!post) {
-      return res.status(404).json({ msg: 'Post not found' });
+//     if (!post) {
+//       return res.status(404).json({ msg: 'Post not found' });
+//     }
+
+//     // Check user
+//     const user = await User.findById(req.user.id).select('-password');
+//     if (user.status !== 'superuser') {
+//       return res.status(401).json({ msg: 'User not authorized' });
+//     }
+
+//     // Remove post
+//     await post.remove();
+
+//     res.json({ msg: 'Post removed' });
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).send('Server Error');
+//   }
+// });
+router.delete('/:id', auth, (req, res) => {
+  // try {
+  //   const post =  Post.findById(req.params.id);
+
+  //   if (!post) {
+  //     return res.status(404).json({ msg: 'Post not found' });
+  //   }
+
+  //   // Check user
+  //   const user = await User.findById(req.user.id).select('-password');
+  //   if (user.status !== 'superuser') {
+  //     return res.status(401).json({ msg: 'User not authorized' });
+  //   }
+
+  //   // Remove post
+  //   await post.remove();
+
+  //   res.json({ msg: 'Post removed' });
+  // } catch (error) {
+  //   console.error(error.message);
+  //   res.status(500).send('Server Error');
+  // }
+
+  const { id } = req.params;
+
+  connectDBMySQL.getConnection((err, connection) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Database error 1' });
     }
 
-    // Check user
-    const user = await User.findById(req.user.id).select('-password');
-    if (user.status !== 'superuser') {
-      return res.status(401).json({ msg: 'User not authorized' });
-    }
+    const checkUserQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
+    connection.query(checkUserQuery, [req.params.id], (err, rows) => {
+      if (err) {
+        console.error(err);
+        connection.release();
+        return res.status(500).json({ error: 'Database error 2' });
+      }
 
-    // Remove post
-    await post.remove();
+      if (rows.length === 0) {
+        connection.release();
+        return res.status(400).json({
+          errors: [{ msg: "Post with such name doesn't exists" }],
+        });
+      }
 
-    res.json({ msg: 'Post removed' });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server Error');
-  }
+      const deletePost = 'DELETE FROM posts WHERE id = ?';
+      connection.query(deletePost, [id], (err, results) => {
+        connection.release();
+
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: 'Database error 3' });
+        }
+
+        results.message = 'You successfully deleted a post!';
+        res.json(results.message);
+      });
+    });
+  });
 });
 
 // @route PUT api/posts/:id
