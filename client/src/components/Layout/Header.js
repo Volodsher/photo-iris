@@ -68,15 +68,15 @@ function Header(props) {
               Pricing
             </NavLink>
           </li>
-          {/* <li key="4">
-          <NavLink
-            to="/blog"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            end
-          >
-            Blog
-          </NavLink>
-        </li> */}
+          <li key="4">
+            <NavLink
+              to="/blog"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              end
+            >
+              Blog
+            </NavLink>
+          </li>
           <li
             key="5"
             style={{

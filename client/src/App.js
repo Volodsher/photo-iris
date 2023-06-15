@@ -51,11 +51,11 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/mygallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
-            {/* <Route exact path="/blog" element={<Blog />} /> */}
-            {/* <Route path="/sessions" element={<Sessions />} /> */}
-            {/* <Route path="/posts/:id" element={<Post />} /> */}
+            <Route exact path="/blog" element={<Blog />} />
+            <Route path="/sessions" element={<Sessions />} />
+            <Route path="/posts/:id" element={<Post />} />
             <Route path="/vhid" element={<Login />} />
-            {/* <Route path="/posts/postForm" element={<PostForm />} /> */}
+            <Route path="/posts/postForm" element={<PostForm />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
