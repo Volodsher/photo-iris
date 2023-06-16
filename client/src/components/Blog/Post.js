@@ -20,13 +20,17 @@ const Post = (props) => {
   const { id } = useParams();
   const payload = { id };
   const dispatch = useDispatch();
-  let _id = null;
-  let title = null;
+  console.log(post);
 
-  if (post !== null) {
-    _id = post._id;
-    title = post.title;
-  }
+  // let _id = null;
+  // let title = null;
+
+  // if (post !== null) {
+  //   _id = post.id;
+  //   title = post.title;
+  // }
+
+  // const { title, text } = post;
 
   useEffect(() => {
     dispatch(getPostAction(payload));
@@ -47,7 +51,7 @@ const Post = (props) => {
     setIsOpen(!isOpen);
   };
 
-  return loading || post === null ? (
+  return loading === true || post === null ? (
     <Spinner />
   ) : (
     <div className={styles.postContainer}>
@@ -75,7 +79,8 @@ const Post = (props) => {
               className={styles.postButton}
               // handleCklick={() => dispatch(openConfirm({ _id, title }))}
               handleCklick={() => {
-                postPayload({ _id, title });
+                // postPayload({ _id, title });
+                postPayload({ id: post.id, title: post.title });
                 toggleConfirm();
               }}
             />
@@ -86,7 +91,7 @@ const Post = (props) => {
       <h4 style={{ color: 'var(--gray-light' }}>
         <Moment format="YYYY/MM/DD">{post.date}</Moment>
       </h4>
-      <p>{post.text}</p>
+      <p>{post[0].text}</p>
       {post.image && (
         <img
           src={`/blog/${post.image}`}

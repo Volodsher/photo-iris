@@ -13,17 +13,18 @@ import MyButton from '../layout/MyButton/MyButton';
 import { useDispatch, useSelector } from 'react-redux';
 
 const PostItem = ({
-  post: { _id, text, title, date, image },
+  post: { id, text, title, date, image },
   showActions,
   toggleConfirm,
   postPayload,
 }) => {
-  const dotIndex = text.indexOf('.');
-  const firstSentence = text.slice(0, dotIndex);
+  let firstSentence = '';
+  if (text && text.indexOf('.') !== undefined) {
+    firstSentence = text.slice(0, text.indexOf('.'));
+  }
+
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((store) => store.auth);
-
-  console.log(image);
 
   return (
     <div className={`${styles.postItem}`}>
@@ -34,8 +35,9 @@ const PostItem = ({
       </div>
       <div>
         <h2 className="">{title}</h2>
-        <p className="">{firstSentence}</p>
-        <Link to={`/photo-iris-react/posts/${_id}`}>
+        {firstSentence && <p className="">{firstSentence}</p>}
+        {/* <Link to={`/photo-iris-react/posts/${id}`}> */}
+        <Link to={`/posts/${id}`}>
           <MyButton
             className={styles.postButton}
             value="Read more"
@@ -47,7 +49,7 @@ const PostItem = ({
             <MyButton
               className={styles.postButton}
               handleCklick={() => {
-                postPayload({ _id, title, image });
+                postPayload({ id, title, image });
                 toggleConfirm();
               }}
               value="delete"
@@ -66,9 +68,9 @@ PostItem.defaultProps = {
 
 PostItem.propTypes = {
   post: PropTypes.object.isRequired,
-  showActions: PropTypes.object.isRequired,
-  toggleConfirm: PropTypes.object.isRequired,
-  postPayload: PropTypes.object.isRequired,
+  showActions: PropTypes.bool.isRequired,
+  toggleConfirm: PropTypes.func.isRequired,
+  postPayload: PropTypes.func.isRequired,
 };
 
 export default PostItem;

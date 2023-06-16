@@ -69,7 +69,7 @@ export default function Blog() {
               toggleConfirm={toggleConfirm}
               toDeletePost={toDeletePost}
               postPayload={postPayload}
-              key={post._id}
+              key={post.id}
               post={post}
             />
           ))}
