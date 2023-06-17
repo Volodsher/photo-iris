@@ -69,7 +69,7 @@ const Post = (props) => {
         <Link to="/blog" className={styles.postLink}>
           <MyButton value="All Posts" className={styles.postButton} />
         </Link>
-        {isAuthenticated && user.status === 'superuser' && (
+        {isAuthenticated && user.status === 'author' && (
           <Fragment>
             <Link to="/posts/postForm" state={{ ...post }}>
               <MyButton value="Edit" className={styles.postButton} />
@@ -78,7 +78,7 @@ const Post = (props) => {
               value="Delete"
               className={styles.postButton}
               // handleCklick={() => dispatch(openConfirm({ _id, title }))}
-              handleCklick={() => {
+              handleClick={() => {
                 // postPayload({ _id, title });
                 postPayload({ id: post.id, title: post.title });
                 toggleConfirm();

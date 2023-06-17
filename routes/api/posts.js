@@ -259,7 +259,7 @@ router.put('/:id', auth, async (req, res) => {
             console.log(err);
             return res.status(500).json({ error: 'Database error 3' });
           }
-          console.log(results);
+          // console.log(results);
           results.message = `You just edited post: ${title}`;
           res.json(results.message);
         }

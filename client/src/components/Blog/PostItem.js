@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const PostItem = ({
   post: { id, text, title, date, image },
-  showActions,
+  // showActions,
   toggleConfirm,
   postPayload,
 }) => {
@@ -23,7 +23,7 @@ const PostItem = ({
     firstSentence = text.slice(0, text.indexOf('.'));
   }
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((store) => store.auth);
 
   return (
@@ -44,13 +44,14 @@ const PostItem = ({
             borderColor="--gray-ultralight"
           />
         </Link>
-        {isAuthenticated && user.status === 'superuser' && (
+        {isAuthenticated && user.status === 'author' && (
           <Fragment>
             <MyButton
               className={styles.postButton}
-              handleCklick={() => {
+              handleClick={() => {
                 postPayload({ id, title, image });
                 toggleConfirm();
+                console.log('done');
               }}
               value="delete"
               borderColor="--gray-ultralight"

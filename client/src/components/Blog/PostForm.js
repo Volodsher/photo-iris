@@ -18,7 +18,7 @@ const PostForm = () => {
   const [image, setImage] = useState();
   const [prevImage, setPrevImage] = useState();
   const [imageUrl, setImageUrl] = useState();
-  const [_id, setId] = useState();
+  const [id, setId] = useState();
   const [url, setUrl] = useState('');
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState();
@@ -26,13 +26,14 @@ const PostForm = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const fromPost = location.state;
+  const fromPost = location.state ? location.state[0] : null;
+  console.log(fromPost);
 
   useEffect(() => {
     if (fromPost !== null) {
       setTitle(fromPost.title);
       setText(fromPost.text);
-      setId(fromPost._id);
+      setId(fromPost.id);
       setImage(fromPost.image);
       setPrevImage(fromPost.image);
     }
@@ -44,8 +45,8 @@ const PostForm = () => {
     formData.append('file', selectedFile);
 
     if (fromPost !== null) {
-      dispatch(updatePostAction({ _id, title, text, image }));
-      navigate(`/posts/${_id}`);
+      dispatch(updatePostAction({ id, title, text, image }));
+      navigate(`/posts/${id}`);
     } else {
       dispatch(addPostAction({ title, text, image }));
     }

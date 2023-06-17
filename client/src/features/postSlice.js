@@ -44,7 +44,7 @@ const postSlice = createSlice({
         ...state,
         // posts: [...state.posts, payload],
         posts: state.posts.map((post) => {
-          if (post._id === payload._id) return payload;
+          if (post.id === payload.id) return payload;
           return post;
         }),
         //arr.splice(index, 1, 'z');
@@ -56,7 +56,7 @@ const postSlice = createSlice({
     deletePost: (state, { payload }) => {
       return {
         ...state,
-        posts: state.posts.filter((post) => post._id !== payload),
+        posts: state.posts.filter((post) => post.id !== payload),
         post: null,
       };
     },
@@ -114,7 +114,7 @@ export const updatePostAction = createAsyncThunk(
     };
 
     try {
-      const res = await axios.put(`/api/posts/${payload._id}`, payload, config);
+      const res = await axios.put(`/api/posts/${payload.id}`, payload, config);
       dispatch(updatePost(res.data));
       console.log(res);
     } catch (error) {
@@ -141,13 +141,13 @@ export const getPostAction = createAsyncThunk(
 // Delete post
 export const deletePostAction = createAsyncThunk(
   'post/deletepost',
-  async ({ _id }, { dispatch }) => {
-    console.log(_id);
+  async ({ id }, { dispatch }) => {
+    console.log(id);
     try {
-      const res = await axios.delete(`/api/posts/${_id}`);
-      dispatch(deletePost(_id));
+      const res = await axios.delete(`/api/posts/${id}`);
+      dispatch(deletePost(id));
     } catch (error) {
-      console.log(_id);
+      console.log(id);
       console.error(error.message);
     }
   }
