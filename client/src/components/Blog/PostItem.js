@@ -22,7 +22,7 @@ const PostItem = ({
   if (text && text.indexOf('.') !== undefined) {
     firstSentence = text.slice(0, text.indexOf('.'));
   }
-
+  console.log({ id, text, title, date, image });
   // const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((store) => store.auth);
 

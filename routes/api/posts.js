@@ -54,8 +54,9 @@ router.post(
             return res.status(500).json({ error: 'Database error 3' });
           }
 
-          results.message = 'You successfully added a new post!';
-          res.json(results.message);
+          // results.message = 'You successfully added a new post!';
+          // res.json(results.message);
+          res.json(newPost);
         }
       );
     });
@@ -246,6 +247,17 @@ router.put('/:id', auth, async (req, res) => {
       const edited = true;
       const id = req.params.id;
       const { title, text, images, date } = req.body;
+
+      const updatedPost = {
+        id,
+        title,
+        text,
+        images,
+        date,
+        edited,
+        edit_date,
+      };
+
       const updatePost =
         'UPDATE posts SET title = ?, text = ?, images = ?, date = ?, edited = ?, edit_date = ? WHERE id = ?;';
 
@@ -260,8 +272,9 @@ router.put('/:id', auth, async (req, res) => {
             return res.status(500).json({ error: 'Database error 3' });
           }
           // console.log(results);
-          results.message = `You just edited post: ${title}`;
-          res.json(results.message);
+          // results.message = `You just edited post: ${title}`;
+          // res.json(results.message);
+          res.json(updatedPost);
         }
       );
     });

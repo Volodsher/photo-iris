@@ -51,6 +51,8 @@ const Post = (props) => {
     setIsOpen(!isOpen);
   };
 
+  console.log(post);
+
   return loading === true || post === null ? (
     <Spinner />
   ) : (
@@ -91,7 +93,7 @@ const Post = (props) => {
       <h4 style={{ color: 'var(--gray-light' }}>
         <Moment format="YYYY/MM/DD">{post.date}</Moment>
       </h4>
-      <p>{post[0].text}</p>
+      <p>{post.text}</p>
       {post.image && (
         <img
           src={`/blog/${post.image}`}

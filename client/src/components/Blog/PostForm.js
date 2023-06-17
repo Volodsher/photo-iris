@@ -26,7 +26,7 @@ const PostForm = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const fromPost = location.state ? location.state[0] : null;
+  const fromPost = location.state ? location.state : null;
   console.log(fromPost);
 
   useEffect(() => {

@@ -116,9 +116,7 @@ export const updatePostAction = createAsyncThunk(
     try {
       const res = await axios.put(`/api/posts/${payload.id}`, payload, config);
       dispatch(updatePost(res.data));
-      console.log(res);
     } catch (error) {
-      console.log(payload);
       console.log(error.message);
     }
   }
@@ -131,7 +129,7 @@ export const getPostAction = createAsyncThunk(
     try {
       const res = await axios.get(`/api/posts/${id}`);
       // console.log(res.data);
-      thunkApi.dispatch(getPost(res.data));
+      thunkApi.dispatch(getPost(res.data[0]));
     } catch (error) {
       console.error(error.message);
     }
