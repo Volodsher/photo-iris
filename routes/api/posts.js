@@ -22,7 +22,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, text, images } = req.body;
+    const { title, text, image } = req.body;
 
     const id = uuidv4();
     const date = new Date().toJSON().slice(0, 10);
@@ -31,7 +31,7 @@ router.post(
       id,
       title,
       text,
-      images,
+      image,
       date,
     };
 
@@ -42,10 +42,10 @@ router.post(
       }
 
       const addNewPost =
-        'INSERT INTO posts (id, title, text, images, date) VALUES (?, ?, ?, ?, ?)';
+        'INSERT INTO posts (id, title, text, image, date) VALUES (?, ?, ?, ?, ?)';
       connection.query(
         addNewPost,
-        [id, title, text, images, date],
+        [id, title, text, image, date],
         (err, results) => {
           connection.release();
 
@@ -246,24 +246,24 @@ router.put('/:id', auth, async (req, res) => {
       const edit_date = new Date().toJSON().slice(0, 10);
       const edited = true;
       const id = req.params.id;
-      const { title, text, images, date } = req.body;
+      const { title, text, image, date } = req.body;
 
       const updatedPost = {
         id,
         title,
         text,
-        images,
+        image,
         date,
         edited,
         edit_date,
       };
 
       const updatePost =
-        'UPDATE posts SET title = ?, text = ?, images = ?, date = ?, edited = ?, edit_date = ? WHERE id = ?;';
+        'UPDATE posts SET title = ?, text = ?, image = ?, date = ?, edited = ?, edit_date = ? WHERE id = ?;';
 
       connection.query(
         updatePost,
-        [title, text, images, date, edited, edit_date, id],
+        [title, text, image, date, edited, edit_date, id],
         (err, results) => {
           connection.release();
 

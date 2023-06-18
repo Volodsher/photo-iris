@@ -15,7 +15,7 @@ const PostForm = () => {
 
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [image, setImage] = useState();
+  const [image, setImage] = useState('');
   const [prevImage, setPrevImage] = useState();
   const [imageUrl, setImageUrl] = useState();
   const [id, setId] = useState();
@@ -45,7 +45,9 @@ const PostForm = () => {
     formData.append('file', selectedFile);
 
     if (fromPost !== null) {
-      dispatch(updatePostAction({ id, title, text, image }));
+      dispatch(
+        updatePostAction({ date: fromPost.date, id, title, text, image })
+      );
       navigate(`/posts/${id}`);
     } else {
       dispatch(addPostAction({ title, text, image }));
@@ -87,11 +89,11 @@ const PostForm = () => {
   }, [selectedFile]);
 
   const deletePostAction = () => {
-    setImage(null);
-    setPrevImage(null);
-    setIsFilePicked(null);
+    setImage('');
+    setPrevImage();
+    setIsFilePicked();
     setSelectedFile('');
-    setImageUrl(null);
+    setImageUrl('');
   };
 
   return (
@@ -145,6 +147,7 @@ const PostForm = () => {
           type="file"
           name="file"
           onChange={(event) => {
+            setImage(event.target.files[0].name);
             if (event.target.files.length !== 0) {
               setSelectedFile(event.target.files[0]);
               setImageUrl(URL.createObjectURL(event.target.files[0]));
@@ -174,6 +177,7 @@ const PostForm = () => {
         )}
         <MyButton type="submit" value="Submit" borderColor="--gray-light" />
       </form>
+      <p>{image}</p>
     </div>
   );
 };
