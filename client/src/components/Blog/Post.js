@@ -20,7 +20,7 @@ const Post = (props) => {
   const { id } = useParams();
   const payload = { id };
   const dispatch = useDispatch();
-  console.log(post);
+  // console.log(post);
 
   // let _id = null;
   // let title = null;
@@ -51,7 +51,7 @@ const Post = (props) => {
     setIsOpen(!isOpen);
   };
 
-  console.log(post);
+  // console.log(post);
 
   return loading === true || post === null ? (
     <Spinner />
@@ -82,7 +82,12 @@ const Post = (props) => {
               // handleCklick={() => dispatch(openConfirm({ _id, title }))}
               handleClick={() => {
                 // postPayload({ _id, title });
-                postPayload({ id: post.id, title: post.title });
+                // postPayload({
+                //   id: post.id,
+                //   title: post.title,
+                //   image: post.image,
+                // });
+                postPayload(post);
                 toggleConfirm();
               }}
             />
@@ -100,6 +105,7 @@ const Post = (props) => {
           style={{ maxWidth: '100%', height: 'auto' }}
         />
       )}
+      <p>{post.image}</p>
     </div>
   );
 };

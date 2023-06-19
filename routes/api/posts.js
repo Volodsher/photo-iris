@@ -6,6 +6,7 @@ const Post = require('../../models/Post');
 const User = require('../../models/User');
 const connectDBMySQL = require('../../config/dbMySQL');
 const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
 // const checkObjectId = require('../../middleware/checkObjectId');
 
 // @route  POST api/posts
@@ -176,6 +177,15 @@ router.delete('/:id', auth, (req, res) => {
         connection.release();
         return res.status(400).json({
           errors: [{ msg: "Post with such name doesn't exists" }],
+        });
+      }
+
+      console.log(req.body, 'here you go');
+      if (req.body.image) {
+        fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
+          if (err) throw err;
+
+          console.log('Blog photo deleted');
         });
       }
 

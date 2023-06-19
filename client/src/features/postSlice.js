@@ -139,13 +139,23 @@ export const getPostAction = createAsyncThunk(
 // Delete post
 export const deletePostAction = createAsyncThunk(
   'post/deletepost',
-  async ({ id }, { dispatch }) => {
-    console.log(id);
+  // async ({ id }, { dispatch }) => {
+  async (post, { dispatch }) => {
+    console.log(post.image);
+
+    // this is from Blog old version
+
+    // if (deletePostData.image !== undefined) {
+    //   const req = async () =>
+    //     console.log('we should delete this image' + deletePostData.image);
+    //   axios.delete(`/api/photo-blog/${deletePostData.image}`);
+    // } else {
+    //   console.log('could not find image');
+    // }
     try {
-      const res = await axios.delete(`/api/posts/${id}`);
-      dispatch(deletePost(id));
+      const res = await axios.delete(`/api/posts/${post.id}`, { data: post });
+      dispatch(deletePost(post.id));
     } catch (error) {
-      console.log(id);
       console.error(error.message);
     }
   }

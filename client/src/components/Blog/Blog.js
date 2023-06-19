@@ -16,6 +16,7 @@ export default function Blog() {
   const { isAuthenticated, user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
+  console.log(deletePostData);
   useEffect(() => {
     if (posts.length === 0) dispatch(getPostsAction());
   }, []);
@@ -25,13 +26,13 @@ export default function Blog() {
     dispatch(deletePostAction(deletePostData));
     setDeletePostData(null);
 
-    if (deletePostData.image !== undefined) {
-      const req = async () =>
-        console.log('we should delete this image' + deletePostData.image);
-      axios.delete(`/api/photo-blog/${deletePostData.image}`);
-    } else {
-      console.log('could not find image');
-    }
+    // if (deletePostData.image !== undefined) {
+    //   const req = async () =>
+    //     console.log('we should delete this image' + deletePostData.image);
+    //   axios.delete(`/api/photo-blog/${deletePostData.image}`);
+    // } else {
+    //   console.log('could not find image');
+    // }
 
     console.log('Post is deleted');
   };

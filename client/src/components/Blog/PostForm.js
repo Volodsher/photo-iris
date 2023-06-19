@@ -21,13 +21,12 @@ const PostForm = () => {
   const [id, setId] = useState();
   const [url, setUrl] = useState('');
   const [selectedFile, setSelectedFile] = useState();
-  const [isFilePicked, setIsFilePicked] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
   const [deleteImage, setDeleteImage] = useState(5);
 
   const navigate = useNavigate();
   const location = useLocation();
   const fromPost = location.state ? location.state : null;
-  console.log(fromPost);
 
   useEffect(() => {
     if (fromPost !== null) {
@@ -57,13 +56,15 @@ const PostForm = () => {
     setImage('');
     setPrevImage('');
     setImageUrl('');
-    setSelectedFile('');
+    setSelectedFile(undefined);
+    setIsFilePicked(false);
 
     if (image && prevImage === undefined) {
       await axios
         .post('/api/photo-blog', formData)
         .then((res) => {
-          console.log('Success:', res);
+          // console.log('Success:', res);
+          console.log('Success:');
         })
         .catch((error) => {
           console.log(error);

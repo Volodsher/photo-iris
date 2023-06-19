@@ -13,16 +13,17 @@ import MyButton from '../layout/MyButton/MyButton';
 import { useDispatch, useSelector } from 'react-redux';
 
 const PostItem = ({
-  post: { id, text, title, date, image },
+  post,
   // showActions,
   toggleConfirm,
   postPayload,
 }) => {
+  const { id, text, title, date, image } = post;
   let firstSentence = '';
   if (text && text.indexOf('.') !== undefined) {
     firstSentence = text.slice(0, text.indexOf('.'));
   }
-  console.log({ id, text, title, date, image });
+  // console.log({ id, text, title, date, image });
   // const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((store) => store.auth);
 
@@ -49,9 +50,10 @@ const PostItem = ({
             <MyButton
               className={styles.postButton}
               handleClick={() => {
-                postPayload({ id, title, image });
+                // postPayload({ id, title, image });
+                postPayload(post);
                 toggleConfirm();
-                console.log('done');
+                // console.log('done');
               }}
               value="delete"
               borderColor="--gray-ultralight"
