@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Blog.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import axios from 'axios';
 const PostForm = () => {
   const { isOpen, payload } = useSelector((store) => store.confirm);
   const dispatch = useDispatch();
+  const fileInputRef = useRef(null);
 
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -43,13 +44,14 @@ const PostForm = () => {
     const formData = new FormData();
     formData.append('file', selectedFile);
 
+    console.log('from my formpos', selectedFile);
     if (fromPost !== null) {
       dispatch(
         updatePostAction({ date: fromPost.date, id, title, text, image })
       );
       navigate(`/posts/${id}`);
     } else {
-      dispatch(addPostAction({ title, text, image }));
+      dispatch(addPostAction({ title, text, image, formData }));
     }
     setTitle('');
     setText('');
@@ -59,35 +61,38 @@ const PostForm = () => {
     setSelectedFile(undefined);
     setIsFilePicked(false);
 
-    if (image && prevImage === undefined) {
-      await axios
-        .post('/api/photo-blog', formData)
-        .then((res) => {
-          // console.log('Success:', res);
-          console.log('Success:');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else if (image && prevImage !== image) {
-      await axios
-        .post('/api/photo-blog', formData)
-        .then((res) => {
-          console.log('Success:', res);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    fileInputRef.current.value = null;
+    // if (image && prevImage === undefined) {
+    //   await axios
+    //     .post('/api/photo-blog', formData)
+    //     .then((res) => {
+    //       // console.log('Success:', res);
+    //       console.log('Success:');
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // } else if (image && prevImage !== image) {
+    //   await axios
+    //     .post('/api/photo-blog', formData)
+    //     .then((res) => {
+    //       console.log('Success:', res);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // }
   };
 
-  useEffect(() => {
-    if (selectedFile === undefined) {
-      setIsFilePicked(false);
-    } else {
-      setIsFilePicked(true);
-    }
-  }, [selectedFile]);
+  // useEffect(() => {
+  //   if (selectedFile === undefined) {
+  //     setIsFilePicked(false);
+  //     console.log('this is selected file', isFilePicked);
+  //   } else {
+  //     setIsFilePicked(true);
+  //     console.log('this is selected file', isFilePicked);
+  //   }
+  // }, [selectedFile]);
 
   const deletePostAction = () => {
     setImage('');
@@ -95,6 +100,8 @@ const PostForm = () => {
     setIsFilePicked();
     setSelectedFile('');
     setImageUrl('');
+
+    fileInputRef.current.value = null;
   };
 
   return (
@@ -147,12 +154,18 @@ const PostForm = () => {
         <input
           type="file"
           name="file"
+          ref={fileInputRef}
           onChange={(event) => {
-            setImage(event.target.files[0].name);
-            if (event.target.files.length !== 0) {
+            if (event.target.files && event.target.files.length > 0) {
+              setImage(event.target.files[0].name);
               setSelectedFile(event.target.files[0]);
               setImageUrl(URL.createObjectURL(event.target.files[0]));
-              setImage(event.target.files[0].name);
+              setIsFilePicked(true);
+            } else {
+              setImage('');
+              setSelectedFile(undefined);
+              setImageUrl('');
+              setIsFilePicked(false);
             }
           }}
         />

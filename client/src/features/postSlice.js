@@ -86,15 +86,17 @@ export const getPostsAction = createAsyncThunk(
 export const addPostAction = createAsyncThunk(
   'post/addPost',
   async (payload, { dispatch }) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+    // const config = {
+    //   headers: {
+    //     // 'Content-Type': 'application/json',
+    //     'Content-Type': 'multipart/form-data',
+    //   },
+    // };
 
-    console.log(payload);
+    console.log('this is from redux', payload.formData.file);
     try {
-      const res = await axios.post('/api/posts/', payload, config);
+      // const res = await axios.post('/api/posts/', payload, config);
+      const res = await axios.post('/api/posts/', payload);
       dispatch(addPost(res.data));
       // console.log(res);
     } catch (error) {

@@ -18,7 +18,7 @@ var storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-({ storage: storage });
+// ({ storage: storage });
 
 const upload = multer({
   storage: storage,
@@ -42,6 +42,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    console.log(req.body.formData, 'this is from server');
     const { title, text, image } = req.body;
 
     const id = uuidv4();
