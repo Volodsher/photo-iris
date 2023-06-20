@@ -92,12 +92,12 @@ export const addPostAction = createAsyncThunk(
       },
     };
 
+    console.log(payload);
     try {
       const res = await axios.post('/api/posts/', payload, config);
       dispatch(addPost(res.data));
-      console.log(res);
+      // console.log(res);
     } catch (error) {
-      console.log(payload);
       console.log(error.message);
     }
   }

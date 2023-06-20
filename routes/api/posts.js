@@ -6,7 +6,25 @@ const Post = require('../../models/Post');
 const User = require('../../models/User');
 const connectDBMySQL = require('../../config/dbMySQL');
 const { v4: uuidv4 } = require('uuid');
+
+const multer = require('multer');
 const fs = require('fs');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads/blog');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+({ storage: storage });
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 2000000 },
+}).single('file');
+
 // const checkObjectId = require('../../middleware/checkObjectId');
 
 // @route  POST api/posts
@@ -15,6 +33,7 @@ const fs = require('fs');
 router.post(
   '/',
   auth,
+  upload,
   check('title', 'Title is required').notEmpty(),
   check('text', 'Text is required').notEmpty(),
   (req, res) => {
@@ -180,7 +199,7 @@ router.delete('/:id', auth, (req, res) => {
         });
       }
 
-      console.log(req.body, 'here you go');
+      // console.log(req.body, 'here you go');
       if (req.body.image) {
         fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
           if (err) throw err;

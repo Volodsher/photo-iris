@@ -33,8 +33,8 @@ router.post('/', auth, upload, (req, res, next) => {
     error.httpStatusCode = 400;
     return next(error);
   }
-  res.send('success');
-  console.log('success');
+  res.send('success!!!');
+  console.log('success!!!');
 });
 
 router.delete('/:image', auth, (req, res) => {

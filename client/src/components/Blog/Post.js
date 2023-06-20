@@ -20,17 +20,6 @@ const Post = (props) => {
   const { id } = useParams();
   const payload = { id };
   const dispatch = useDispatch();
-  // console.log(post);
-
-  // let _id = null;
-  // let title = null;
-
-  // if (post !== null) {
-  //   _id = post.id;
-  //   title = post.title;
-  // }
-
-  // const { title, text } = post;
 
   useEffect(() => {
     dispatch(getPostAction(payload));
@@ -50,8 +39,6 @@ const Post = (props) => {
   const toggleConfirm = () => {
     setIsOpen(!isOpen);
   };
-
-  // console.log(post);
 
   return loading === true || post === null ? (
     <Spinner />
@@ -81,12 +68,6 @@ const Post = (props) => {
               className={styles.postButton}
               // handleCklick={() => dispatch(openConfirm({ _id, title }))}
               handleClick={() => {
-                // postPayload({ _id, title });
-                // postPayload({
-                //   id: post.id,
-                //   title: post.title,
-                //   image: post.image,
-                // });
                 postPayload(post);
                 toggleConfirm();
               }}
