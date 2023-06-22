@@ -18,13 +18,7 @@ var storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-// ({ storage: storage });
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 2000000 },
-}).single('file');
-
+({ storage: storage });
 // const checkObjectId = require('../../middleware/checkObjectId');
 
 // @route  POST api/posts
@@ -33,7 +27,6 @@ const upload = multer({
 router.post(
   '/',
   auth,
-  upload,
   check('title', 'Title is required').notEmpty(),
   check('text', 'Text is required').notEmpty(),
   (req, res) => {
@@ -42,8 +35,11 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    console.log(req.body.formData, 'this is from server');
     const { title, text, image } = req.body;
+
+    // console.log('should be good', title);
+    // console.log('should be good', text);
+    // console.log('should be good', title);
 
     const id = uuidv4();
     const date = new Date().toJSON().slice(0, 10);
@@ -200,7 +196,7 @@ router.delete('/:id', auth, (req, res) => {
         });
       }
 
-      // console.log(req.body, 'here you go');
+      console.log(req.body, 'here you go');
       if (req.body.image) {
         fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
           if (err) throw err;

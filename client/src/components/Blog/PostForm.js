@@ -41,6 +41,7 @@ const PostForm = () => {
 
   const handleSubmission = async (event) => {
     event.preventDefault();
+
     const formData = new FormData();
     formData.append('file', selectedFile);
 
