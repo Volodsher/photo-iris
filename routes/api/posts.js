@@ -2,11 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
-const Post = require('../../models/Post');
-const User = require('../../models/User');
 const connectDBMySQL = require('../../config/dbMySQL');
 const { v4: uuidv4 } = require('uuid');
-
 const multer = require('multer');
 const fs = require('fs');
 
@@ -19,7 +16,11 @@ var storage = multer.diskStorage({
   },
 });
 ({ storage: storage });
-// const checkObjectId = require('../../middleware/checkObjectId');
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 2000000 },
+}).single('file');
 
 // @route  POST api/posts
 // @desc   Create a post
@@ -27,6 +28,7 @@ var storage = multer.diskStorage({
 router.post(
   '/',
   auth,
+  upload,
   check('title', 'Title is required').notEmpty(),
   check('text', 'Text is required').notEmpty(),
   (req, res) => {
@@ -36,10 +38,6 @@ router.post(
     }
 
     const { title, text, image } = req.body;
-
-    // console.log('should be good', title);
-    // console.log('should be good', text);
-    // console.log('should be good', title);
 
     const id = uuidv4();
     const date = new Date().toJSON().slice(0, 10);
@@ -70,7 +68,6 @@ router.post(
             console.error(err);
             return res.status(500).json({ error: 'Database error 3' });
           }
-
           // results.message = 'You successfully added a new post!';
           // res.json(results.message);
           res.json(newPost);

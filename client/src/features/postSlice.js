@@ -95,6 +95,7 @@ export const addPostAction = createAsyncThunk(
     console.log(payload);
     try {
       const res = await axios.post('/api/posts/', payload, config);
+      console.log('from redux payload', payload);
       dispatch(addPost(res.data));
       // console.log(res);
     } catch (error) {

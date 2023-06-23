@@ -52,7 +52,11 @@ const PostForm = () => {
       );
       navigate(`/posts/${id}`);
     } else {
-      dispatch(addPostAction({ title, text, image, formData }));
+      formData.append('title', title);
+      formData.append('text', text);
+      formData.append('image', image);
+      dispatch(addPostAction(formData));
+      // dispatch(addPostAction({ title, text, image }));
     }
     setTitle('');
     setText('');
