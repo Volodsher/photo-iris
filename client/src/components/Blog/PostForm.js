@@ -45,7 +45,6 @@ const PostForm = ({ posts }) => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('file', selectedFile);
 
     console.log('from my formpos', selectedFile);
     if (fromPost !== null) {
@@ -66,6 +65,7 @@ const PostForm = ({ posts }) => {
         console.log('here we do not have');
         formData.append('image', image);
       }
+      formData.append('file', selectedFile);
 
       // formData.append('image', image);
       dispatch(addPostAction(formData));

@@ -12,10 +12,15 @@ var storage = multer.diskStorage({
     cb(null, './uploads/blog');
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    console.log('should be a new name here', req.body.image);
+    cb(null, req.body.image);
+    // cb(null, file.originalname);
   },
+  // filename: function (req, file, cb) {
+  //   cb(null, req.body[image]);
+  // },
 });
-({ storage: storage });
+// ({ storage: storage });
 
 const upload = multer({
   storage: storage,
@@ -193,14 +198,14 @@ router.delete('/:id', auth, (req, res) => {
         });
       }
 
-      // console.log(req.body, 'here you go');
-      // if (req.body.image) {
-      //   fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
-      //     if (err) throw err;
+      console.log(req.body, 'here you go');
+      if (req.body.image) {
+        fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
+          if (err) throw err;
 
-      //     console.log('Blog photo deleted');
-      //   });
-      // }
+          console.log('Blog photo deleted');
+        });
+      }
 
       const deletePost = 'DELETE FROM posts WHERE id = ?';
       connection.query(deletePost, [id], (err, results) => {
