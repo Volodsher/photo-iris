@@ -7,9 +7,11 @@ import { addPostAction, updatePostAction } from '../../features/postSlice';
 import { useLocation } from 'react-router';
 import MyButton from '../layout/MyButton/MyButton';
 import Confirm from '../layout/Confirm';
+// import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
-const PostForm = () => {
+const PostForm = ({ posts }) => {
   const { isOpen, payload } = useSelector((store) => store.confirm);
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
@@ -54,7 +56,18 @@ const PostForm = () => {
     } else {
       formData.append('title', title);
       formData.append('text', text);
-      formData.append('image', image);
+      if (image && posts.filter((post) => image === post.image)) {
+        console.log(posts.filter((post) => image === post.image));
+        const changeNamePart = uuidv4().slice(0, 10);
+        const newImageName = changeNamePart + image;
+        console.log('here we have this picture', newImageName);
+        formData.append('image', newImageName);
+      } else {
+        console.log('here we do not have');
+        formData.append('image', image);
+      }
+
+      // formData.append('image', image);
       dispatch(addPostAction(formData));
       // dispatch(addPostAction({ title, text, image }));
     }

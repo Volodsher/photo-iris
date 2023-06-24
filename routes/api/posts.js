@@ -193,14 +193,14 @@ router.delete('/:id', auth, (req, res) => {
         });
       }
 
-      console.log(req.body, 'here you go');
-      if (req.body.image) {
-        fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
-          if (err) throw err;
+      // console.log(req.body, 'here you go');
+      // if (req.body.image) {
+      //   fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
+      //     if (err) throw err;
 
-          console.log('Blog photo deleted');
-        });
-      }
+      //     console.log('Blog photo deleted');
+      //   });
+      // }
 
       const deletePost = 'DELETE FROM posts WHERE id = ?';
       connection.query(deletePost, [id], (err, results) => {
