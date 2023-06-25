@@ -7,6 +7,7 @@ import { addPostAction, updatePostAction } from '../../features/postSlice';
 import { useLocation } from 'react-router';
 import MyButton from '../layout/MyButton/MyButton';
 import Confirm from '../layout/Confirm';
+import ErrorMessage from '../layout/ErrorMessage';
 // import { uuid } from 'uuidv4';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
@@ -16,6 +17,7 @@ const PostForm = ({ posts }) => {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
 
+  const [newError, setNewError] = useState('');
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [image, setImage] = useState('');
@@ -24,7 +26,7 @@ const PostForm = ({ posts }) => {
   const [id, setId] = useState();
   const [url, setUrl] = useState('');
   const [selectedFile, setSelectedFile] = useState();
-  const [isFilePicked, setIsFilePicked] = useState(false);
+  const [fileIsPicked, setFileIsPicked] = useState(false);
   const [deleteImage, setDeleteImage] = useState(5);
 
   const navigate = useNavigate();
@@ -40,6 +42,36 @@ const PostForm = ({ posts }) => {
       setPrevImage(fromPost.image);
     }
   }, []);
+
+  const handleFileChange = (event) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const fileSizeInBytes = file.size;
+      const maxSizeInBytes = 1024 * 1024; // 1MB
+
+      if (fileSizeInBytes > maxSizeInBytes) {
+        setImage('');
+        setSelectedFile(undefined);
+        setImageUrl('');
+        setFileIsPicked(false);
+        fileInputRef.current.value = null;
+        return setNewError(
+          'File size exceeds the maximum allowed size in 1 MB'
+        );
+      }
+      setNewError(''); // to delete an error from previous choice if there is one
+      setImage(file.name);
+      setSelectedFile(file);
+      setImageUrl(URL.createObjectURL(file));
+      setFileIsPicked(true);
+    } else {
+      setImage('');
+      setSelectedFile(undefined);
+      setImageUrl('');
+      setFileIsPicked(false);
+      setNewError('');
+    }
+  };
 
   const handleSubmission = async (event) => {
     event.preventDefault();
@@ -77,7 +109,8 @@ const PostForm = ({ posts }) => {
     setPrevImage('');
     setImageUrl('');
     setSelectedFile(undefined);
-    setIsFilePicked(false);
+    setFileIsPicked(false);
+    setNewError('');
 
     fileInputRef.current.value = null;
     // if (image && prevImage === undefined) {
@@ -104,18 +137,18 @@ const PostForm = ({ posts }) => {
 
   // useEffect(() => {
   //   if (selectedFile === undefined) {
-  //     setIsFilePicked(false);
-  //     console.log('this is selected file', isFilePicked);
+  //     setFileIsPicked(false);
+  //     console.log('this is selected file', fileIsPicked);
   //   } else {
-  //     setIsFilePicked(true);
-  //     console.log('this is selected file', isFilePicked);
+  //     setFileIsPicked(true);
+  //     console.log('this is selected file', fileIsPicked);
   //   }
   // }, [selectedFile]);
 
   const deletePostAction = () => {
     setImage('');
     setPrevImage();
-    setIsFilePicked();
+    setFileIsPicked();
     setSelectedFile('');
     setImageUrl('');
 
@@ -173,20 +206,9 @@ const PostForm = ({ posts }) => {
           type="file"
           name="file"
           ref={fileInputRef}
-          onChange={(event) => {
-            if (event.target.files && event.target.files.length > 0) {
-              setImage(event.target.files[0].name);
-              setSelectedFile(event.target.files[0]);
-              setImageUrl(URL.createObjectURL(event.target.files[0]));
-              setIsFilePicked(true);
-            } else {
-              setImage('');
-              setSelectedFile(undefined);
-              setImageUrl('');
-              setIsFilePicked(false);
-            }
-          }}
+          onChange={handleFileChange}
         />
+        {newError && <ErrorMessage errMessage={newError} />}
         {image && (
           <button
             type="button"
@@ -195,7 +217,7 @@ const PostForm = ({ posts }) => {
             Delete image
           </button>
         )}
-        {isFilePicked ? (
+        {fileIsPicked ? (
           <div>
             <p>Filename: {selectedFile.name}</p>
             <p>
