@@ -6,6 +6,7 @@ const connectDBMySQL = require('../../config/dbMySQL');
 const { v4: uuidv4 } = require('uuid');
 const multer = require('multer');
 const fs = require('fs');
+const sharp = require('sharp');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -36,7 +37,7 @@ router.post(
   upload,
   check('title', 'Title is required').notEmpty(),
   check('text', 'Text is required').notEmpty(),
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -54,6 +55,42 @@ router.post(
       image,
       date,
     };
+
+    if (req.file) {
+      console.log(req.file);
+      try {
+        // Resize image to width 800px
+        const resizedImage800Buffer = await sharp(req.file.path)
+          .resize({ width: 800 })
+          .toBuffer();
+
+        console.log(resizedImage800Buffer);
+        // Save or upload the resized image with width 800px
+        // Example: fs.writeFileSync('path/to/save/resizedImage800.jpg', resizedImage800Buffer);
+        fs.writeFileSync(
+          './uploads/blog/resizedImage800.jpg',
+          resizedImage800Buffer
+        );
+        // Resize image to width 350px
+        const resizedImage350Buffer = await sharp(req.file.path)
+          .resize({ width: 350 })
+          .toBuffer();
+        console.log(resizedImage350Buffer);
+        // Save or upload the resized image with width 350px
+        // Example: fs.writeFileSync('path/to/save/resizedImage350.jpg', resizedImage350Buffer);
+        fs.writeFileSync(
+          './uploads/blog/resizedImage350.jpg',
+          resizedImage350Buffer
+        );
+
+        // Add the resized images to the newPost object or update the image field with their base64 representation
+        newPost.image800 = resizedImage800Buffer.toString('base64');
+        newPost.image350 = resizedImage350Buffer.toString('base64');
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Error resizing image' });
+      }
+    }
 
     connectDBMySQL.getConnection((err, connection) => {
       if (err) {
