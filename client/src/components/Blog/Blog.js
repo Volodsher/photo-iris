@@ -25,6 +25,8 @@ export default function Blog() {
     setIsOpen(!isOpen);
     dispatch(deletePostAction(deletePostData));
     setDeletePostData(null);
+    console.log('this is deletePostData', deletePostData);
+    console.log('Post is deleted from Blog page');
 
     // if (deletePostData.image !== undefined) {
     //   const req = async () =>

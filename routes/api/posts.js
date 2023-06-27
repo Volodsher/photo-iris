@@ -84,8 +84,8 @@ router.post(
         );
 
         // Add the resized images to the newPost object or update the image field with their base64 representation
-        newPost.image800 = resizedImage800Buffer.toString('base64');
-        newPost.image350 = resizedImage350Buffer.toString('base64');
+        // newPost.image800 = resizedImage800Buffer.toString('base64');
+        // newPost.image350 = resizedImage350Buffer.toString('base64');
       } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Error resizing image' });

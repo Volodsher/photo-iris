@@ -29,7 +29,7 @@ const Post = (props) => {
     setIsOpen(!isOpen);
     dispatch(deletePostAction(deletePostData));
     setDeletePostData(null);
-    console.log('Post is deleted');
+    console.log('Post is deleted from Post page');
   };
 
   const postPayload = (postData) => {
