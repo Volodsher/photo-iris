@@ -64,22 +64,20 @@ router.post(
           .resize({ width: 800 })
           .toBuffer();
 
-        console.log(resizedImage800Buffer);
         // Save or upload the resized image with width 800px
         // Example: fs.writeFileSync('path/to/save/resizedImage800.jpg', resizedImage800Buffer);
         fs.writeFileSync(
-          './uploads/blog/resizedImage800.jpg',
+          `./uploads/blog/${image.substring(0, image.length - 4)}800.jpg`,
           resizedImage800Buffer
         );
         // Resize image to width 350px
         const resizedImage350Buffer = await sharp(req.file.path)
           .resize({ width: 350 })
           .toBuffer();
-        console.log(resizedImage350Buffer);
         // Save or upload the resized image with width 350px
         // Example: fs.writeFileSync('path/to/save/resizedImage350.jpg', resizedImage350Buffer);
         fs.writeFileSync(
-          './uploads/blog/resizedImage350.jpg',
+          `./uploads/blog/${image.substring(0, image.length - 4)}350.jpg`,
           resizedImage350Buffer
         );
 
@@ -239,9 +237,28 @@ router.delete('/:id', auth, (req, res) => {
       if (req.body.image) {
         fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
           if (err) throw err;
-
-          console.log('Blog photo deleted');
+          console.log('Blog big photo deleted');
         });
+        fs.unlink(
+          `./uploads/blog/${req.body.image.substring(
+            0,
+            req.body.image.length - 4
+          )}800.jpg`,
+          (err) => {
+            if (err) throw err;
+            console.log('Blog 800 photo deleted');
+          }
+        );
+        fs.unlink(
+          `./uploads/blog/${req.body.image.substring(
+            0,
+            req.body.image.length - 4
+          )}350.jpg`,
+          (err) => {
+            if (err) throw err;
+            console.log('Blog 350 photo deleted');
+          }
+        );
       }
 
       const deletePost = 'DELETE FROM posts WHERE id = ?';
