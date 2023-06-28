@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Gallery() {
+  const [screenSize, setScreenSize] = useState('.jpg');
   const { sessions, loading } = useSelector((store) => store.session);
   const [newSessions, setNewSessions] = useState([]);
   const [oneImageUrl, setOneImageUrl] = useState('');
@@ -34,6 +35,28 @@ export default function Gallery() {
   const handleCleaarOneImageUrl = () => {
     setOneImageUrl('');
   };
+
+  useEffect(() => {
+    const updateDimension = () => {
+      const realScreenSize = window.innerWidth;
+
+      if (realScreenSize < 600) {
+        setScreenSize('200.jpg');
+      } else if (realScreenSize < 800) {
+        setScreenSize('350.jpg');
+      } else if (realScreenSize < 1280) {
+        setScreenSize('450.jpg');
+      } else {
+        setScreenSize('.jpg');
+      }
+    };
+    updateDimension();
+    window.addEventListener('resize', updateDimension);
+
+    return () => {
+      window.removeEventListener('resize', updateDimension);
+    };
+  }, []);
 
   useEffect(() => {
     const observer = new ResizeObserver(() => {
@@ -94,6 +117,8 @@ export default function Gallery() {
       className={styles.gallery}
       style={{ paddingBottom: '3rem' }}
     >
+      <p>{screenSize}</p>
+
       {oneImage !== '' && (
         <FontAwesomeIcon
           style={{
@@ -172,32 +197,39 @@ export default function Gallery() {
           <div key={session.id} id={session.name}>
             <h1 style={{ margin: '3rem 0' }}>{session.title}</h1>
             <div key={session.id} className={styles.galleryImagesBox}>
-              {session.images?.map((image, ind) => {
-                return [
-                  <img
-                    key={ind}
-                    // src={`/gallery/${session.id}/${image}`}
-                    src={`/gallery/${session.name}/${image}`}
-                    className={styles.galleryImage}
-                    onClick={() => {
-                      // handleOneImageUrl(`/gallery/${session.id}/${image}`);
-                      handleOneImageUrl(`/gallery/${session.name}/${image}`);
-                      // toggleOneImage(`${session.id}${image}`);
-                      toggleOneImage(`${session.name}${image}`);
-                    }}
-                    alt={`one of ${session.title} session photo`}
-                  />,
-                  // oneImage === `${session.id}${image}` && (
-                  oneImage === `${session.name}${image}` && (
-                    <Picture
-                      key={session.id}
-                      clearPicture={handleCleaarOneImageUrl}
-                      picture={oneImageUrl}
-                      toggleOneImage={toggleOneImage}
-                    />
-                  ),
-                ];
-              })}
+              {session.images
+                ?.filter((img) => img.split('-')[1] === screenSize)
+                .map((image, ind) => {
+                  return [
+                    <img
+                      key={ind}
+                      // src={`/gallery/${session.id}/${image}`}
+                      // src={`/gallery/${session.name}/${image.substring(
+                      //   0,
+                      //   image.length - 4
+                      // )}${screenSize}.jpg`}
+                      src={`/gallery/${session.name}/${image}`}
+                      className={styles.galleryImage}
+                      onClick={() => {
+                        // handleOneImageUrl(`/gallery/${session.id}/${image}`);
+                        handleOneImageUrl(`/gallery/${session.name}/${image}`);
+                        // toggleOneImage(`${session.id}${image}`);
+                        toggleOneImage(`${session.name}${image}`);
+                      }}
+                      alt={`one of ${session.title} session photo`}
+                    />,
+                    // oneImage === `${session.id}${image}` && (
+                    oneImage === `${session.name}${image}` && (
+                      <Picture
+                        key={session.id}
+                        clearPicture={handleCleaarOneImageUrl}
+                        picture={oneImageUrl}
+                        toggleOneImage={toggleOneImage}
+                      />
+                    ),
+                    // <p>{image.split('-')[1]}</p>,
+                  ];
+                })}
             </div>
             {session.last === 1 && (
               <Link to={session.priceLink}>
