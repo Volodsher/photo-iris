@@ -17,45 +17,52 @@ export default function Gallery() {
   const [divHeight, setDivHeight] = useState(0);
   const [openSMGallery, setOpenSMGallery] = useState(false);
   const galleryRef = useRef();
-
   const location = useLocation();
 
-  const openMenuGallery = () => {
-    setOpenSMGallery(!openSMGallery);
-  };
+  const openMenuGallery = () => setOpenSMGallery(!openSMGallery);
+  const toggleOneImage = (id) => setOneImage(id);
+  const handleCleaarOneImageUrl = () => setOneImageUrl('');
 
   const handleOneImageUrl = (imageUrl) => {
-    setOneImageUrl(imageUrl);
-  };
+    const bigImageArr = imageUrl
+      .split(/[-.]/g)
+      .filter((imeg, ind) => ind % 2 === 0);
 
-  const toggleOneImage = (id) => {
-    setOneImage(id);
-  };
-
-  const handleCleaarOneImageUrl = () => {
-    setOneImageUrl('');
+    let imageSize = '';
+    switch (screenSize) {
+      case '200.jpg':
+        imageSize = '350';
+        break;
+      case '350.jpg':
+        imageSize = '450';
+        break;
+      case '450.jpg':
+        imageSize = '';
+        break;
+      default:
+        imageSize = '';
+    }
+    const bigImageUrl = bigImageArr[0] + '-' + imageSize + '.' + bigImageArr[1];
+    setOneImageUrl(bigImageUrl);
   };
 
   useEffect(() => {
     const updateDimension = () => {
       const realScreenSize = window.innerWidth;
-
-      if (realScreenSize < 600) {
-        setScreenSize('200.jpg');
-      } else if (realScreenSize < 800) {
-        setScreenSize('350.jpg');
-      } else if (realScreenSize < 1280) {
-        setScreenSize('450.jpg');
-      } else {
-        setScreenSize('.jpg');
-      }
+      setScreenSize(
+        realScreenSize < 600
+          ? '200.jpg'
+          : realScreenSize < 800
+          ? '350.jpg'
+          : realScreenSize < 1280
+          ? '450.jpg'
+          : '.jpg'
+      );
     };
+
     updateDimension();
     window.addEventListener('resize', updateDimension);
-
-    return () => {
-      window.removeEventListener('resize', updateDimension);
-    };
+    return () => window.removeEventListener('resize', updateDimension);
   }, []);
 
   useEffect(() => {
@@ -69,10 +76,9 @@ export default function Gallery() {
 
   useEffect(() => {
     if (newSessions.length > 0) {
-      // const scroll = (id) => {
       const scroll = (id) => {
         const section = document.querySelector(`#${id}`);
-        // const section = document.querySelector(`#${name}`); - doesnt work with this attribute
+
         section.scrollIntoView({ block: 'start' });
       };
       if (
@@ -87,24 +93,19 @@ export default function Gallery() {
 
   useEffect(() => {
     if (window.location.href.includes('#')) {
-      // const onlyIdSessions = sessions.filter((ses) => {
       const requestedSessions = sessions.filter((ses) => {
         return (
-          // ses.id.substring(0, 3) ===
           ses.name.substring(0, 3) ===
           window.location.href.split('#')[1].substring(0, 3)
         );
       });
 
-      // const withougIdSessions = sessions.filter((ses) => {
       const restSessions = sessions.filter((ses) => {
         return (
-          // ses.id.substring(0, 3) !==
           ses.name.substring(0, 3) !==
           window.location.href.split('#')[1].substring(0, 3)
         );
       });
-      // setNewSessions([...onlyIdSessions, ...withougIdSessions]);
       setNewSessions([...requestedSessions, ...restSessions]);
     } else {
       setNewSessions(sessions);
@@ -117,8 +118,6 @@ export default function Gallery() {
       className={styles.gallery}
       style={{ paddingBottom: '3rem' }}
     >
-      <p>{screenSize}</p>
-
       {oneImage !== '' && (
         <FontAwesomeIcon
           style={{
@@ -193,7 +192,6 @@ export default function Gallery() {
         <Spinner />
       ) : (
         newSessions.map((session) => (
-          // <div key={session.id} id={session.id}>
           <div key={session.id} id={session.name}>
             <h1 style={{ margin: '3rem 0' }}>{session.title}</h1>
             <div key={session.id} className={styles.galleryImagesBox}>
@@ -203,22 +201,15 @@ export default function Gallery() {
                   return [
                     <img
                       key={ind}
-                      // src={`/gallery/${session.id}/${image}`}
-                      // src={`/gallery/${session.name}/${image.substring(
-                      //   0,
-                      //   image.length - 4
-                      // )}${screenSize}.jpg`}
                       src={`/gallery/${session.name}/${image}`}
                       className={styles.galleryImage}
                       onClick={() => {
-                        // handleOneImageUrl(`/gallery/${session.id}/${image}`);
                         handleOneImageUrl(`/gallery/${session.name}/${image}`);
-                        // toggleOneImage(`${session.id}${image}`);
+
                         toggleOneImage(`${session.name}${image}`);
                       }}
                       alt={`one of ${session.title} session photo`}
                     />,
-                    // oneImage === `${session.id}${image}` && (
                     oneImage === `${session.name}${image}` && (
                       <Picture
                         key={session.id}
@@ -227,7 +218,6 @@ export default function Gallery() {
                         toggleOneImage={toggleOneImage}
                       />
                     ),
-                    // <p>{image.split('-')[1]}</p>,
                   ];
                 })}
             </div>
