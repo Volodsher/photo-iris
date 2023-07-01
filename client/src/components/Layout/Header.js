@@ -20,7 +20,6 @@ function Header(props) {
       <div
         key="2"
         style={{
-          // postion: 'fixed',
           display: 'flex',
           justifyContent: 'center',
           gap: '5rem',
@@ -35,7 +34,6 @@ function Header(props) {
       <div className={styles.header}>
         <div className={styles.toCenterLogo} />
         <ul className={`${styles.menuList} ${styles.menuListFirst}`}>
-          {/* <ul> */}
           <li key="1">
             <NavLink
               to="/"
@@ -142,14 +140,11 @@ function Header(props) {
               <NavLink to="/pricing">Pricing</NavLink>
             </li>
             <li key="4" onClick={props.changeMenuStatus}>
+              <NavLink to="/blog">Blog</NavLink>
+            </li>
+            <li key="5" onClick={props.changeMenuStatus}>
               <NavLink to="/contact">Contact</NavLink>
             </li>
-            {/* <li key="5" onClick={props.changeMenuStatus}>
-            <NavLink to="/inspiration">Inspiration</NavLink>
-          </li> */}
-            {/* <li key="6" onClick={props.changeMenuStatus}>
-            <NavLink to="/contact">Contact</NavLink>
-          </li> */}
           </ul>
         </div>
         <div
