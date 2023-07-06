@@ -223,7 +223,6 @@ const PostForm = ({ posts }) => {
             <p>
               Size: {Math.round((selectedFile.size / 1000000) * 1000) / 1000} MB
             </p>
-            <p>{image}</p>
             <img src={imageUrl} style={{ maxWidth: '100%', height: 'auto' }} />
           </div>
         ) : (
@@ -231,7 +230,6 @@ const PostForm = ({ posts }) => {
         )}
         <MyButton type="submit" value="Submit" borderColor="--gray-light" />
       </form>
-      <p>{image}</p>
     </div>
   );
 };
