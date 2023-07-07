@@ -16,7 +16,7 @@ export default function Blog() {
   const { isAuthenticated, user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
-  console.log(deletePostData);
+  // console.log(deletePostData);
   useEffect(() => {
     if (posts.length === 0) dispatch(getPostsAction());
   }, []);
@@ -61,7 +61,6 @@ export default function Blog() {
         />
       )}
       <h1>Wellcome to my blog</h1>
-      <p>Here I tell some interesting stories about photography</p>
       {isAuthenticated && user.status === 'author' && (
         <PostForm posts={posts} />
       )}

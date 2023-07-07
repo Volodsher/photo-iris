@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import MyButton from '../layout/MyButton/MyButton';
 import styles from './Home.module.scss';
-import int13 from '../../images/int13.JPG';
+import int13 from '../../images/int13.jpg';
 
 export default function AdvertSession() {
   return (
