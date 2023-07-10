@@ -1,16 +1,15 @@
 {
   "files": {
     "main.css": "./static/css/main.94e6fcc4.css",
-    "main.js": "./static/js/main.557cd224.js",
-    "static/media/3.jpg": "./static/media/3.a7c048068f9c09a3bfb7.jpg",
-    "static/media/2.jpg": "./static/media/2.7b15ebcf55c7bcee3f07.jpg",
-    "static/media/1.jpg": "./static/media/1.18a34c9aa5029006abab.jpg",
-    "static/media/6.jpg": "./static/media/6.1d5be5653ad69a15f0f2.jpg",
-    "static/media/5.jpg": "./static/media/5.4d578e2bf767240b63e6.jpg",
-    "static/media/4.jpg": "./static/media/4.43cbec633e0e0b44d554.jpg",
+    "main.js": "./static/js/main.c193d4cc.js",
     "static/media/logo-iris-photo.png": "./static/media/logo-iris-photo.9d93f3861b40648e5440.png",
     "static/media/portrait.jpg": "./static/media/portrait.fd375bb52764b5a50ba6.jpg",
+    "static/media/4.jpg": "./static/media/4.9db76abbde5c1d202b5b.jpg",
+    "static/media/3.jpg": "./static/media/3.d5333971c700b4f6c348.jpg",
     "static/media/love1.jpg": "./static/media/love1.3e782c04b40742fa33f9.jpg",
+    "static/media/6.jpg": "./static/media/6.8360bc25d2bb5c503905.jpg",
+    "static/media/5.jpg": "./static/media/5.5aeba0123e7d2474bbeb.jpg",
+    "static/media/2.jpg": "./static/media/2.24f66d50cfc7e331912e.jpg",
     "static/media/fam2.jpg": "./static/media/fam2.310159c9e633f49d1e5e.jpg",
     "static/media/smile2.jpg": "./static/media/smile2.492f210c9e1e8f886073.jpg",
     "static/media/love2.jpg": "./static/media/love2.25b711248bcacfc9eecc.jpg",
@@ -20,14 +19,15 @@
     "static/media/port2.jpg": "./static/media/port2.3a03967e22ea72fd1640.jpg",
     "static/media/fam1.jpg": "./static/media/fam1.e7729464ed0ee519fcfd.jpg",
     "static/media/smile1.jpg": "./static/media/smile1.fb297ec94efd987373bb.jpg",
-    "static/media/int13.JPG": "./static/media/int13.535b71e18eadd6d3212c.JPG",
+    "static/media/int13.jpg": "./static/media/int13.535b71e18eadd6d3212c.jpg",
+    "static/media/1.jpg": "./static/media/1.408c3e952064d4bbddbd.jpg",
     "static/media/insta.png": "./static/media/insta.1e040c245fba14ea4f20.png",
     "index.html": "./index.html",
     "main.94e6fcc4.css.map": "./static/css/main.94e6fcc4.css.map",
-    "main.557cd224.js.map": "./static/js/main.557cd224.js.map"
+    "main.c193d4cc.js.map": "./static/js/main.c193d4cc.js.map"
   },
   "entrypoints": [
     "static/css/main.94e6fcc4.css",
-    "static/js/main.557cd224.js"
+    "static/js/main.c193d4cc.js"
   ]
 }

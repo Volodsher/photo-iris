@@ -1,14 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('./config/db');
-const connectDBMySQL = require('./config/dbMySQL');
-
-const bodyParser = require('body-parser');
-
+// const connectDB = require('./config/db');
+// const connectDBMySQL = require('./config/dbMySQL');
 const app = express();
 app.use(cors());
 // connectDB();
 
+const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -23,7 +21,7 @@ app.get('/api', (req, res) => {
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/posts', require('./routes/api/posts'));
-app.use('/api/photo-blog', require('./routes/api/photoBlog'));
+// app.use('/api/photo-blog', require('./routes/api/photoBlog'));
 app.use('/api/mail', require('./routes/api/mail'));
 app.use('/api/sessions', require('./routes/api/sessions'));
 
