@@ -66,14 +66,14 @@ function Pricing() {
                     >
                       {session.about}
                     </Card.Text>
-                    {/* <Card.Text
+                    <Card.Text
                       style={{ textAlign: 'left', whiteSpace: 'pre-wrap' }}
                     >
                       <span style={{ fontWeight: 'bold' }}>Bonus: </span>
                       {session.mustHave}
-                    </Card.Text> */}
+                    </Card.Text>
                     <Card.Text style={{ textAlign: 'left' }}>
-                      {session.price}$
+                      {session.price}
                     </Card.Text>
                     {session.additional && (
                       <Card.Text
@@ -128,14 +128,14 @@ function Pricing() {
                     >
                       {session.about}
                     </Card.Text>
-                    {/* <Card.Text
+                    <Card.Text
                       style={{ textAlign: 'left', whiteSpace: 'pre-wrap' }}
                     >
                       <span style={{ fontWeight: 'bold' }}>Bonus: </span>
                       {session.mustHave}
-                    </Card.Text> */}
+                    </Card.Text>
                     <Card.Text style={{ textAlign: 'left' }}>
-                      {session.price}$
+                      {session.price}
                     </Card.Text>
                   </Card.Body>
                   <Card.Footer>
