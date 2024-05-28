@@ -42,22 +42,24 @@ export default function Gallery() {
       default:
         imageSize = '';
     }
-    const bigImageUrl = bigImageArr[0] + '-' + imageSize + '.' + bigImageArr[1];
+    // const bigImageUrl = bigImageArr[0] + '-' + imageSize + '.' + bigImageArr[1];
+    const bigImageUrl = bigImageArr[0] + '-' + '.' + bigImageArr[1];
     setOneImageUrl(bigImageUrl);
   };
 
   useEffect(() => {
     const updateDimension = () => {
       const realScreenSize = window.innerWidth;
-      setScreenSize(
-        realScreenSize < 600
-          ? '200.jpg'
-          : realScreenSize < 800
-          ? '350.jpg'
-          : realScreenSize < 1280
-          ? '450.jpg'
-          : '.jpg'
-      );
+      // setScreenSize(
+      //   realScreenSize < 600
+      //     ? '200.jpg'
+      //     : realScreenSize < 800
+      //     ? '350.jpg'
+      //     : realScreenSize < 1280
+      //     ? '450.jpg'
+      //     : '.jpg'
+      // );
+      setScreenSize(realScreenSize < 1280 ? '450.jpg' : '.jpg');
     };
 
     updateDimension();

@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.94e6fcc4.css",
-    "main.js": "./static/js/main.53bbc9ac.js",
+    "main.js": "./static/js/main.7c0190db.js",
     "static/media/logo-iris-photo.png": "./static/media/logo-iris-photo.9d93f3861b40648e5440.png",
     "static/media/portrait.jpg": "./static/media/portrait.fd375bb52764b5a50ba6.jpg",
     "static/media/4.jpg": "./static/media/4.9db76abbde5c1d202b5b.jpg",
@@ -24,10 +24,10 @@
     "static/media/insta.png": "./static/media/insta.1e040c245fba14ea4f20.png",
     "index.html": "./index.html",
     "main.94e6fcc4.css.map": "./static/css/main.94e6fcc4.css.map",
-    "main.53bbc9ac.js.map": "./static/js/main.53bbc9ac.js.map"
+    "main.7c0190db.js.map": "./static/js/main.7c0190db.js.map"
   },
   "entrypoints": [
     "static/css/main.94e6fcc4.css",
-    "static/js/main.53bbc9ac.js"
+    "static/js/main.7c0190db.js"
   ]
 }
